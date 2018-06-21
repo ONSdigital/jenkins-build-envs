@@ -1,0 +1,8 @@
+version: '3'
+services:
+  jenkins-slave-base:
+    build: ./jenkins-slave-base
+    image: onsdigital/jenkins-slave-base
+  scala_2-11-8:
+    build: ./scala/2.11.8
+    image: onsdigital/scala_2-11-8
