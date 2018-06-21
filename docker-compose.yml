@@ -5,4 +5,11 @@ services:
     image: onsdigital/jenkins-slave-base
   scala_2-11-8:
     build: ./scala/2.11.8
-    image: onsdigital/scala_2-11-8
+    image: onsdigital/jenkins-slave-scala:2.11.8
+    depends_on: 
+      - jenkins-slave-base
+  sbt_0-13-13:
+    build: ./sbt/0.13.13
+    image: onsdigital/jenkins-slave-sbt:0.13.13
+    depends_on: 
+      - scala_2-11-8
