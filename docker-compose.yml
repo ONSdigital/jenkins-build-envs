@@ -15,6 +15,11 @@ services:
     image: onsdigital/jenkins-slave-node:6.11.5
     depends_on: 
       - jenkins-slave-base
+  maven_3.2.5:
+    build: ./maven/3.2.5
+    image: onsdigital/jenkins-slave-maven:3.2.5
+    depends_on: 
+      - jenkins-slave-base
 # TIER 3
   sbt_0-13-13:
     build: ./sbt/0.13.13
