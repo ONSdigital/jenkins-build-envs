@@ -44,3 +44,9 @@ Build a single image:
 
 In the `docker-compose.yml` I have put comments for Tier1/2/3. These are simply visual cues for how the images are constructed. Tier 2 is built on Tier 1, and Tier 3 is built on an image in Tier 2 etc...
 
+## Build Tasks
+
+* `make all` - will build all of the Dockerfiles (as long as they exist in docker-compose.yml)
+* `make build-<servicename>` - is a dynamic task for building services defined in `docker-compose.yml` e.g. `make build-jenkins-slave-base`
+
+
