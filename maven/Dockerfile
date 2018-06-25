@@ -1,17 +1,22 @@
-# Jenkins Build Env :: Maven 3.2.5
+# Jenkins Build Env :: Maven
 # 
-# Test:
+# Example:
 #   $ docker run -it onsdigital/jenkins-slave-maven:3.2.5 mvn --version
 # 
 FROM onsdigital/jenkins-slave-base
+LABEL maintainer="sion.williams@ext.ons.gov.uk"
 
-ARG MAVEN_VERSION=3.2.5
+# build-args are overridden in the docker-compose.yml
+# to allow for multiple builds of new versions from the 
+# same dockerfile
+ARG TOOL_VERSION
+ARG SHA
+
 ARG USER_HOME_DIR="/root"
-ARG SHA=8c190264bdf591ff9f1268dc0ad940a2726f9e958e367716a09b8aaa7e74a755
-ARG BASE_URL=https://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/binaries
+ARG BASE_URL=https://apache.osuosl.org/maven/maven-3/${TOOL_VERSION}/binaries
 
 RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
-  && curl -fsSL -o /tmp/apache-maven.tar.gz ${BASE_URL}/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
+  && curl -fsSL -o /tmp/apache-maven.tar.gz ${BASE_URL}/apache-maven-${TOOL_VERSION}-bin.tar.gz \
   && echo "${SHA}  /tmp/apache-maven.tar.gz" | sha256sum -c - \
   && tar -xzf /tmp/apache-maven.tar.gz -C /usr/share/maven --strip-components=1 \
   && rm -f /tmp/apache-maven.tar.gz \
