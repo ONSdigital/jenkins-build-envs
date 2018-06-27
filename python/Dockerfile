@@ -1,7 +1,7 @@
 # Jenkins Build Env :: Python
 # 
 # Example:
-#   $ docker run -it onsdigital/jenkins-slave-pytho:2.7.15 /usr/local/bin/python2.7 -V
+#   $ docker run -it onsdigital/jenkins-slave-python:2.7.15 /usr/local/bin/python2.7 -V
 # 
 FROM onsdigital/jenkins-slave-base
 LABEL maintainer="sion.williams@ext.ons.gov.uk"

@@ -54,8 +54,15 @@ services:
       context: ./python
       args:
         TOOL_VERSION: 2.7.15
-        SHA: c9750707d127d39a6868e1e55f7cd8c7be006b89
     image: onsdigital/jenkins-slave-python:2.7.15
+    depends_on: 
+      - jenkins-slave-base
+  python_3.3.0:
+    build:
+      context: ./python
+      args:
+        TOOL_VERSION: 3.3.0
+    image: onsdigital/jenkins-slave-python:3.3.0
     depends_on: 
       - jenkins-slave-base      
 # TIER 3
