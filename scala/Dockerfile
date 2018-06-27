@@ -4,7 +4,8 @@
 #   $ docker run -it onsdigital/jenkins-slave-scala:2.11.8 scala -version
 # 
 FROM onsdigital/jenkins-slave-base
-LABEL maintainer="sion.williams@ext.ons.gov.uk"
+LABEL maintainer="sion.williams@ext.ons.gov.uk" \
+      build-tool="scala"
 
 # build-args are overridden in the docker-compose.yml
 # to allow for multiple builds of new versions from the 

@@ -49,6 +49,22 @@ services:
     image: onsdigital/jenkins-slave-maven:3.5.4
     depends_on: 
       - jenkins-slave-base
+  python_2.7.15:
+    build:
+      context: ./python
+      args:
+        TOOL_VERSION: 2.7.15
+    image: onsdigital/jenkins-slave-python:2.7.15
+    depends_on: 
+      - jenkins-slave-base
+  python_3.3.0:
+    build:
+      context: ./python
+      args:
+        TOOL_VERSION: 3.3.0
+    image: onsdigital/jenkins-slave-python:3.3.0
+    depends_on: 
+      - jenkins-slave-base      
 # TIER 3
   sbt_0-13-13:
     build: 

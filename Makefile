@@ -19,6 +19,8 @@ verify:
 	@docker run -it onsdigital/jenkins-slave-node:v9.9.0 node --version
 	@docker run -it onsdigital/jenkins-slave-scala:2.11.8 scala -version
 	@docker run -it onsdigital/jenkins-slave-sbt:0.13.13 sbt -version
+	@docker run -it onsdigital/jenkins-slave-python:2.7.15 /usr/local/bin/python2.7 -V
+	@docker run -it onsdigital/jenkins-slave-python:3.3.0 /usr/local/bin/python3.3 -V
 
 test: clean all verify
 
