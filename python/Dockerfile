@@ -4,7 +4,8 @@
 #   $ docker run -it onsdigital/jenkins-slave-python:2.7.15 /usr/local/bin/python2.7 -V
 # 
 FROM onsdigital/jenkins-slave-base
-LABEL maintainer="sion.williams@ext.ons.gov.uk"
+LABEL maintainer="sion.williams@ext.ons.gov.uk" \
+      build-tool="python"
 
 # build-args are overridden in the docker-compose.yml
 # to allow for multiple builds of new versions from the 

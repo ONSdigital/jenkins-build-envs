@@ -4,7 +4,8 @@
 #   $ docker run -it onsdigital/jenkins-slave-maven:3.2.5 mvn --version
 # 
 FROM onsdigital/jenkins-slave-base
-LABEL maintainer="sion.williams@ext.ons.gov.uk"
+LABEL maintainer="sion.williams@ext.ons.gov.uk" \
+      build-tool="maven"
 
 # build-args are overridden in the docker-compose.yml
 # to allow for multiple builds of new versions from the 
