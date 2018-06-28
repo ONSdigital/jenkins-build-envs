@@ -1,5 +1,6 @@
 # ONS Build Slaves
 
+[![Build Status](https://travis-ci.org/ONSdigital/jenkins-build-envs.svg?branch=master)](https://travis-ci.org/ONSdigital/jenkins-build-envs)
 
 This repository holds the Dockerfiles for our Jenkins build environments.
 
