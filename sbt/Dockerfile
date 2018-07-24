@@ -24,6 +24,16 @@ RUN curl -fsSL -o /tmp/sbt-${TOOL_VERSION}.rpm ${BASE_URL}/sbt-${TOOL_VERSION}.r
   yum install -y /tmp/sbt-${TOOL_VERSION}.rpm && \
   yum clean all
 
+# The location of global sbtopts is dependent on the version of SBT (rpm) being installed
+# As of 2018/07/24, there are 29 versions of the SBT rpm available on bintray
+# 10 versions use /usr/share/sbt-launcher-packaging/conf    (which is symlinked to /etc/sbt-launcher-packaging)
+# 19 versions use /usr/share/sbt/conf                       (which is symlinked to /etc/sbt)
+# So check for the existence of sbtopts in two locations before appending to it.
+# If none of the two locations exists, exit with non-zero exit code so that the build fails.
+RUN if [ -f /etc/sbt-launcher-packaging/sbtopts ]; then echo "-Dsbt.override.build.repos=true" >> /etc/sbt-launcher-packaging/sbtopts; \
+  elif [ -f /etc/sbt/sbtopts ]; then echo "-Dsbt.override.build.repos=true" >> /etc/sbt/sbtopts; \
+  else exit 1; fi
+
 # Running sbt version here allows us to cache the results of an sbt boot
 # making future executions faster
 RUN runuser -l jenkins -c 'sbt clean'
