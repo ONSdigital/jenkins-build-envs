@@ -1,19 +1,19 @@
 # Jenkins Build Env :: Maven
-# 
+#
 # Example:
 #   $ docker run -it onsdigital/jenkins-slave-maven:3.2.5 mvn --version
-# 
+#
 FROM onsdigital/jenkins-slave-base
 LABEL maintainer="sion.williams@ext.ons.gov.uk" \
       build-tool="maven"
 
 # build-args are overridden in the docker-compose.yml
-# to allow for multiple builds of new versions from the 
+# to allow for multiple builds of new versions from the
 # same dockerfile
 ARG TOOL_VERSION
 ARG SHA
 
-ARG USER_HOME_DIR="/root"
+ARG USER_HOME_DIR="/home/jenkins"
 ARG BASE_URL=https://apache.osuosl.org/maven/maven-3/${TOOL_VERSION}/binaries
 
 RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
