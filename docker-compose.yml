@@ -6,39 +6,39 @@ services:
     image: onsdigital/jenkins-slave-base
 # TIER 2
   scala_2-11-8:
-    build: 
+    build:
       context: ./scala
       args:
          TOOL_VERSION: 2.11.8
     image: onsdigital/jenkins-slave-scala:2.11.8
-    depends_on: 
+    depends_on:
       - jenkins-slave-base
   node_6-11-5:
-    build: 
+    build:
       context: ./node
       args:
          TOOL_VERSION: v6.11.5
          SHA: fffd25c9e9b6d2235e97ba8be1dd6ea5f31e32ea445c5cc704ca84ef44db66c1
     image: onsdigital/jenkins-slave-node:v6.11.5
-    depends_on: 
+    depends_on:
       - jenkins-slave-base
   node_9.9.0:
-    build: 
+    build:
       context: ./node
       args:
          TOOL_VERSION: v9.9.0
          SHA: 887cb4db6207f303b5ba15b6e15298f19d288fce2064e8caa7bb7cae170cbe85
     image: onsdigital/jenkins-slave-node:v9.9.0
-    depends_on: 
+    depends_on:
       - jenkins-slave-base
   maven_3.2.5:
-    build: 
+    build:
       context: ./maven
       args:
          TOOL_VERSION: 3.2.5
          SHA: 8c190264bdf591ff9f1268dc0ad940a2726f9e958e367716a09b8aaa7e74a755
     image: onsdigital/jenkins-slave-maven:3.2.5
-    depends_on: 
+    depends_on:
       - jenkins-slave-base
   maven_3.5.4:
     build:
@@ -47,7 +47,7 @@ services:
         TOOL_VERSION: 3.5.4
         SHA: ce50b1c91364cb77efe3776f756a6d92b76d9038b0a0782f7d53acf1e997a14d
     image: onsdigital/jenkins-slave-maven:3.5.4
-    depends_on: 
+    depends_on:
       - jenkins-slave-base
   python_2.7.15:
     build:
@@ -55,7 +55,7 @@ services:
       args:
         TOOL_VERSION: 2.7.15
     image: onsdigital/jenkins-slave-python:2.7.15
-    depends_on: 
+    depends_on:
       - jenkins-slave-base
   python_3.3.0:
     build:
@@ -63,22 +63,23 @@ services:
       args:
         TOOL_VERSION: 3.3.0
     image: onsdigital/jenkins-slave-python:3.3.0
-    depends_on: 
-      - jenkins-slave-base      
+    depends_on:
+      - jenkins-slave-base
   r_3.5.0-1:
     build:
       context: ./r
       args:
         TOOL_VERSION: 3.5.0-1.el7
     image: onsdigital/jenkins-slave-r:3.5.0-1
-    depends_on: 
+    depends_on:
       - jenkins-slave-base
 # TIER 3
   sbt_0-13-13:
-    build: 
+    build:
         context: ./sbt
         args:
           TOOL_VERSION: 0.13.13
+          MAJOR_MINOR_VERSION: 0.13
     image: onsdigital/jenkins-slave-sbt:0.13.13
-    depends_on: 
+    depends_on:
       - scala_2-11-8
