@@ -20,14 +20,7 @@ ARG BASE_URL=https://sbt.bintray.com/rpm/
 RUN curl -fsSL -o /tmp/sbt-${TOOL_VERSION}.rpm ${BASE_URL}/sbt-${TOOL_VERSION}.rpm && \
   yum install -y /tmp/sbt-${TOOL_VERSION}.rpm && \
   yum clean all
-RUN echo "-Dsbt.override.build.repos=true" >> /etc/sbt-launcher-packaging/sbtopts
 
 # Running sbt version here allows us to cache the results of an sbt boot
 # making future executions faster
 RUN runuser -l jenkins -c 'sbt clean'
-
-COPY /files/repositories /${JENKINS_HOME}/.sbt/
-COPY /files/.credentials /${JENKINS_HOME}/.sbt/
-RUN mkdir -p /${JENKINS_HOME}/.sbt/${MAJOR_MINOR_VERSION}/plugins/
-COPY /files/credentials.sbt /${JENKINS_HOME}/.sbt/${MAJOR_MINOR_VERSION}/plugins/
-
