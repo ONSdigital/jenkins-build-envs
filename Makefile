@@ -18,7 +18,9 @@ verify:
 	docker run -it onsdigital/jenkins-slave-node:v6.11.5 node --version
 	docker run -it onsdigital/jenkins-slave-node:v9.9.0 node --version
 	docker run -it onsdigital/jenkins-slave-scala:2.11.8 scala -version
+	docker run -it onsdigital/jenkins-slave-scala:2.12.6 scala -version
 	docker run -it onsdigital/jenkins-slave-sbt:0.13.13 sbt -version
+	docker run -it onsdigital/jenkins-slave-sbt:1.1.6 sbt -version
 	docker run -it onsdigital/jenkins-slave-python:2.7.15 /usr/local/bin/python2.7 -V
 	docker run -it onsdigital/jenkins-slave-python:3.3.0 /usr/local/bin/python3.3 -V
 	docker run -it onsdigital/jenkins-slave-r:3.5.0-1 R --version

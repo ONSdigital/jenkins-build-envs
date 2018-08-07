@@ -1,16 +1,19 @@
 # Jenkins Build Env :: Python
-# 
+#
 # Example:
 #   $ docker run -it onsdigital/jenkins-slave-python:2.7.15 /usr/local/bin/python2.7 -V
-# 
+#
 FROM onsdigital/jenkins-slave-base
-LABEL maintainer="sion.williams@ext.ons.gov.uk" \
-      build-tool="python"
+
+ARG TOOL_VERSION
+
+LABEL uk.gov.ons.image.name="jenkins-slave-python"
+LABEL uk.gov.ons.image.description="A Jenkins slave with Python"
+LABEL uk.gov.ons.image.version="${TOOL_VERSION}"
 
 # build-args are overridden in the docker-compose.yml
-# to allow for multiple builds of new versions from the 
+# to allow for multiple builds of new versions from the
 # same dockerfile
-ARG TOOL_VERSION
 ARG SHA
 ARG BASE_URL=https://www.python.org/ftp/python/${TOOL_VERSION}/
 
