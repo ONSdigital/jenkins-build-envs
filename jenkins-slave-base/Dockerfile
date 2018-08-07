@@ -1,4 +1,4 @@
-FROM centos:centos7
+FROM centos:7
 
 LABEL uk.gov.ons.image.name="jenkins-slave-base"
 LABEL uk.gov.ons.image.description="A Jenkins slave using JNLP to establish connection based on Centos"
