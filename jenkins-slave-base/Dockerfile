@@ -1,5 +1,7 @@
 FROM centos:centos7
-LABEL maintainer="sion.williams@ext.ons.gov.uk"
+
+LABEL uk.gov.ons.image.name="jenkins-slave-base"
+LABEL uk.gov.ons.image.description="A Jenkins slave using JNLP to establish connection based on Centos"
 
 # Install Essentials
 RUN yum update -y && \

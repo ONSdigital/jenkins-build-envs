@@ -4,13 +4,16 @@
 #   $ docker run -it onsdigital/jenkins-slave-maven:3.2.5 mvn --version
 #
 FROM onsdigital/jenkins-slave-base
-LABEL maintainer="sion.williams@ext.ons.gov.uk" \
-      build-tool="maven"
+
+ARG TOOL_VERSION
+
+LABEL uk.gov.ons.image.name="jenkins-slave-maven"
+LABEL uk.gov.ons.image.description="A Jenkins slave with Maven"
+LABEL uk.gov.ons.image.version="${TOOL_VERSION}"
 
 # build-args are overridden in the docker-compose.yml
 # to allow for multiple builds of new versions from the
 # same dockerfile
-ARG TOOL_VERSION
 ARG SHA
 
 ARG USER_HOME_DIR="/home/jenkins"
