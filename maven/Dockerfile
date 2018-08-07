@@ -28,7 +28,7 @@ RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
 
 ENV MAVEN_HOME /usr/share/maven
 ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
-ENV JAVA_HOME "/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.171-8.b10.el7_5.x86_64/jre"
+ENV JAVA_HOME "/usr"
 ENV PATH "${JAVA_HOME}/bin:${PATH}"
 
 COPY /files/settings-docker.xml /usr/share/maven/ref/
