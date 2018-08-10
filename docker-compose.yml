@@ -5,6 +5,12 @@ services:
     build: ./jenkins-slave-base
     image: onsdigital/jenkins-slave-base
 # TIER 2
+  cf-cli:
+    build:
+      context: ./cloud-foundry
+    image: onsdigital/jenkins-slave-cf-cli
+    depends_on:
+      - jenkins-slave-base
   scala_2-11-8:
     build:
       context: ./scala
