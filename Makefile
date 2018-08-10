@@ -13,6 +13,7 @@ clean:  docker.check
 
 # TODO: this isn't great. Look to improve this...
 verify:
+	docker run -it onsdigital/jenkins-slave-gmu pip -V
 	docker run -it onsdigital/jenkins-slave-maven:3.2.5 mvn --version
 	docker run -it onsdigital/jenkins-slave-maven:3.5.4 mvn --version
 	docker run -it onsdigital/jenkins-slave-node:v6.11.5 node --version
