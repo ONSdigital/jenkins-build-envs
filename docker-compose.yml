@@ -5,6 +5,14 @@ services:
     build: ./jenkins-slave-base
     image: onsdigital/jenkins-slave-base
 # TIER 2
+  gradle_4-9:
+    build:
+      context: ./gradle
+      args:
+        TOOL_VERSION: 4.9
+    image: onsdigital/jenkins-slave-gradle:4.9
+    depends_on:
+      - jenkins-slave-base
   cf-cli:
     build:
       context: ./cloud-foundry
