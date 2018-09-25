@@ -13,6 +13,8 @@ clean:  docker.check
 
 # TODO: this isn't great. Look to improve this...
 verify:
+	docker run -it onsdigital/jenkins-slave-gradle:4.9 gradle --version
+	docker run -it onsdigital/jenkins-slave-cf-cli:latest cf --version
 	docker run -it onsdigital/jenkins-slave-maven:3.2.5 mvn --version
 	docker run -it onsdigital/jenkins-slave-maven:3.5.4 mvn --version
 	docker run -it onsdigital/jenkins-slave-node:v6.11.5 node --version
@@ -24,7 +26,6 @@ verify:
 	docker run -it onsdigital/jenkins-slave-python:2.7.15 /usr/local/bin/python2.7 -V
 	docker run -it onsdigital/jenkins-slave-python:3.3.0 /usr/local/bin/python3.3 -V
 	docker run -it onsdigital/jenkins-slave-r:3.5.0-1 R --version
-	docker run -it onsdigital/jenkins-slave-cf-cli:latest cf --version
 
 test: clean all verify
 
