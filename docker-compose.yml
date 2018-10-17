@@ -104,14 +104,14 @@ services:
     image: onsdigital/jenkins-slave-python:3.6.0
     depends_on:
       - jenkins-slave-base
-  r_3.5.0-1:
-    build:
-      context: ./r
-      args:
-        TOOL_VERSION: 3.5.0-1.el7
-    image: onsdigital/jenkins-slave-r:3.5.0-1
-    depends_on:
-      - jenkins-slave-base
+#  r_3.5.0-1:
+#    build:
+#      context: ./r
+#      args:
+#        TOOL_VERSION: 3.5.0-1.el7
+#    image: onsdigital/jenkins-slave-r:3.5.0-1
+#    depends_on:
+#      - jenkins-slave-base
   # TIER 3
   sbt_0-13-13:
     build:
