@@ -36,6 +36,14 @@ services:
     image: onsdigital/jenkins-slave-scala:2.12.6
     depends_on:
       - jenkins-slave-base
+  scala_2-12-7:
+    build:
+      context: ./scala
+      args:
+        TOOL_VERSION: 2.12.7
+    image: onsdigital/jenkins-slave-scala:2.12.7
+    depends_on:
+      - jenkins-slave-base
   node_6-11-5:
     build:
       context: ./node
@@ -104,14 +112,14 @@ services:
     image: onsdigital/jenkins-slave-python:3.6.0
     depends_on:
       - jenkins-slave-base
-#  r_3.5.0-1:
-#    build:
-#      context: ./r
-#      args:
-#        TOOL_VERSION: 3.5.0-1.el7
-#    image: onsdigital/jenkins-slave-r:3.5.0-1
-#    depends_on:
-#      - jenkins-slave-base
+  #  r_3.5.0-1:
+  #    build:
+  #      context: ./r
+  #      args:
+  #        TOOL_VERSION: 3.5.0-1.el7
+  #    image: onsdigital/jenkins-slave-r:3.5.0-1
+  #    depends_on:
+  #      - jenkins-slave-base
   # TIER 3
   sbt_0-13-13:
     build:
@@ -123,6 +131,16 @@ services:
     image: onsdigital/jenkins-slave-sbt:0.13.13
     depends_on:
       - scala_2-11-8
+  sbt_1-2-4:
+    build:
+      context: ./sbt
+      args:
+        TOOL_VERSION: 1.2.4
+        MAJOR_MINOR_VERSION: 1.1
+        TOOL_DEPENDENCY_VERSION: 2.12.7
+    image: onsdigital/jenkins-slave-sbt:1.2.4
+    depends_on:
+      - scala_2-12-7
   sbt_1-1-6:
     build:
       context: ./sbt
