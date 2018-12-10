@@ -20,12 +20,12 @@ ENV JENKINS_HOME /home/jenkins
 ARG MAJOR_MINOR_VERSION
 ARG BASE_URL=https://sbt.bintray.com/rpm/
 
+ENV JAVA_HOME "/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.191.b12-1.el7_6.x86_64"
+ENV PATH "${JAVA_HOME}/bin:${PATH}"
+
 RUN curl -fsSL -o /tmp/sbt-${TOOL_VERSION}.rpm ${BASE_URL}/sbt-${TOOL_VERSION}.rpm && \
   yum install -y /tmp/sbt-${TOOL_VERSION}.rpm && \
   yum clean all
-
-ENV JAVA_HOME "/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.191.b12-1.el7_6.x86_64"
-ENV PATH "${JAVA_HOME}/bin:${PATH}"
 
 # The location of global sbtopts is dependent on the version of SBT (rpm) being installed
 # As of 2018/07/24, there are 29 versions of the SBT rpm available on bintray
