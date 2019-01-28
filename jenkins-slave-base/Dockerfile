@@ -9,7 +9,7 @@ RUN yum update -y && \
 
 # Install Packages
 RUN yum install -y git && \
-	yum install -y java-1.8.0-openjdk && \
+	yum install -y java-1.8.0-openjdk-devel.x86_64 && \
 	yum install -y sudo && \
 	yum clean all
 
