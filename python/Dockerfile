@@ -21,6 +21,7 @@ ARG BASE_URL=https://www.python.org/ftp/python/${TOOL_VERSION}/
 ENV LD_RUN_PATH /usr/local/lib
 
 RUN yum install -y \
+        zip \
         gcc \
         openssl-devel \
         bzip2-devel \
