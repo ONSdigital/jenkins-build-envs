@@ -168,3 +168,19 @@ services:
     image: onsdigital/jenkins-slave-sbt:1.1.6
     depends_on:
       - scala_2-12-6
+  sonarscannercli_3.2.0:
+    build:
+      context: sonar-scanner
+      args:
+        TOOL_VERSION: 3.2.0.1227
+    image: onsdigital/jenkins-slave-sonar-scanner:3.2.0
+    depends_on:
+      - jenkins-slave-base
+  sonarscannercli_3.3.0:
+    build:
+      context: sonar-scanner
+      args:
+        TOOL_VERSION: 3.3.0.1492
+    image: onsdigital/jenkins-slave-sonar-scanner:3.3.0
+    depends_on:
+      - jenkins-slave-base
