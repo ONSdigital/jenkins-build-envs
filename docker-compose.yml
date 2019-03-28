@@ -121,6 +121,14 @@ services:
     image: onsdigital/jenkins-slave-python:3.6.0
     depends_on:
       - jenkins-slave-base
+  python_3.6.1:
+    build:
+      context: ./python
+      args:
+        TOOL_VERSION: 3.6.1
+    image: onsdigital/jenkins-slave-python:3.6.1
+    depends_on:
+      - jenkins-slave-base
   python_3.6.3:
     build:
       context: ./python

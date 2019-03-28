@@ -33,7 +33,7 @@ RUN mkdir -p /usr/src/python \
     && tar -xzf /tmp/python.tgz -C /usr/src/python --strip-components=1 \
     && rm -f /tmp/python.tgz \
     && cd /usr/src/python \
-    && ./configure --with-ensurepip=install --enable-shared --enable-optimizations \
+    && ./configure --with-ensurepip=install --enable-shared \
     && make \
     && make install \
     && python -V
