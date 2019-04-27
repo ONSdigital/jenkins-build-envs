@@ -25,7 +25,7 @@ verify:
 	docker run -it onsdigital/jenkins-slave-sbt:1.1.6 sbt -version
 	docker run -it onsdigital/jenkins-slave-python:2.7.15 /usr/local/bin/python2.7 -V
 	docker run -it onsdigital/jenkins-slave-python:3.3.0 /usr/local/bin/python3.3 -V
-	docker run -it onsdigital/jenkins-slave-r:3.5.0-1 R --version
+	docker run -it onsdigital/jenkins-slave-r:3.5.2-2 R --version
 
 test: clean all verify
 
