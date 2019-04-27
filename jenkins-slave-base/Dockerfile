@@ -11,6 +11,8 @@ RUN yum update -y && \
 RUN yum install -y git && \
 	yum install -y java-1.8.0-openjdk-devel.x86_64 && \
 	yum install -y sudo && \
+	yum install -y epel-release && \
+	yum install -y jq && \
 	yum clean all
 
 ARG user=jenkins
