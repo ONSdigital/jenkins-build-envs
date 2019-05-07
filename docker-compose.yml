@@ -176,3 +176,11 @@ services:
     image: onsdigital/jenkins-slave-sbt:1.1.6
     depends_on:
       - scala_2-12-6
+  jq_1-6:
+    build:
+      context: ./jq
+      args:
+        TOOL_VERSION: 1.6
+    image: onsdigital/jenkins-slave-jq:1.6
+    depends_on:
+      - jenkins-slave-base
