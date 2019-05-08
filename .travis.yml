@@ -4,4 +4,20 @@ services:
   - docker
 
 script:
-  - make test
+  - make sbt
+
+env:
+  global:
+    - CACHE_DIR_SBT=$HOME/.sbt
+    - CACHE_DIR_IVY=$HOME/.ivy2/cache
+
+cache:
+  directories:
+    - $CACHE_DIR_SBT
+    - $CACHE_DIR_IVY
+
+before_cache:
+  # Cleanup the cached directories to avoid unnecessary cache updates
+  - rm -fv $HOME/.ivy2/.sbt.ivy.lock
+  - find $HOME/.ivy2/cache -name "ivydata-*.properties" -print -delete
+  - find $HOME/.sbt        -name "*.lock"               -print -delete

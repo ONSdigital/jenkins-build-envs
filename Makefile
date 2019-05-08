@@ -1,4 +1,4 @@
-.PHONY: %.check build
+.PHONY: %.check build sbt
 
 all: docker-compose.check
 	docker-compose build --force-rm
@@ -32,6 +32,9 @@ verify:
 	docker run -it onsdigital/jenkins-slave-python:3.6.1 /usr/local/bin/python3.6 -V
 	docker run -it onsdigital/jenkins-slave-python:3.6.3 /usr/local/bin/python3.6 -V
 	docker run -it onsdigital/jenkins-slave-jq:1.6 jq --version
+
+sbt:
+	docker run -it -v ${HOME}/.sbt:/root/.sbt -v ${HOME}/.ivy2/cache:/root/.ivy2/cache onsdigital/jenkins-slave-sbt:0.13.13 sbt sbtVersion
 
 test: clean all verify
 
