@@ -28,13 +28,13 @@ verify: $(TARGETS)
 
 # -----------------------------------------------------------------------------------------------------
 MAVEN_VERIFY_COMMAND:=mvn --version
-MAVEN_VERSION_LIST=3.2.5 3.5.4 3.6.0
+MAVEN_VERSION_LIST=3.2.5 3.5.4
 MAVEN_DOCKER_IMAGE=onsdigital/jenkins-slave-maven
 MAVEN:
 	$(call run_docker_meta,$@)
 # -----------------------------------------------------------------------------------------------------
 SBT_VERIFY_COMMAND=sbt sbtVersion
-SBT_VERSION_LIST=0.13.13 1.1.6 1.2.4
+SBT_VERSION_LIST=0.13.13 1.2.4
 SBT_DOCKER_IMAGE=onsdigital/jenkins-slave-sbt
 SBT:
 	$(call run_docker_meta,$@)
@@ -46,7 +46,7 @@ NODE:
 	$(call run_docker_meta,$@)
 # -----------------------------------------------------------------------------------------------------
 SCALA_VERIFY_COMMAND=scala -version
-SCALA_VERSION_LIST=2.11.8 2.12.6 2.12.7 2.11.8
+SCALA_VERSION_LIST=2.11.8 2.12.7
 SCALA_DOCKER_IMAGE=onsdigital/jenkins-slave-scala
 SCALA:
 	$(call run_docker_meta,$@)
