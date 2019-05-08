@@ -1,3 +1,4 @@
+---
 sudo: required
 
 services:
@@ -5,3 +6,17 @@ services:
 
 script:
   - make test
+
+env:
+  global:
+    - CACHE_DIR_SBT=$HOME/.sbt
+    - CACHE_DIR_IVY=$HOME/.ivy2/cache
+    - CACHE_DIR_GRADLE=$HOME/.gradle
+    - CACHE_DIR_MAVEN=$HOME/.m2/repository
+
+cache:
+  directories:
+    - $CACHE_DIR_SBT
+    - $CACHE_DIR_IVY
+    - $CACHE_DIR_GRADLE
+    - $CACHE_DIR_MAVEN
