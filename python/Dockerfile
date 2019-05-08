@@ -36,5 +36,5 @@ RUN mkdir -p /usr/src/python \
     && ./configure --with-ensurepip=install --enable-shared \
     && make \
     && make install \
-    && python -V
-
+    && printf "\n\n********* Listing python binaries in PATH " \
+    && echo $PATH | tr ":" "\n" | xargs -I % sh -c "printf \"\n\n Searchin in %\"; find % -name \"python*\""
