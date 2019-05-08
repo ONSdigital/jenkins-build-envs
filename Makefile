@@ -53,11 +53,10 @@ SCALA:
 # -----------------------------------------------------------------------------------------------------
 PYTHON_VERIFY_COMMAND_OTHER=python_version -V
 PYTHON_VERIFY_COMMAND=python3.6 -V
-PYTHON_VERSION_LIST=3.6.0 3.6.1 3.6.3
+PYTHON_VERSION_LIST=3.6.0 3.6.1
 PYTHON_DOCKER_IMAGE=onsdigital/jenkins-slave-python
 PYTHON:
-	$(DOCKER) $(DOCKER_FLAGS) onsdigital/jenkins-slave-python:2.7.15  ${PYTHON_VERIFY_COMMAND_OTHER:_version=2.7}
-	$(DOCKER) $(DOCKER_FLAGS) onsdigital/jenkins-slave-python:3.3.0   ${PYTHON_VERIFY_COMMAND_OTHER:_version=3.3}
+	#$(DOCKER) $(DOCKER_FLAGS) onsdigital/jenkins-slave-python:2.7.15  ${PYTHON_VERIFY_COMMAND_OTHER:_version=2.7}
 	$(call run_docker_meta,$@)
 # -----------------------------------------------------------------------------------------------------
 
@@ -71,7 +70,7 @@ PYTHON:
 # This function iterates through the versions in $1, and for each runs a container and executes the command specified
 # by $3
 define run_docker
-    { \
+    @{ \
     	for version in $(1); do \
     		printf "\n\n************************* Checking image $(2):$${version} with command $(3) \n"; \
     		$(DOCKER) $(DOCKER_FLAGS) $(2):$${version} 	$(3) ; \

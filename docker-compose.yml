@@ -97,22 +97,6 @@ services:
     image: onsdigital/jenkins-slave-python:2.7.15
     depends_on:
       - jenkins-slave-base
-  python_3.3.0:
-    build:
-      context: ./python
-      args:
-        TOOL_VERSION: 3.3.0
-    image: onsdigital/jenkins-slave-python:3.3.0
-    depends_on:
-      - jenkins-slave-base
-  python_3.4.0:
-    build:
-      context: ./python
-      args:
-        TOOL_VERSION: 3.4.0
-    image: onsdigital/jenkins-slave-python:3.4.0
-    depends_on:
-      - jenkins-slave-base
   python_3.6.0:
     build:
       context: ./python
@@ -127,14 +111,6 @@ services:
       args:
         TOOL_VERSION: 3.6.1
     image: onsdigital/jenkins-slave-python:3.6.1
-    depends_on:
-      - jenkins-slave-base
-  python_3.6.3:
-    build:
-      context: ./python
-      args:
-        TOOL_VERSION: 3.6.3
-    image: onsdigital/jenkins-slave-python:3.6.3
     depends_on:
       - jenkins-slave-base
   #  r_3.5.0-1:
