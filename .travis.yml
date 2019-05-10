@@ -5,7 +5,7 @@ services:
   - docker
 
 script:
-  - make test
+  - make SBT
 
 env:
   global:
