@@ -4,6 +4,13 @@ sudo: required
 services:
   - docker
 
+before_install:
+  - if [ -f ${CACHE_FILE_JENKINS_BASE_IMAGE} ]; then gunzip -c ${CACHE_FILE_JENKINS_BASE_IMAGE} | docker load; fi
+
+install:
+  - mkdir -p $CACHE_DIR_DOCKER
+  - if [ ! -f ${CACHE_FILE_JENKINS_BASE_IMAGE} ]; then docker save onsdigital/jenkins-slave-base | gzip > ${CACHE_FILE_JENKINS_BASE_IMAGE}; fi
+
 script:
   - make test
 
@@ -13,6 +20,8 @@ env:
     - CACHE_DIR_IVY=$HOME/.ivy2/cache
     - CACHE_DIR_GRADLE=$HOME/.gradle
     - CACHE_DIR_MAVEN=$HOME/.m2/repository
+    - CACHE_DIR_DOCKER=$HOME/.cache/docker
+    - CACHE_FILE_JENKINS_BASE_IMAGE=$CACHE_DIR_DOCKER/jenkins_base_image.tar.gz
 
 cache:
   directories:
