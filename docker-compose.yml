@@ -18,6 +18,10 @@ services:
     build:
       context: ./cloud-foundry
     image: onsdigital/jenkins-slave-cf-cli
+  gmu:
+    build:
+      context: ./gmu
+    image: onsdigital/jenkins-slave-gmu
     depends_on:
       - jenkins-slave-base
   scala_2-11-8:
