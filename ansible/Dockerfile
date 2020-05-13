@@ -15,30 +15,6 @@ LABEL uk.gov.ons.image.version="$ANSIBLE_VERSION}"
 # same dockerfile
 ARG SHA
 
-
-ENV LD_RUN_PATH /usr/local/lib
-
-# Install new packages
-
-RUN yum install -y \
-        build-base \
-        python-dev \
-        py-pip \
-        jpeg-dev \
-        zlib-dev \
-        libffi-dev\
-        openssl-dev \
-        git \
-        openssh-client sshpass \
-        python3-pip \
-    && yum clean all
-
-# Upgrade pip
-RUN pip3 install --upgrade pip
-
-# Change LIBRARY_PATH environment variable because of error in building zlib
-ENV LIBRARY_PATH=/lib:/usr/lib
-
 # Set Workdir
 WORKDIR /ansible
 
@@ -47,5 +23,10 @@ VOLUME [ "/ansible" ]
 
 # Install ansible
 ARG ANSIBLE_VERSION=2.5
+
+RUN yum install -y epel-release \
+    && yum install -y python-pip \
+    && yum clean all \
+    && rm -rf /var/cache/yum
 
 RUN pip install ansible==$ANSIBLE_VERSION
