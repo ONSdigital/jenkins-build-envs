@@ -10,8 +10,8 @@ services:
     build:
       context: ./ansible
       args:
-        TOOL_VERSION: 2.8.2
-    image: onsdigital/jenkins-slave-ansible:3.6.1
+        ANSIBLE_VERSION: 2.8.2
+    image: onsdigital/jenkins-slave-ansible:2.8.2
     depends_on:
       - jenkins-slave-base
   gradle_4-9:
