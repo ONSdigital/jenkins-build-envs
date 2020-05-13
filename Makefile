@@ -22,7 +22,7 @@ verify: $(TARGETS)
 	$(DOCKER) $(DOCKER_FLAGS) onsdigital/jenkins-slave-gradle:4.9 		gradle 	 --version
 	$(DOCKER) $(DOCKER_FLAGS) onsdigital/jenkins-slave-cf-cli:latest 	cf 	 --version
 	$(DOCKER) $(DOCKER_FLAGS) onsdigital/jenkins-slave-gmu			pip 	 -V
-
+        $(DOCKER) $(DOCKER_FLAGS) onsdigital/jenkins-slave-ansible              ansible  --version
 # .check targets just tests for a command to be available on your PATH.
 %.check:
 	@which $*
