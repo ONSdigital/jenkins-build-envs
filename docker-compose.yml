@@ -137,3 +137,10 @@ services:
     image: onsdigital/jenkins-slave-jq:1.6
     depends_on:
       - jenkins-slave-base
+#  Tier 3 Images
+  cm_1.0:
+    build:
+      context: ./cm
+    image: onsdigital/jenkins-slave-cm:1.0
+    depends_on:
+      - node_12.16.2
