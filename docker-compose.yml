@@ -58,6 +58,15 @@ services:
     image: onsdigital/jenkins-slave-node:v9.9.0
     depends_on:
       - jenkins-slave-base
+  node_12.16.2:
+    build:
+      context: ./node
+      args:
+        TOOL_VERSION: v12.16.2
+        SHA: ffc92b8d9f53a10a2a734c93e78a3be74af7b0034bddd6f034a700c430eb94c1
+    image: onsdigital/jenkins-slave-node:v12.16.2
+    depends_on:
+      - jenkins-slave-base
   maven_3.2.5:
     build:
       context: ./maven

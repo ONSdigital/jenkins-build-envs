@@ -15,7 +15,7 @@ LABEL uk.gov.ons.image.version="${TOOL_VERSION}"
 # to allow for multiple builds of new versions from the
 # same dockerfile
 ARG SHA
-ARG BASE_URL=http://nodejs.org/dist/${TOOL_VERSION}
+ARG BASE_URL=http://nodejs.org/download/release/${TOOL_VERSION}
 
 RUN curl -fsSL -o /tmp/node.tar.gz ${BASE_URL}/node-${TOOL_VERSION}-linux-x64.tar.gz \
   && echo "${SHA}  /tmp/node.tar.gz" | sha256sum -c - \
