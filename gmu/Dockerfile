@@ -5,6 +5,8 @@
 #
 FROM onsdigital/jenkins-slave-base
 
+ARG TOOL_VERSION
+
 LABEL uk.gov.ons.image.name="jenkins-slave-gmu"
 LABEL uk.gov.ons.image.description="A Jenkins slave with GMU"
 

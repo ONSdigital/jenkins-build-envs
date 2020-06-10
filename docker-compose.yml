@@ -141,6 +141,8 @@ services:
   cm_1.0:
     build:
       context: ./cm
+      args:
+        TOOL_VERSION: 4.0.1
     image: onsdigital/jenkins-slave-cm:1.0
     depends_on:
       - node_12.16.2
