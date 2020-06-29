@@ -14,6 +14,7 @@ LABEL uk.gov.ons.image.version="${TOOL_VERSION}"
 RUN  yum install -y xorg-x11-server-Xvfb gcc-c++ wget \
     && wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm \
     && sudo yum install google-chrome-stable_current_x86_64.rpm -y \
-    && npm install cypress@${TOOL_VERSION} --save-dev
+    && npm install cypress@${TOOL_VERSION} --save-dev \
+    && npm install --save-dev cypress-cucumber-preprocessor@2.0.1 cypress-axe@0.5.3
 
 ENV PATH "/node_modules/.bin:${PATH}"
