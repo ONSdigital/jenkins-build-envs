@@ -25,6 +25,7 @@ services:
     depends_on:
       - jenkins-slave-base
   scala_2-11-8:
+    tty: true
     build:
       context: ./scala
       args:
@@ -33,6 +34,7 @@ services:
     depends_on:
       - jenkins-slave-base
   scala_2-12-7:
+    tty: true
     build:
       context: ./scala
       args:
@@ -41,51 +43,58 @@ services:
     depends_on:
       - jenkins-slave-base
   node_6-11-5:
+    tty: true
     build:
       context: ./node
       args:
         TOOL_VERSION: v6.11.5
-        SHA: fffd25c9e9b6d2235e97ba8be1dd6ea5f31e32ea445c5cc704ca84ef44db66c1
+        SHA256: fffd25c9e9b6d2235e97ba8be1dd6ea5f31e32ea445c5cc704ca84ef44db66c1
     image: onsdigital/jenkins-slave-node:v6.11.5
     depends_on:
       - jenkins-slave-base
   node_9.9.0:
+    tty: true
     build:
       context: ./node
       args:
         TOOL_VERSION: v9.9.0
-        SHA: 887cb4db6207f303b5ba15b6e15298f19d288fce2064e8caa7bb7cae170cbe85
+        SHA256: 887cb4db6207f303b5ba15b6e15298f19d288fce2064e8caa7bb7cae170cbe85
     image: onsdigital/jenkins-slave-node:v9.9.0
     depends_on:
       - jenkins-slave-base
   node_12.16.2:
+    tty: true
     build:
       context: ./node
       args:
         TOOL_VERSION: v12.16.2
-        SHA: ffc92b8d9f53a10a2a734c93e78a3be74af7b0034bddd6f034a700c430eb94c1
+        SHA256: ffc92b8d9f53a10a2a734c93e78a3be74af7b0034bddd6f034a700c430eb94c1
     image: onsdigital/jenkins-slave-node:v12.16.2
     depends_on:
       - jenkins-slave-base
   maven_3.2.5:
+    tty: true
     build:
       context: ./maven
       args:
         TOOL_VERSION: 3.2.5
-        SHA: 8c190264bdf591ff9f1268dc0ad940a2726f9e958e367716a09b8aaa7e74a755
+        SHA256: 8c190264bdf591ff9f1268dc0ad940a2726f9e958e367716a09b8aaa7e74a755
     image: onsdigital/jenkins-slave-maven:3.2.5
     depends_on:
       - jenkins-slave-base
   maven_3.5.4:
+    tty: true
     build:
       context: ./maven
       args:
         TOOL_VERSION: 3.5.4
-        SHA: ce50b1c91364cb77efe3776f756a6d92b76d9038b0a0782f7d53acf1e997a14d
+        SHA256: ce50b1c91364cb77efe3776f756a6d92b76d9038b0a0782f7d53acf1e997a14d
+        SHA512: 2a803f578f341e164f6753e410413d16ab60fabe31dc491d1fe35c984a5cce696bc71f57757d4538fe7738be04065a216f3ebad4ef7e0ce1bb4c51bc36d6be86
     image: onsdigital/jenkins-slave-maven:3.5.4
     depends_on:
       - jenkins-slave-base
   python_2.7.15:
+    tty: true
     build:
       context: ./python
       args:
@@ -94,6 +103,7 @@ services:
     depends_on:
       - jenkins-slave-base
   python_3.6.0:
+    tty: true
     build:
       context: ./python
       args:
@@ -102,6 +112,7 @@ services:
     depends_on:
       - jenkins-slave-base
   python_3.6.1:
+    tty: true
     build:
       context: ./python
       args:

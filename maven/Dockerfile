@@ -14,15 +14,19 @@ LABEL uk.gov.ons.image.version="${TOOL_VERSION}"
 # build-args are overridden in the docker-compose.yml
 # to allow for multiple builds of new versions from the
 # same dockerfile
-ARG SHA
+ARG SHA256
+ARG SHA512
 
 ARG USER_HOME_DIR="/home/jenkins"
 ARG BASE_URL=https://apache.osuosl.org/maven/maven-3/${TOOL_VERSION}/binaries
+ARG TMP_BINARY_DESTINATION="/tmp/apache-maven.tar.gz"
 
 RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
-  && curl -fsSL -o /tmp/apache-maven.tar.gz ${BASE_URL}/apache-maven-${TOOL_VERSION}-bin.tar.gz \
-  && tar -xzf /tmp/apache-maven.tar.gz -C /usr/share/maven --strip-components=1 \
-  && rm -f /tmp/apache-maven.tar.gz \
+  && curl -fsSL -o ${TMP_BINARY_DESTINATION} ${BASE_URL}/apache-maven-${TOOL_VERSION}-bin.tar.gz \
+  && if [[ -n "${SHA256}" ]] ; then printf "\n\n \x1b[48;5;1m Checking SHA256 sum \e[0m \n"; echo "${SHA256} ${TMP_BINARY_DESTINATION}" | sha256sum -c - ; fi \
+  && if [[ -n "${SHA512}" ]] ; then printf "\n\n \x1b[48;5;1m Checking SHA512 sum \e[0m \n"; echo "${SHA512} ${TMP_BINARY_DESTINATION}" | sha512sum -c - ; fi \
+  && tar -xzf ${TMP_BINARY_DESTINATION} -C /usr/share/maven --strip-components=1 \
+  && rm -f ${TMP_BINARY_DESTINATION} \
   && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn \
   && yum install -y make
 

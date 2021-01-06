@@ -14,9 +14,12 @@ LABEL uk.gov.ons.image.version="${TOOL_VERSION}"
 # build-args are overridden in the docker-compose.yml
 # to allow for multiple builds of new versions from the
 # same dockerfile
-ARG SHA
+ARG SHA256
+ARG SHA512
 ARG BASE_URL=http://nodejs.org/download/release/${TOOL_VERSION}
+ARG TMP_BINARY_DESTINATION="/tmp/node.tar.gz"
 
-RUN curl -fsSL -o /tmp/node.tar.gz ${BASE_URL}/node-${TOOL_VERSION}-linux-x64.tar.gz \
-  && echo "${SHA}  /tmp/node.tar.gz" | sha256sum -c - \
-  && tar -xzf /tmp/node.tar.gz -C /usr/local --strip-components=1
+RUN curl -fsSL -o ${TMP_BINARY_DESTINATION} ${BASE_URL}/node-${TOOL_VERSION}-linux-x64.tar.gz \
+  && if [[ -n "${SHA256}" ]] ; then printf "\n\n \x1b[48;5;1m Checking SHA256 sum \e[0m \n"; echo "${SHA256} ${TMP_BINARY_DESTINATION}" | sha256sum -c - ; fi \
+  && if [[ -n "${SHA512}" ]] ; then printf "\n\n \x1b[48;5;1m Checking SHA512 sum \e[0m \n"; echo "${SHA512} ${TMP_BINARY_DESTINATION}" | sha512sum -c - ; fi \
+  && tar -xzf ${TMP_BINARY_DESTINATION} -C /usr/local --strip-components=1
