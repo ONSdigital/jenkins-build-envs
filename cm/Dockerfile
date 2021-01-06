@@ -11,7 +11,7 @@ LABEL uk.gov.ons.image.name="jenkins-slave-cypress"
 LABEL uk.gov.ons.image.description="A Jenkins slave with NodeJS, google-chrome and gcc"
 LABEL uk.gov.ons.image.version="${TOOL_VERSION}"
 
-RUN  yum install -y xorg-x11-server-Xvfb gcc-c++ wget \
+RUN  yum install -y xorg-x11-server-Xvfb wget \
     && wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm \
     && sudo yum install google-chrome-stable_current_x86_64.rpm -y \
     && npm install cypress@${TOOL_VERSION} --save-dev
