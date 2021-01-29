@@ -14,6 +14,7 @@ LABEL uk.gov.ons.image.version="${TOOL_VERSION}"
 RUN  yum install -y xorg-x11-server-Xvfb wget \
     && wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm \
     && sudo yum install google-chrome-stable_current_x86_64.rpm -y \
+    && sudo yum install libXScrnSaver -y \
     && npm install cypress@${TOOL_VERSION} --save-dev
 
 ENV PATH "/node_modules/.bin:${PATH}"
