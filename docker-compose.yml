@@ -42,6 +42,24 @@ services:
     image: onsdigital/jenkins-slave-scala:2.12.7
     depends_on:
       - jenkins-slave-base
+  scala_2-12-12:
+    tty: true
+    build:
+      context: ./scala
+      args:
+        TOOL_VERSION: 2.12.12
+    image: onsdigital/jenkins-slave-scala:2.12.12
+    depends_on:
+      - jenkins-slave-base
+  scala_2-13-4:
+    tty: true
+    build:
+      context: ./scala
+      args:
+        TOOL_VERSION: 2.13.4
+    image: onsdigital/jenkins-slave-scala:2.13.4
+    depends_on:
+      - jenkins-slave-base
   node_6-11-5:
     tty: true
     build:
