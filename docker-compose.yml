@@ -158,6 +158,24 @@ services:
     image: onsdigital/jenkins-slave-python:3.6.1
     depends_on:
       - jenkins-slave-base
+  python_3.8.7:
+    tty: true
+    build:
+      context: ./python
+      args:
+        TOOL_VERSION: 3.8.7
+    image: onsdigital/jenkins-slave-python:3.8.7
+    depends_on:
+      - jenkins-slave-base
+  python_3.9.1:
+    tty: true
+    build:
+      context: ./python
+      args:
+        TOOL_VERSION: 3.9.1
+    image: onsdigital/jenkins-slave-python:3.9.1
+    depends_on:
+      - jenkins-slave-base
   sbt_0-13-13:
     build:
       context: ./sbt
