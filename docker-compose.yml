@@ -223,3 +223,12 @@ services:
     image: onsdigital/jenkins-slave-cm:2.0
     depends_on:
       - node_15.3.0
+  cm_3.0:
+    build:
+      context: ./cm
+      args:
+        TOOL_VERSION: 8.1.0
+        PARENT_VERSION: 15.3.0
+    image: onsdigital/jenkins-slave-cm:3.0
+    depends_on:
+      - node_15.3.0
