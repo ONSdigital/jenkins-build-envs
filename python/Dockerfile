@@ -27,6 +27,9 @@ RUN yum install -y \
         openssl-devel \
         bzip2-devel \
         make \
+        gcc-c++ \
+        libffi-devel \
+        unixODBC-devel \
     && yum clean all
 
 RUN mkdir -p /usr/src/python \
