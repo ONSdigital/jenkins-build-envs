@@ -14,9 +14,6 @@ slack_alert_message: &slack_alert_message
         Check it out:
         https://concourse.cicd-shared.aws.onsdigital.uk/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME
 
-resource-types:
-
-
 resources:
 # The repo with our Dockerfile
 - name: jenkins-git
@@ -39,12 +36,19 @@ resources:
   source:
     url: ((slack_webhook)) # Comes from secret manager
 
-- name: jenkins-base
+- name: jenkins-base-docker
   type: registry-image
   icon: docker
   source:
     <<: *docker_auth
     repository: ((docker_organisation))/jenkins-base
+
+- name: jenkins-scala-docker
+  type: registry-image
+  icon: docker
+  source:
+    <<: *docker_auth
+    repository: ((docker_organisation))/jenkins-scala
 
 jobs:
 - name: jenkins-base
@@ -63,10 +67,63 @@ jobs:
       put: slack-alert
       params:
         <<: *slack_alert_message
-  - put: jenkins-base
+  - put: jenkins-base-docker
     params:
       image: image/image.tar
       version: ((jenkins_base_version))
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
+
+
+- name: jenkins-scala-2.11.8
+  plan:
+  - get: jenkins-git
+    passed: [jenkins-base]
+  - task: build-image
+    privileged: true # oci-build-task must run in a privileged container
+    file: jenkins-git/packer_build.yml
+    input_mapping:
+      repo-name: jenkins-git
+    params:
+      CONTEXT: repo-name/jenkins-scala
+      BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
+      BUILD_ARG_TOOL_VERSION: 2.11.8
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
+  - put: jenkins-scala-docker
+    params:
+      image: image/image.tar
+      version: 2.11.8
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
+
+- name: jenkins-scala-2.12.7
+  plan:
+  - get: jenkins-git
+    passed: [jenkins-base]
+  - task: build-image
+    privileged: true # oci-build-task must run in a privileged container
+    file: jenkins-git/packer_build.yml
+    input_mapping:
+      repo-name: jenkins-git
+    params:
+      CONTEXT: repo-name/jenkins-scala
+      BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
+      BUILD_ARG_TOOL_VERSION: 2.12.7
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
+  - put: jenkins-scala-docker
+    params:
+      image: image/image.tar
+      version: 2.12.7
     on_failure:
       put: slack-alert
       params:
