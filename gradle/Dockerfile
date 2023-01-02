@@ -3,12 +3,13 @@
 # Example:
 #   $ docker run -it onsdigital/jenkins-slave-gradle:4.9 gradle --version
 #
-FROM onsdigital/jenkins-slave-base
+ARG PARENT_VERSION
+FROM onsdigital/jenkins-base:v${PARENT_VERSION}
 
 ARG TOOL_VERSION
 
-LABEL uk.gov.ons.image.name="jenkins-slave-gradle"
-LABEL uk.gov.ons.image.description="A Jenkins slave with Gradle"
+LABEL uk.gov.ons.image.name="jenkins-gradle"
+LABEL uk.gov.ons.image.description="A Jenkins with Gradle"
 LABEL uk.gov.ons.image.version="${TOOL_VERSION}"
 
 ARG BASE_URL=https://services.gradle.org/distributions
