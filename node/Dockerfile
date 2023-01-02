@@ -3,12 +3,13 @@
 # Example:
 #   $ docker run -it onsdigital/jenkins-slave-node:v9.9.0 node --version
 #
-FROM onsdigital/jenkins-slave-base
+ARG PARENT_VERSION
+FROM onsdigital/jenkins-base:v${PARENT_VERSION}
 
 ARG TOOL_VERSION
 
-LABEL uk.gov.ons.image.name="jenkins-slave-node"
-LABEL uk.gov.ons.image.description="A Jenkins slave with NodeJS"
+LABEL uk.gov.ons.image.name="jenkins-node"
+LABEL uk.gov.ons.image.description="A Jenkins with NodeJS"
 LABEL uk.gov.ons.image.version="${TOOL_VERSION}"
 
 # build-args are overridden in the docker-compose.yml
