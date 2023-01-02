@@ -3,12 +3,13 @@
 # Example:
 #   $ docker run -it onsdigital/jenkins-slave-sbt:0.13.13 sbt -version
 #
-FROM onsdigital/jenkins-slave-scala:2.11.8
+ARG PARENT_VERSION
+FROM onsdigital/jenkins-scala:v${PARENT_VERSION}
 
 ARG TOOL_VERSION
 
-LABEL uk.gov.ons.image.name="jenkins-slave-sbt"
-LABEL uk.gov.ons.image.description="A Jenkins slave with Scala Build Tool"
+LABEL uk.gov.ons.image.name="jenkins-sbt"
+LABEL uk.gov.ons.image.description="A Jenkins with Scala Build Tool"
 LABEL uk.gov.ons.image.version="${TOOL_VERSION}"
 
 
