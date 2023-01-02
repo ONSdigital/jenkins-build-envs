@@ -71,6 +71,13 @@ resources:
     <<: *docker_auth
     repository: ((docker_organisation))/jenkins-node
 
+- name: jenkins-cm-docker
+  type: registry-image
+  icon: docker
+  source:
+    <<: *docker_auth
+    repository: ((docker_organisation))/jenkins-cm
+
 jobs:
 - name: jenkins-base
   plan:
@@ -213,7 +220,7 @@ jobs:
       repo-name: jenkins-git
     params:
       CONTEXT: repo-name/sbt
-      BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
+      BUILD_ARG_PARENT_VERSION: 2.12.7
       BUILD_ARG_TOOL_VERSION: 1.2.4
       BUILD_ARG_MAJOR_MINOR_VERSION: 1.1
     on_failure:
@@ -240,7 +247,7 @@ jobs:
       repo-name: jenkins-git
     params:
       CONTEXT: repo-name/sbt
-      BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
+      BUILD_ARG_PARENT_VERSION: 2.11.8
       BUILD_ARG_TOOL_VERSION: 0.13.13
       BUILD_ARG_MAJOR_MINOR_VERSION: 0.13
     on_failure:
@@ -384,6 +391,58 @@ jobs:
     params:
       image: image/image.tar
       version: 15.3.0
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
+
+- name: jenkins-cm-1.0.0
+  plan:
+  - get: jenkins-git
+    passed: [jenkins-node-12.16.2]
+  - task: build-image
+    privileged: true # oci-build-task must run in a privileged container
+    file: jenkins-git/packer_build.yml
+    input_mapping:
+      repo-name: jenkins-git
+    params:
+      CONTEXT: repo-name/cm
+      BUILD_ARG_TOOL_VERSION: 4.0.1
+      BUILD_ARG_PARENT_VERSION: 12.16.2  
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
+  - put: jenkins-cm-docker
+    params:
+      image: image/image.tar
+      version: 1.0.0
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
+
+- name: jenkins-cm-2.0.0
+  plan:
+  - get: jenkins-git
+    passed: [jenkins-node-15.3.0]
+  - task: build-image
+    privileged: true # oci-build-task must run in a privileged container
+    file: jenkins-git/packer_build.yml
+    input_mapping:
+      repo-name: jenkins-git
+    params:
+      CONTEXT: repo-name/cm
+      BUILD_ARG_TOOL_VERSION: 4.0.1
+      BUILD_ARG_PARENT_VERSION: 15.3.0  
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
+  - put: jenkins-cm-docker
+    params:
+      image: image/image.tar
+      version: 2.0.0
     on_failure:
       put: slack-alert
       params:
