@@ -3,10 +3,11 @@
 # Example:
 #   $ docker run -it onsdigital/jenkins-slave-cf-cli:latest cf --version
 #
-FROM onsdigital/jenkins-slave-base
+ARG PARENT_VERSION
+FROM onsdigital/jenkins-base:v${PARENT_VERSION}
 
-LABEL uk.gov.ons.image.name="jenkins-slave-cf-cli"
-LABEL uk.gov.ons.image.description="A Jenkins slave with CF CLI"
+LABEL uk.gov.ons.image.name="jenkins-cf-cli"
+LABEL uk.gov.ons.image.description="A Jenkins with CF CLI"
 
 # need to use wget here because the curl equivalent didnt work
 RUN yum install -y wget && \
