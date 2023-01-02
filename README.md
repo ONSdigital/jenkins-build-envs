@@ -1,8 +1,66 @@
-# ONS Build Slaves
+# ONS Build
 
 [![Build Status](https://travis-ci.org/ONSdigital/jenkins-build-envs.svg?branch=master)](https://travis-ci.org/ONSdigital/jenkins-build-envs)
 
 This repository holds the Dockerfiles for our Jenkins build environments.
+
+## CICD Pipeline 
+
+[Concourse pipeline](https://concourse.cicd-shared.aws.onsdigital.uk/teams/cia/pipelines/jenkins-docker-build) is setup to run at 05:00 every wednesday. 
+
+Each jenkins build is added to a repository in onsdigital dockerhub account. 
+
+Errors are reported to jenkins-builds slack channel in ons-operations slack
+
+### Adding a new repository to the pipeline
+
+Create a new resource in the pipeline.yml file. Replace "reponame" with the name of your repository this is the object we are pushing too in dockerhub
+
+```
+- name: jenkins-reponame-docker
+  type: registry-image
+  icon: docker
+  source:
+    <<: *docker_auth
+    repository: ((docker_organisation))/jenkins-reponame
+```
+
+Create a new job within the pipeline.yml file. 
+
+Replace:
+
+- software - with the name of the software you are building
+- version_number - with the version of software you are building
+- folder_where_dockerfile_is_located
+- jenkins-reponame-docker - with the name of the resource you created above
+
+```
+- name: jenkins-software-version_number
+  plan:
+  - get: jenkins-git
+    passed: [jenkins-base]
+  - task: build-image
+    privileged: true # oci-build-task must run in a privileged container
+    file: jenkins-git/packer_build.yml
+    input_mapping:
+      repo-name: jenkins-git
+    params:
+      CONTEXT: repo-name/folder_where_dockerfile_is_located
+      BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
+      BUILD_ARG_TOOL_VERSION: version_number
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
+  - put: jenkins-reponame-docker
+    params:
+      image: image/image.tar
+      version: version_number
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
+```
 
 
 ## Build Tasks
