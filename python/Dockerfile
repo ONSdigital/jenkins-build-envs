@@ -3,12 +3,13 @@
 # Example:
 #   $ docker run -it onsdigital/jenkins-slave-python:2.7.15 /usr/local/bin/python2.7 -V
 #
-FROM onsdigital/jenkins-slave-base
+ARG PARENT_VERSION
+FROM onsdigital/jenkins-base:v${PARENT_VERSION}
 
 ARG TOOL_VERSION
 
-LABEL uk.gov.ons.image.name="jenkins-slave-python"
-LABEL uk.gov.ons.image.description="A Jenkins slave with Python"
+LABEL uk.gov.ons.image.name="jenkins-python"
+LABEL uk.gov.ons.image.description="A Jenkins with Python"
 LABEL uk.gov.ons.image.version="${TOOL_VERSION}"
 
 # build-args are overridden in the docker-compose.yml
