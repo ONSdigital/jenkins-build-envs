@@ -1,0 +1,45 @@
+docker_auth: &docker_auth
+  username: ((registry-username))
+  password: ((registry-password))
+
+resources:
+# The repo with our Dockerfile
+- name: jenkins-git
+  type: git
+  icon: github
+  source:
+    uri: https://github.com/onsdigital/jenkins-build-envs
+    branch: main
+
+- name: wednesday-build
+  type: time
+  icon: clock-outline
+  source:
+    start: 05:00
+    stop: 05:30
+    days: Wednesday
+
+- name: jenkins-base
+  type: registry-image
+  icon: docker
+  source:
+    <<: *docker_auth
+    repository: onsdigital/jenkins-base
+
+jobs:
+- name: jenkins-base
+  plan:
+  - get: wednesday-build
+    trigger: true
+  - get: jenkins-git
+  - task: build-image
+    privileged: true # oci-build-task must run in a privileged container
+    file: jenkins-git/packer_build.yml
+    input_mapping:
+      repo-name: jenkins-git
+    params:
+      CONTEXT: repo-name/jenkins-base
+  - put: jenkins-base
+    params:
+      image: image/image.tar
+      version: ((jenkins_base_version))
