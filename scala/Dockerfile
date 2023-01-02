@@ -3,11 +3,12 @@
 # Example:
 #   $ docker run -it onsdigital/jenkins-slave-scala:2.11.8 scala -version
 #
-FROM onsdigital/jenkins-slave-base
+ARG PARENT_VERSION
+FROM onsdigital/jenkins-base:v${PARENT_VERSION}
 ARG TOOL_VERSION
 
-LABEL uk.gov.ons.image.name="jenkins-slave-scala"
-LABEL uk.gov.ons.image.description="A Jenkins slave with Scala lang"
+LABEL uk.gov.ons.image.name="jenkins-scala"
+LABEL uk.gov.ons.image.description="A Jenkins with Scala lang"
 LABEL uk.gov.ons.image.version="${TOOL_VERSION}"
 
 # build-args are overridden in the docker-compose.yml
