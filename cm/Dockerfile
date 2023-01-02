@@ -4,12 +4,12 @@
 #   $ docker run -it onsdigital/jenkins-slave-node:v9.9.0 node --version
 #
 ARG PARENT_VERSION
-FROM onsdigital/jenkins-slave-node:v${PARENT_VERSION}
+FROM onsdigital/jenkins-node:v${PARENT_VERSION}
 
 ARG TOOL_VERSION
 
-LABEL uk.gov.ons.image.name="jenkins-slave-cypress"
-LABEL uk.gov.ons.image.description="A Jenkins slave with NodeJS, google-chrome and gcc"
+LABEL uk.gov.ons.image.name="jenkins-cypress"
+LABEL uk.gov.ons.image.description="A Jenkins with NodeJS, google-chrome and gcc"
 LABEL uk.gov.ons.image.version="${TOOL_VERSION}"
 
 WORKDIR /root
