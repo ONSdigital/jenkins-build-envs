@@ -3,12 +3,13 @@
 # Example:
 #   $ docker run -it onsdigital/jenkins-slave-maven:3.2.5 mvn --version
 #
-FROM onsdigital/jenkins-slave-base
+ARG PARENT_VERSION
+FROM onsdigital/jenkins-base:v${PARENT_VERSION}
 
 ARG TOOL_VERSION
 
-LABEL uk.gov.ons.image.name="jenkins-slave-maven"
-LABEL uk.gov.ons.image.description="A Jenkins slave with Maven"
+LABEL uk.gov.ons.image.name="jenkins-maven"
+LABEL uk.gov.ons.image.description="A Jenkins with Maven"
 LABEL uk.gov.ons.image.version="${TOOL_VERSION}"
 
 # build-args are overridden in the docker-compose.yml
