@@ -1,6 +1,24 @@
 docker_auth: &docker_auth
-  username: ((registry-username))
+  username: ((registry-username)) # These come from secrets manager
   password: ((registry-password))
+
+github_auth: &github_auth
+  username: ((github_pat))
+  password: x-oauth-basic
+
+slack_alert_message: &slack_alert_message
+  text: |
+        Jenkins Concourse job failed!
+        Pipeline: $BUILD_PIPELINE_NAME
+        Job: $BUILD_JOB_NAME
+        Check it out:
+        https://concourse.cicd-shared.aws.onsdigital.uk/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME
+
+resource-types:
+- name: slack-alert
+  type: slack-notification
+  source:
+    url: ((slack_webhook)) # Comes from secret manager
 
 resources:
 # The repo with our Dockerfile
@@ -24,7 +42,7 @@ resources:
   icon: docker
   source:
     <<: *docker_auth
-    repository: onsdigital/jenkins-base
+    repository: ((docker_organisation))/jenkins-base
 
 jobs:
 - name: jenkins-base
@@ -39,7 +57,15 @@ jobs:
       repo-name: jenkins-git
     params:
       CONTEXT: repo-name/jenkins-base
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert
   - put: jenkins-base
     params:
       image: image/image.tar
       version: ((jenkins_base_version))
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
