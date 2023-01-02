@@ -99,6 +99,13 @@ resources:
     <<: *docker_auth
     repository: ((docker_organisation))/jenkins-jq
 
+- name: jenkins-maven-docker
+  type: registry-image
+  icon: docker
+  source:
+    <<: *docker_auth
+    repository: ((docker_organisation))/jenkins-maven
+
 jobs:
 - name: jenkins-base
   plan:
@@ -541,6 +548,88 @@ jobs:
     params:
       image: image/image.tar
       version: 1.6
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
+
+- name: jenkins-maven-3.2.5
+  plan:
+  - get: jenkins-git
+    passed: [jenkins-base]
+  - task: build-image
+    privileged: true # oci-build-task must run in a privileged container
+    file: jenkins-git/packer_build.yml
+    input_mapping:
+      repo-name: jenkins-git
+    params:
+      CONTEXT: repo-name/maven
+      BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
+      BUILD_ARG_TOOL_VERSION: 3.2.5
+      BUILD_ARG_SHA256: 8c190264bdf591ff9f1268dc0ad940a2726f9e958e367716a09b8aaa7e74a755
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
+  - put: jenkins-maven-docker
+    params:
+      image: image/image.tar
+      version: 3.2.5
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
+
+- name: jenkins-maven-3.5.4
+  plan:
+  - get: jenkins-git
+    passed: [jenkins-base]
+  - task: build-image
+    privileged: true # oci-build-task must run in a privileged container
+    file: jenkins-git/packer_build.yml
+    input_mapping:
+      repo-name: jenkins-git
+    params:
+      CONTEXT: repo-name/maven
+      BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
+      BUILD_ARG_TOOL_VERSION: 3.5.4
+      BUILD_ARG_SHA256: ce50b1c91364cb77efe3776f756a6d92b76d9038b0a0782f7d53acf1e997a14d
+      BUILD_ARG_SHA512: 2a803f578f341e164f6753e410413d16ab60fabe31dc491d1fe35c984a5cce696bc71f57757d4538fe7738be04065a216f3ebad4ef7e0ce1bb4c51bc36d6be86
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
+  - put: jenkins-maven-docker
+    params:
+      image: image/image.tar
+      version: 3.5.4
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
+
+- name: jenkins-maven-3.6.3
+  plan:
+  - get: jenkins-git
+    passed: [jenkins-base]
+  - task: build-image
+    privileged: true # oci-build-task must run in a privileged container
+    file: jenkins-git/packer_build.yml
+    input_mapping:
+      repo-name: jenkins-git
+    params:
+      CONTEXT: repo-name/maven
+      BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
+      BUILD_ARG_TOOL_VERSION: 3.6.3
+      BUILD_ARG_SHA256: c35a1803a6e70a126e80b2b3ae33eed961f83ed74d18fcd16909b2d44d7dada3203f1ffe726c17ef8dcca2dcaa9fca676987befeadc9b9f759967a8cb77181c0
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
+  - put: jenkins-maven-docker
+    params:
+      image: image/image.tar
+      version: 3.6.3
     on_failure:
       put: slack-alert
       params:
