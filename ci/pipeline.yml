@@ -1,6 +1,6 @@
 docker_auth: &docker_auth
-  username: ((registry-username)) # These come from secrets manager
-  password: ((registry-password))
+  username: ((docker-username)) # These come from secrets manager
+  password: ((docker-password))
 
 github_auth: &github_auth
   username: ((github_pat))
@@ -15,10 +15,7 @@ slack_alert_message: &slack_alert_message
         https://concourse.cicd-shared.aws.onsdigital.uk/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME
 
 resource-types:
-- name: slack-alert
-  type: slack-notification
-  source:
-    url: ((slack_webhook)) # Comes from secret manager
+
 
 resources:
 # The repo with our Dockerfile
@@ -36,6 +33,11 @@ resources:
     start: 05:00
     stop: 05:30
     days: Wednesday
+
+- name: slack-alert
+  type: slack-notification
+  source:
+    url: ((slack_webhook)) # Comes from secret manager
 
 - name: jenkins-base
   type: registry-image
@@ -60,7 +62,7 @@ jobs:
     on_failure:
       put: slack-alert
       params:
-        <<: *slack_alert
+        <<: *slack_alert_message
   - put: jenkins-base
     params:
       image: image/image.tar
