@@ -85,6 +85,13 @@ resources:
     <<: *docker_auth
     repository: ((docker_organisation))/jenkins-gmu
 
+- name: jenkins-gradle-docker
+  type: registry-image
+  icon: docker
+  source:
+    <<: *docker_auth
+    repository: ((docker_organisation))/jenkins-gradle
+
 jobs:
 - name: jenkins-base
   plan:
@@ -466,7 +473,7 @@ jobs:
       repo-name: jenkins-git
     params:
       CONTEXT: repo-name/gmu
-      BUILD_ARG_TOOL_VERSION: ((jenkins_base_version))
+      BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
     on_failure:
       put: slack-alert
       params:
@@ -475,6 +482,32 @@ jobs:
     params:
       image: image/image.tar
       version: latest
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
+
+- name: jenkins-gradle-4.9
+  plan:
+  - get: jenkins-git
+    passed: [jenkins-base]
+  - task: build-image
+    privileged: true # oci-build-task must run in a privileged container
+    file: jenkins-git/packer_build.yml
+    input_mapping:
+      repo-name: jenkins-git
+    params:
+      CONTEXT: repo-name/gradle
+      BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
+      BUILD_ARG_TOOL_VERSION: 4.9
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
+  - put: jenkins-gradle-docker
+    params:
+      image: image/image.tar
+      version: 4.9
     on_failure:
       put: slack-alert
       params:
