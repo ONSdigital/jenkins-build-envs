@@ -3,12 +3,13 @@
 # Example:
 #   $ docker run -it onsdigital/jenkins-slave-gmu pip -V
 #
-FROM onsdigital/jenkins-slave-base
+ARG PARENT_VERSION
+FROM onsdigital/jenkins-base:v${PARENT_VERSION}
 
 ARG TOOL_VERSION
 
-LABEL uk.gov.ons.image.name="jenkins-slave-gmu"
-LABEL uk.gov.ons.image.description="A Jenkins slave with GMU"
+LABEL uk.gov.ons.image.name="jenkins-gmu"
+LABEL uk.gov.ons.image.description="A Jenkins with GMU"
 
 RUN yum install -y epel-release \
     && yum install -y python-pip \
