@@ -1,9 +1,10 @@
-FROM onsdigital/jenkins-slave-base
+ARG PARENT_VERSION
+FROM onsdigital/jenkins-base:v${PARENT_VERSION}
 
 ARG TOOL_VERSION
 
-LABEL uk.gov.ons.image.name="jenkins-slave-jq"
-LABEL uk.gov.ons.image.description="A Jenkins slave with JQ"
+LABEL uk.gov.ons.image.name="jenkins-jq"
+LABEL uk.gov.ons.image.description="A Jenkins with JQ"
 LABEL uk.gov.ons.image.version="${TOOL_VERSION}"
 
 
