@@ -78,6 +78,13 @@ resources:
     <<: *docker_auth
     repository: ((docker_organisation))/jenkins-cm
 
+- name: jenkins-gmu-docker
+  type: registry-image
+  icon: docker
+  source:
+    <<: *docker_auth
+    repository: ((docker_organisation))/jenkins-gmu
+
 jobs:
 - name: jenkins-base
   plan:
@@ -443,6 +450,31 @@ jobs:
     params:
       image: image/image.tar
       version: 2.0.0
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
+
+- name: jenkins-gmu
+  plan:
+  - get: jenkins-git
+    passed: [jenkins-base]
+  - task: build-image
+    privileged: true # oci-build-task must run in a privileged container
+    file: jenkins-git/packer_build.yml
+    input_mapping:
+      repo-name: jenkins-git
+    params:
+      CONTEXT: repo-name/gmu
+      BUILD_ARG_TOOL_VERSION: ((jenkins_base_version))
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
+  - put: jenkins-gmu-docker
+    params:
+      image: image/image.tar
+      version: latest
     on_failure:
       put: slack-alert
       params:
