@@ -63,6 +63,13 @@ groups:
   jobs:
   - jenkins-scala-*
 
+resource-type:
+- name: slack-notification
+  type: docker-image
+  source:
+    repository: cfcommunity/slack-notification-resource
+    tag: latest
+
 resources:
 # The repo with our Dockerfile
 - name: jenkins-git
@@ -78,7 +85,7 @@ resources:
   source:
     start: 05:00
     stop: 05:30
-    days: Wednesday
+    days: [Wednesday]
 
 - name: slack-alert
   type: slack-notification
