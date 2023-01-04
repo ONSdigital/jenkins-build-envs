@@ -11,13 +11,11 @@ ARG TOOL_VERSION
 LABEL uk.gov.ons.image.name="jenkins-gmu"
 LABEL uk.gov.ons.image.description="A Jenkins with GMU"
 
-RUN sudo dnf install python3
-
 RUN yum install -y epel-release \
     && yum install -y python-pip \
     && yum clean all \
     && rm -rf /var/cache/yum
 
-RUN pip install requests \
+RUN python3 -m pip install requests \
         lxml --upgrade \
         colorama
