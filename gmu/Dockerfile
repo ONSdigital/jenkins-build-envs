@@ -4,7 +4,7 @@
 #   $ docker run -it onsdigital/jenkins-slave-gmu pip -V
 #
 ARG PARENT_VERSION
-FROM onsdigital/jenkins-base:${PARENT_VERSION}
+FROM onsdigital/jenkins-python:3.9.1
 
 ARG TOOL_VERSION
 
@@ -16,6 +16,6 @@ RUN yum install -y epel-release \
     && yum clean all \
     && rm -rf /var/cache/yum
 
-RUN pip3 install requests \
+RUN python3.9.1 -m pip install requests \
         lxml --upgrade \
         colorama
