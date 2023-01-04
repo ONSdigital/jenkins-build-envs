@@ -16,6 +16,6 @@ RUN yum install -y epel-release \
     && yum clean all \
     && rm -rf /var/cache/yum
 
-RUN python3.9.1 -m pip install requests \
+RUN python3.9 -m pip install requests \
         lxml --upgrade \
         colorama
