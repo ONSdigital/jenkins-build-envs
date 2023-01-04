@@ -63,7 +63,7 @@ groups:
   jobs:
   - jenkins-scala-*
 
-resource-type:
+resource_types:
 - name: slack-notification
   type: docker-image
   source:
