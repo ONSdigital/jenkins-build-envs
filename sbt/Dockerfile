@@ -4,7 +4,7 @@
 #   $ docker run -it onsdigital/jenkins-slave-sbt:0.13.13 sbt -version
 #
 ARG PARENT_VERSION
-FROM onsdigital/jenkins-scala:v${PARENT_VERSION}
+FROM onsdigital/jenkins-scala:${PARENT_VERSION}
 
 ARG TOOL_VERSION
 

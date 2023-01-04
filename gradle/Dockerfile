@@ -4,7 +4,7 @@
 #   $ docker run -it onsdigital/jenkins-slave-gradle:4.9 gradle --version
 #
 ARG PARENT_VERSION
-FROM onsdigital/jenkins-base:v${PARENT_VERSION}
+FROM onsdigital/jenkins-base:${PARENT_VERSION}
 
 ARG TOOL_VERSION
 

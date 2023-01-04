@@ -4,7 +4,7 @@
 #   $ docker run -it onsdigital/jenkins-slave-python:2.7.15 /usr/local/bin/python2.7 -V
 #
 ARG PARENT_VERSION
-FROM onsdigital/jenkins-base:v${PARENT_VERSION}
+FROM onsdigital/jenkins-base:${PARENT_VERSION}
 
 ARG TOOL_VERSION
 

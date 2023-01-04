@@ -4,7 +4,7 @@
 #   $ docker run -it onsdigital/jenkins-slave-scala:2.11.8 scala -version
 #
 ARG PARENT_VERSION
-FROM onsdigital/jenkins-base:v${PARENT_VERSION}
+FROM onsdigital/jenkins-base:${PARENT_VERSION}
 ARG TOOL_VERSION
 
 LABEL uk.gov.ons.image.name="jenkins-scala"

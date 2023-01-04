@@ -1,5 +1,5 @@
 ARG PARENT_VERSION
-FROM onsdigital/jenkins-base:v${PARENT_VERSION}
+FROM onsdigital/jenkins-base:${PARENT_VERSION}
 
 ARG TOOL_VERSION
 

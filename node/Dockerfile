@@ -4,7 +4,7 @@
 #   $ docker run -it onsdigital/jenkins-slave-node:v9.9.0 node --version
 #
 ARG PARENT_VERSION
-FROM onsdigital/jenkins-base:v${PARENT_VERSION}
+FROM onsdigital/jenkins-base:${PARENT_VERSION}
 
 ARG TOOL_VERSION
 

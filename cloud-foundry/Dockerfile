@@ -4,7 +4,7 @@
 #   $ docker run -it onsdigital/jenkins-slave-cf-cli:latest cf --version
 #
 ARG PARENT_VERSION
-FROM onsdigital/jenkins-base:v${PARENT_VERSION}
+FROM onsdigital/jenkins-base:${PARENT_VERSION}
 
 LABEL uk.gov.ons.image.name="jenkins-cf-cli"
 LABEL uk.gov.ons.image.description="A Jenkins with CF CLI"
