@@ -4,7 +4,7 @@
 #   $ docker run -it onsdigital/jenkins-slave-gmu pip -V
 #
 ARG PARENT_VERSION
-FROM onsdigital/jenkins-python:3.9.1
+FROM onsdigital/jenkins-python:${PARENT_VERSION}
 
 ARG TOOL_VERSION
 
