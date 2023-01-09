@@ -11,6 +11,8 @@ ARG TOOL_VERSION
 LABEL uk.gov.ons.image.name="jenkins-gmu"
 LABEL uk.gov.ons.image.description="A Jenkins with GMU"
 
+RUN ls
+
 RUN mkdir /gmu
 
 RUN mkdir /certs
