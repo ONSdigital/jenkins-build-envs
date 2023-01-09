@@ -557,13 +557,21 @@ jobs:
   - get: jenkins-git
     trigger: true
     passed: [jenkins-python-3.9.1]
+  - task: downloadgmu
+    file: jenkins-git/ci/tasks/gmu/task.yml
+    params: 
+      S3_BUCKET: ((s3_bucket))
+      CERT_FOLDER: ((CERT_FOLDER))
+      GMU_FOLDER: ((GMU_FOLDER))
   - task: build-image
     privileged: true # oci-build-task must run in a privileged container
-    file: jenkins-git/ci/packer_build.yml
+    file: jenkins-git/ci/tasks/gmu/packer_build.yml
     input_mapping:
       repo-name: jenkins-git
+      folder-name: gmu
     params:
-      CONTEXT: repo-name/gmu
+      CONTEXT: .
+      DOCKERFILE: ./repo-name/gmu/Dockerfile
       BUILD_ARG_PARENT_VERSION: 3.9.1
     on_failure:
       put: slack-alert
