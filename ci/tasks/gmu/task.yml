@@ -9,4 +9,4 @@ inputs:
 outputs:
   - name: gmu
 run:
-  path: ./repo-git/ci/tasks/gmu/task.sh
+  path: ./repo-name/ci/tasks/gmu/task.sh
