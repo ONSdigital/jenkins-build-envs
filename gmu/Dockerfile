@@ -24,6 +24,6 @@ COPY ./gmu-output/gmudownload /opt/gmu
 
 ENV JAVA_HOME=/etc/alternatives/jre
 
-COPY ./certs /etc/pki/ca-trust/source/anchors/
+COPY ./gmu-output/certs /etc/pki/ca-trust/source/anchors/
 
 RUN update-ca-trust extract
