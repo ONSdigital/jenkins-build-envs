@@ -6,6 +6,6 @@ aws s3 cp $S3_BUCKET/$GMU_FOLDER ./gmu
 
 ls
 
-ls /certs
+ls certs
 
-ls /gmu
+ls gmu
