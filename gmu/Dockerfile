@@ -11,8 +11,6 @@ ARG TOOL_VERSION
 LABEL uk.gov.ons.image.name="jenkins-gmu"
 LABEL uk.gov.ons.image.description="A Jenkins with GMU"
 
-COPY ./gmu-output/gmudownload/ . 
-
 RUN yum install -y epel-release \
     && yum install -y python-pip \
     && yum clean all \
@@ -21,3 +19,11 @@ RUN yum install -y epel-release \
 RUN python3.9 -m pip install requests \
         lxml --upgrade \
         colorama
+
+COPY ./gmu-output/gmudownload /opt/gmu 
+
+ENV JAVA_HOME=/etc/alternatives/jre
+
+COPY ./certs /etc/pki/ca-trust/source/anchors/
+
+RUN update-ca-trust extract
