@@ -4,7 +4,7 @@ aws s3 cp $S3_BUCKET/$CERT_FOLDER ./certs --recursive
 
 aws s3 cp $S3_BUCKET/$GMU_FOLDER ./gmudownload/gmu.zip
 
-sudo yum install unzip
+yum install unzip
 
 unzip -d ./gmudownload -u ./gmudownload/gmu.zip
 
