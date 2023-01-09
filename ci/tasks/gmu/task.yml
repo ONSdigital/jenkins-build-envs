@@ -5,7 +5,7 @@ image_resource:
     repository: amazon/aws-cli
     tag: latest
 inputs:
-  - name: repo-git
+  - name: repo-name
 outputs:
   - name: gmu
 run:
