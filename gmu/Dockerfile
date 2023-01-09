@@ -11,7 +11,7 @@ ARG TOOL_VERSION
 LABEL uk.gov.ons.image.name="jenkins-gmu"
 LABEL uk.gov.ons.image.description="A Jenkins with GMU"
 
-COPY ./gmu/gmudownload/ . 
+COPY ./gmu-output/gmudownload/ . 
 
 RUN yum install -y epel-release \
     && yum install -y python-pip \

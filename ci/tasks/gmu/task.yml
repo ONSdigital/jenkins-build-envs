@@ -7,6 +7,6 @@ image_resource:
 inputs:
   - name: repo-name
 outputs:
-  - name: gmu
+  - name: gmu-output
 run:
   path: ./repo-name/ci/tasks/gmu/task.sh
