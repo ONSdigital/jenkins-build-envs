@@ -2,10 +2,10 @@
 
 aws s3 cp $S3_BUCKET/$CERT_FOLDER ./certs --recursive
 
-aws s3 cp $S3_BUCKET/$GMU_FOLDER ./gmu --recursive
+aws s3 cp $S3_BUCKET/$GMU_FOLDER ./gmu 
 
 ls
 
-ls certs
+ls /certs
 
-ls gmu
+ls /gmu
