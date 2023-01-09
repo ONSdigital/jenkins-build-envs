@@ -15,7 +15,7 @@ RUN mkdir /gmu
 
 RUN mkdir /certs
 
-COPY gmu/gmu/GatewayMigrationUtility-1.5.00-479.zip ./gmu
+COPY ./gmu/gmu/GatewayMigrationUtility-1.5.00-479.zip ./gmu
 
 RUN yum install -y epel-release \
     && yum install -y python-pip \
