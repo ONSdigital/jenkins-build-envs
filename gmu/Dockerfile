@@ -11,7 +11,7 @@ ARG TOOL_VERSION
 LABEL uk.gov.ons.image.name="jenkins-gmu"
 LABEL uk.gov.ons.image.description="A Jenkins with GMU"
 
-COPY ./gmu/gmudownload/GatewayMigrationUtility-1.5.00-479.zip . 
+COPY ./gmu/gmudownload/ . 
 
 RUN yum install -y epel-release \
     && yum install -y python-pip \
