@@ -5,7 +5,7 @@ image_resource:
     repository: concourse/oci-build-task
 inputs:
   - name: repo-name
-  - name: gmu-ouput
+  - name: gmu-output
 outputs:
   - name: image
 params:
