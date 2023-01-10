@@ -41,7 +41,7 @@ Replace:
     passed: [jenkins-base]
   - task: build-image
     privileged: true # oci-build-task must run in a privileged container
-    file: jenkins-git/packer_build.yml
+    file: jenkins-git/ci/packer_build.yml
     input_mapping:
       repo-name: jenkins-git
     params:

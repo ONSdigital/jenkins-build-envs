@@ -6,6 +6,10 @@ github_auth: &github_auth
   username: ((github_pat))
   password: x-oauth-basic
 
+aws_auth: &aws_auth
+  AWS_ACCESS_KEY_ID: ((ciashared_access_key_id_prod))
+  AWS_SECRET_ACCESS_KEY: ((ciashared_access_key_secret_prod))
+
 slack_alert_message: &slack_alert_message
   text: |
         Jenkins Concourse job failed!
@@ -77,7 +81,7 @@ resources:
   icon: github
   source:
     uri: https://github.com/onsdigital/jenkins-build-envs
-    branch: main
+    branch: cia-651-cicd
 
 - name: wednesday-build
   type: time
@@ -555,12 +559,15 @@ jobs:
 - name: jenkins-gmu
   plan:
   - get: jenkins-git
-    trigger: true
     passed: [jenkins-python-3.9.1]
+    trigger: true
   - task: downloadgmu
     file: jenkins-git/ci/tasks/gmu/task.yml
+    input_mapping:
+      repo-name: jenkins-git
     params: 
-      S3_BUCKET: ((s3_bucket))
+      <<: *aws_auth
+      S3_BUCKET: ((S3_BUCKET))
       CERT_FOLDER: ((CERT_FOLDER))
       GMU_FOLDER: ((GMU_FOLDER))
   - task: build-image
@@ -568,7 +575,7 @@ jobs:
     file: jenkins-git/ci/tasks/gmu/packer_build.yml
     input_mapping:
       repo-name: jenkins-git
-      folder-name: gmu
+      folder-name: gmu-output
     params:
       CONTEXT: .
       DOCKERFILE: ./repo-name/gmu/Dockerfile
@@ -580,7 +587,7 @@ jobs:
   - put: jenkins-gmu-docker
     params:
       image: image/image.tar
-      version: 1.0.0
+      version: 1.0.3
     on_failure:
       put: slack-alert
       params:
