@@ -16,6 +16,12 @@ RUN yum install -y epel-release \
     && yum clean all \
     && rm -rf /var/cache/yum
 
+RUN alternatives --install /usr/bin/python python /usr/bin/python2 50
+
+RUN alternatives --install /usr/bin/python python /usr/bin/python3.9 60
+
+RUN alternatives --auto python
+
 RUN python3.9 -m pip install requests \
         lxml --upgrade \
         colorama
