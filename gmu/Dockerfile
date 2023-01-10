@@ -18,7 +18,7 @@ RUN yum install -y epel-release \
 
 RUN alternatives --install /usr/bin/python python /usr/bin/python2 50
 
-RUN alternatives --install /usr/bin/python python /usr/bin/python3.9 60
+RUN alternatives --install /usr/bin/python python /usr/local/bin/python3 60
 
 RUN alternatives --auto python
 
