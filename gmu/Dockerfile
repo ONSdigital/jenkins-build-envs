@@ -17,7 +17,7 @@ RUN yum install -y epel-release \
     && rm -rf /var/cache/yum
     
 # Java 11 for CA Gateway v10 support - Do this before python switch as yum breaks after    
-RUN yum install java-11-openjdk
+RUN yum install -y java-11-openjdk
 RUN alternatives --set java /usr/lib/jvm/java-11-openjdk-11.0.17.0.8-2.el7_9.x86_64/bin/java
 
 
