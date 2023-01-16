@@ -14,16 +14,7 @@ services:
     image: onsdigital/jenkins-slave-gradle:4.9
     depends_on:
       - jenkins-slave-base
-  cf-cli:
-    build:
-      context: ./cloud-foundry
-    image: onsdigital/jenkins-slave-cf-cli
-  gmu:
-    build:
-      context: ./gmu
-    image: onsdigital/jenkins-slave-gmu
-    depends_on:
-      - jenkins-slave-base
+
   scala_2-11-8:
     tty: true
     build:
