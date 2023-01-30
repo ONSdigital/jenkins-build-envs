@@ -1,0 +1,10 @@
+FROM onsdigital/jenkins-slave-python:3.9.10
+
+
+LABEL uk.gov.ons.image.name="python"
+LABEL uk.gov.ons.image.description="A Jenkins slave with python Tool"
+LABEL uk.gov.ons.image.version="3.9.10J11"
+
+# Install Packages
+RUN yum install -y java-11-openjdk && yum clean all
+

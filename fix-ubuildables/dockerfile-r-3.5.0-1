@@ -1,0 +1,10 @@
+FROM onsdigital/jenkins-slave-r:3.5.0-1
+
+
+LABEL uk.gov.ons.image.name="r"
+LABEL uk.gov.ons.image.description="A Jenkins slave with r Tool"
+LABEL uk.gov.ons.image.version="3.5.0-1J11"
+
+# Install Packages
+RUN yum install -y java-11-openjdk && yum clean all
+

@@ -1,0 +1,9 @@
+FROM onsdigital/jenkins-slave-node:v16.16.0
+
+LABEL uk.gov.ons.image.name="node"
+LABEL uk.gov.ons.image.description="A Jenkins slave with node JS Tools"
+LABEL uk.gov.ons.image.version="v16.16.0"
+
+# Install Packages
+RUN yum install -y java-11-openjdk && yum clean all
+

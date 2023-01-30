@@ -1,0 +1,65 @@
+version: '3'
+services:
+
+  python_3_3_0:
+    build:
+      context: .
+      dockerfile: dockerfile-python-3.3.0
+    image: onsdigital/jenkins-slave-python:3.3.0J11
+
+  python_3_4_0:
+    build:
+      context: .
+      dockerfile: dockerfile-python-3.4.0
+    image: onsdigital/jenkins-slave-python:3.4.0J11
+
+  python_3_9_10:
+    build:
+      context: .
+      dockerfile: dockerfile-python-3.9.10
+    image: onsdigital/jenkins-slave-python:3.9.10J11
+
+  r_3_5_0-1:
+    build:
+      context: .
+      dockerfile: dockerfile-r-3.5.0-1
+    image: onsdigital/jenkins-slave-r:3.5.0-1J11
+
+  sonar-scanner_3-2-0:
+    build:
+      context: .
+      dockerfile: dockerfile-sonar-scanner-3.2.0
+    image: onsdigital/jenkins-slave-sonar-scanner:3.2.0J11
+
+  sonar-scanner_3-3-0:
+    build:
+      context: .
+      dockerfile: dockerfile-sonar-scanner-3.3.0
+    image: onsdigital/jenkins-slave-sonar-scanner:3.3.0J11
+      
+  cm_3-0:
+    build:
+      context: .
+      dockerfile: dockerfile-cm-3.0
+    image: onsdigital/jenkins-slave-cm:3.0J11
+
+  cm_4-0:
+    build:
+      context: .
+      dockerfile: dockerfile-cm-4.0
+    image: onsdigital/jenkins-slave-cm:4.0J11
+
+  cm_4-8:
+    build:
+      context: .
+      dockerfile: dockerfile-cm-4.8
+    image: onsdigital/jenkins-slave-cm:4.8J11
+
+  node_v16-16-0:
+    build:
+      context: .
+      dockerfile: dockerfile-node_v16.16.0
+    image: onsdigital/jenkins-slave-node:v16.16.0J11
+
+
+

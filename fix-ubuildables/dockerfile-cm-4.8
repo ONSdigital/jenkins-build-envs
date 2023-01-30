@@ -1,0 +1,9 @@
+FROM onsdigital/jenkins-slave-cm:4.8
+
+LABEL uk.gov.ons.image.name="cm"
+LABEL uk.gov.ons.image.description="A Jenkins slave with clerical matching Tools"
+LABEL uk.gov.ons.image.version="4.8J11"
+
+# Install Packages
+RUN yum install -y java-11-openjdk && yum clean all
+
