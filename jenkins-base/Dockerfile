@@ -1,7 +1,7 @@
 FROM centos:7
 
-LABEL uk.gov.ons.image.name="jenkins-slave-base"
-LABEL uk.gov.ons.image.description="A Jenkins slave using JNLP to establish connection based on Centos"
+LABEL uk.gov.ons.image.name="jenkins-base"
+LABEL uk.gov.ons.image.description="A Jenkins using JNLP to establish connection based on Centos"
 
 # Install Essentials
 RUN yum update -y && \
@@ -10,6 +10,7 @@ RUN yum update -y && \
 # Install Packages
 RUN yum install -y git && \
 	yum install -y java-1.8.0-openjdk-devel.x86_64 && \
+	yum install -y java-11-openjdk && \
 	yum install -y sudo && \
 	yum clean all
 

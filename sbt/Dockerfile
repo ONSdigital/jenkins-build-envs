@@ -3,12 +3,13 @@
 # Example:
 #   $ docker run -it onsdigital/jenkins-slave-sbt:0.13.13 sbt -version
 #
-FROM onsdigital/jenkins-slave-scala:2.11.8
+ARG PARENT_VERSION
+FROM onsdigital/jenkins-scala:${PARENT_VERSION}
 
 ARG TOOL_VERSION
 
-LABEL uk.gov.ons.image.name="jenkins-slave-sbt"
-LABEL uk.gov.ons.image.description="A Jenkins slave with Scala Build Tool"
+LABEL uk.gov.ons.image.name="jenkins-sbt"
+LABEL uk.gov.ons.image.description="A Jenkins with Scala Build Tool"
 LABEL uk.gov.ons.image.version="${TOOL_VERSION}"
 
 
@@ -18,13 +19,13 @@ ENV JENKINS_HOME /home/jenkins
 # to allow for multiple builds of new versions from the
 # same dockerfile
 ARG MAJOR_MINOR_VERSION
-ARG BASE_URL=https://sbt.bintray.com/rpm/
+ARG BASE_URL=https://scala.jfrog.io/artifactory/rpm
 
 ENV JAVA_HOME "/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.191.b12-1.el7_6.x86_64"
 ENV PATH "${JAVA_HOME}/bin:${PATH}"
 
-RUN curl -fsSL -o /tmp/sbt-${TOOL_VERSION}.rpm ${BASE_URL}/sbt-${TOOL_VERSION}.rpm && \
-  yum install -y /tmp/sbt-${TOOL_VERSION}.rpm && \
+RUN curl -fsSL -o /tmp/sbt-${TOOL_VERSION}.rpm ${BASE_URL}/sbt-${TOOL_VERSION}.rpm 
+RUN yum install -y /tmp/sbt-${TOOL_VERSION}.rpm && \
   yum clean all
 
 # The location of global sbtopts is dependent on the version of SBT (rpm) being installed
