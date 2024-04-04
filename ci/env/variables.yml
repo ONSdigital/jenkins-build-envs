@@ -1,5 +1,5 @@
-jenkins_base_version: 1.0.0
+jenkins_base_version: 2.0.0
 docker_organisation: onsdigital
-S3_BUCKET: s3://ons-ciashared-prod
-CERT_FOLDER: build-elements/jenkins-docker-build-gmu/ons-internal-certs/
-GMU_FOLDER: build-elements/jenkins-docker-build-gmu/GatewayMigrationUtility-1.8.00-1304.zip
+#S3_BUCKET: s3://ons-ciashared-prod
+#CERT_FOLDER: build-elements/jenkins-docker-build-gmu/ons-internal-certs/
+#GMU_FOLDER: build-elements/jenkins-docker-build-gmu/GatewayMigrationUtility-1.8.00-1304.zip

@@ -35,10 +35,6 @@ groups:
   jobs:
   - jenkins-cm-*
 
-- name: gmu
-  jobs:
-  - jenkins-gmu*
-
 - name: gradle
   jobs:
   - jenkins-gradle-*

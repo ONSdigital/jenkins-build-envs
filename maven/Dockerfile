@@ -19,7 +19,8 @@ ARG SHA256
 ARG SHA512
 
 ARG USER_HOME_DIR="/home/jenkins"
-ARG BASE_URL=https://apache.osuosl.org/maven/maven-3/${TOOL_VERSION}/binaries
+ARG BASE_URL=https://archive.apache.org/dist/maven/maven-3/${TOOL_VERSION}/binaries
+#previously https://apache.osuosl.org/maven/maven-3/${TOOL_VERSION}/binaries
 ARG TMP_BINARY_DESTINATION="/tmp/apache-maven.tar.gz"
 
 RUN mkdir -p /usr/share/maven /usr/share/maven/ref \

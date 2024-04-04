@@ -1,65 +1,59 @@
 ---
-version: '3'
 services:
   # TIER 1
-  jenkins-slave-base:
-    build: ./jenkins-slave-base
-    image: onsdigital/jenkins-slave-base
+  jenkins-base:
+    build: ./jenkins-base
+    image: onsdigital/jenkins-base:${jenkins_base_version}
   # TIER 2
   gradle_4-9:
     build:
       context: ./gradle
       args:
         TOOL_VERSION: 4.9
-    image: onsdigital/jenkins-slave-gradle:4.9
+        PARENT_VERSION: ${jenkins_base_version}
+    image: onsdigital/jenkins-gradle:4.9
     depends_on:
-      - jenkins-slave-base
-  cf-cli:
-    build:
-      context: ./cloud-foundry
-    image: onsdigital/jenkins-slave-cf-cli
-  gmu:
-    build:
-      context: ./gmu
-    image: onsdigital/jenkins-slave-gmu
-    depends_on:
-      - jenkins-slave-base
+      - jenkins-base
   scala_2-11-8:
     tty: true
     build:
       context: ./scala
       args:
         TOOL_VERSION: 2.11.8
-    image: onsdigital/jenkins-slave-scala:2.11.8
+        PARENT_VERSION: ${jenkins_base_version}
+    image: onsdigital/jenkins-scala:2.11.8
     depends_on:
-      - jenkins-slave-base
+      - jenkins-base
   scala_2-12-7:
     tty: true
     build:
       context: ./scala
       args:
         TOOL_VERSION: 2.12.7
-    image: onsdigital/jenkins-slave-scala:2.12.7
+        PARENT_VERSION: ${jenkins_base_version}
+    image: onsdigital/jenkins-scala:2.12.7
     depends_on:
-      - jenkins-slave-base
+      - jenkins-base
   scala_2-12-12:
     tty: true
     build:
       context: ./scala
       args:
         TOOL_VERSION: 2.12.12
-    image: onsdigital/jenkins-slave-scala:2.12.12
+        PARENT_VERSION: ${jenkins_base_version}
+    image: onsdigital/jenkins-scala:2.12.12
     depends_on:
-      - jenkins-slave-base
+      - jenkins-base
   scala_2-13-4:
     tty: true
     build:
       context: ./scala
       args:
         TOOL_VERSION: 2.13.4
-    image: onsdigital/jenkins-slave-scala:2.13.4
+        PARENT_VERSION: ${jenkins_base_version}
+    image: onsdigital/jenkins-scala:2.13.4
     depends_on:
-      - jenkins-slave-base
+      - jenkins-base
   node_6-11-5:
     tty: true
     build:
@@ -67,9 +61,10 @@ services:
       args:
         TOOL_VERSION: v6.11.5
         SHA256: fffd25c9e9b6d2235e97ba8be1dd6ea5f31e32ea445c5cc704ca84ef44db66c1
-    image: onsdigital/jenkins-slave-node:v6.11.5
+        PARENT_VERSION: ${jenkins_base_version}
+    image: onsdigital/jenkins-node:v6.11.5
     depends_on:
-      - jenkins-slave-base
+      - jenkins-base
   node_9.9.0:
     tty: true
     build:
@@ -77,9 +72,10 @@ services:
       args:
         TOOL_VERSION: v9.9.0
         SHA256: 887cb4db6207f303b5ba15b6e15298f19d288fce2064e8caa7bb7cae170cbe85
-    image: onsdigital/jenkins-slave-node:v9.9.0
+        PARENT_VERSION: ${jenkins_base_version}
+    image: onsdigital/jenkins-node:v9.9.0
     depends_on:
-      - jenkins-slave-base
+      - jenkins-base
   node_12.16.2:
     tty: true
     build:
@@ -87,9 +83,10 @@ services:
       args:
         TOOL_VERSION: v12.16.2
         SHA256: ffc92b8d9f53a10a2a734c93e78a3be74af7b0034bddd6f034a700c430eb94c1
-    image: onsdigital/jenkins-slave-node:v12.16.2
+        PARENT_VERSION: ${jenkins_base_version}
+    image: onsdigital/jenkins-node:v12.16.2
     depends_on:
-      - jenkins-slave-base
+      - jenkins-base
   node_15.3.0:
     tty: true
     build:
@@ -97,9 +94,10 @@ services:
       args:
         TOOL_VERSION: v15.3.0
         SHA256: c3f6c64d98e623c783b7de7580365be74d8a2dba87529447ae66061609b5d0ec
-    image: onsdigital/jenkins-slave-node:v15.3.0
+        PARENT_VERSION: ${jenkins_base_version}
+    image: onsdigital/jenkins-node:v15.3.0
     depends_on:
-      - jenkins-slave-base
+      - jenkins-base
   maven_3.2.5:
     tty: true
     build:
@@ -107,9 +105,10 @@ services:
       args:
         TOOL_VERSION: 3.2.5
         SHA256: 8c190264bdf591ff9f1268dc0ad940a2726f9e958e367716a09b8aaa7e74a755
-    image: onsdigital/jenkins-slave-maven:3.2.5
+        PARENT_VERSION: ${jenkins_base_version}
+    image: onsdigital/jenkins-maven:3.2.5
     depends_on:
-      - jenkins-slave-base
+      - jenkins-base
   maven_3.5.4:
     tty: true
     build:
@@ -118,9 +117,10 @@ services:
         TOOL_VERSION: 3.5.4
         SHA256: ce50b1c91364cb77efe3776f756a6d92b76d9038b0a0782f7d53acf1e997a14d
         SHA512: 2a803f578f341e164f6753e410413d16ab60fabe31dc491d1fe35c984a5cce696bc71f57757d4538fe7738be04065a216f3ebad4ef7e0ce1bb4c51bc36d6be86
-    image: onsdigital/jenkins-slave-maven:3.5.4
+        PARENT_VERSION: ${jenkins_base_version}
+    image: onsdigital/jenkins-maven:3.5.4
     depends_on:
-      - jenkins-slave-base
+      - jenkins-base
   maven_3.6.3:
     tty: true
     build:
@@ -128,54 +128,60 @@ services:
       args:
         TOOL_VERSION: 3.6.3
         SHA512: c35a1803a6e70a126e80b2b3ae33eed961f83ed74d18fcd16909b2d44d7dada3203f1ffe726c17ef8dcca2dcaa9fca676987befeadc9b9f759967a8cb77181c0
-    image: onsdigital/jenkins-slave-maven:3.6.3
+        PARENT_VERSION: ${jenkins_base_version}
+    image: onsdigital/jenkins-maven:3.6.3
     depends_on:
-      - jenkins-slave-base
+      - jenkins-base
   python_2.7.15:
     tty: true
     build:
       context: ./python
       args:
         TOOL_VERSION: 2.7.15
-    image: onsdigital/jenkins-slave-python:2.7.15
+        PARENT_VERSION: ${jenkins_base_version}
+    image: onsdigital/jenkins-python:2.7.15
     depends_on:
-      - jenkins-slave-base
+      - jenkins-base
   python_3.6.0:
     tty: true
     build:
       context: ./python
       args:
         TOOL_VERSION: 3.6.0
-    image: onsdigital/jenkins-slave-python:3.6.0
+        PARENT_VERSION: ${jenkins_base_version}
+    image: onsdigital/jenkins-python:3.6.0
     depends_on:
-      - jenkins-slave-base
+      - jenkins-base
   python_3.6.1:
     tty: true
     build:
       context: ./python
       args:
         TOOL_VERSION: 3.6.1
-    image: onsdigital/jenkins-slave-python:3.6.1
+        PARENT_VERSION: ${jenkins_base_version}
+    image: onsdigital/jenkins-python:3.6.1
     depends_on:
-      - jenkins-slave-base
+      - jenkins-base
   python_3.8.7:
     tty: true
     build:
       context: ./python
       args:
         TOOL_VERSION: 3.8.7
-    image: onsdigital/jenkins-slave-python:3.8.7
+        PARENT_VERSION: ${jenkins_base_version}
+    image: onsdigital/jenkins-python:3.8.7
     depends_on:
-      - jenkins-slave-base
+      - jenkins-base
   python_3.9.1:
     tty: true
     build:
       context: ./python
       args:
         TOOL_VERSION: 3.9.1
-    image: onsdigital/jenkins-slave-python:3.9.1
+        PARENT_VERSION: ${jenkins_base_version}
+    image: onsdigital/jenkins-python:3.9.1
     depends_on:
-      - jenkins-slave-base
+      - jenkins-base
   sbt_0-13-13:
     build:
       context: ./sbt
@@ -183,7 +189,8 @@ services:
         TOOL_VERSION: 0.13.13
         MAJOR_MINOR_VERSION: 0.13
         TOOL_DEPENDENCY_VERSION: 2.11.8
-    image: onsdigital/jenkins-slave-sbt:0.13.13
+        PARENT_VERSION: 2.11.8
+    image: onsdigital/jenkins-sbt:0.13.13
     depends_on:
       - scala_2-11-8
   sbt_1-2-4:
@@ -193,7 +200,8 @@ services:
         TOOL_VERSION: 1.2.4
         MAJOR_MINOR_VERSION: 1.1
         TOOL_DEPENDENCY_VERSION: 2.12.7
-    image: onsdigital/jenkins-slave-sbt:1.2.4
+        PARENT_VERSION: 2.12.7
+    image: onsdigital/jenkins-sbt:1.2.4
     depends_on:
       - scala_2-12-7
   jq_1-6:
@@ -201,9 +209,10 @@ services:
       context: ./jq
       args:
         TOOL_VERSION: 1.6
-    image: onsdigital/jenkins-slave-jq:1.6
+        PARENT_VERSION: ${jenkins_base_version}
+    image: onsdigital/jenkins-jq:1.6
     depends_on:
-      - jenkins-slave-base
+      - jenkins-base
 #  Tier 3 Images
   cm_1.0:
     build:
@@ -211,7 +220,7 @@ services:
       args:
         TOOL_VERSION: 4.0.1
         PARENT_VERSION: 12.16.2
-    image: onsdigital/jenkins-slave-cm:1.0
+    image: onsdigital/jenkins-cm:1.0
     depends_on:
       - node_12.16.2
   cm_2.0:
@@ -220,6 +229,6 @@ services:
       args:
         TOOL_VERSION: 4.0.1
         PARENT_VERSION: 15.3.0
-    image: onsdigital/jenkins-slave-cm:2.0
+    image: onsdigital/jenkins-cm:2.0
     depends_on:
       - node_15.3.0

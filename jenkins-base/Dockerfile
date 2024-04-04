@@ -1,4 +1,4 @@
-FROM centos:7
+FROM registry.access.redhat.com/ubi9/ubi
 
 LABEL uk.gov.ons.image.name="jenkins-base"
 LABEL uk.gov.ons.image.description="A Jenkins using JNLP to establish connection based on Centos"

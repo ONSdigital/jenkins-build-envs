@@ -18,6 +18,7 @@ LABEL uk.gov.ons.image.version="${TOOL_VERSION}"
 ARG SHA256
 ARG SHA512
 ARG BASE_URL=https://www.python.org/ftp/python/${TOOL_VERSION}/
+ARG ODBCBASE=https://mirror.stream.centos.org/9-stream/CRB/x86_64/os/Packages/
 ARG TMP_BINARY_DESTINATION="/tmp/python.tar.gz"
 
 ENV LD_RUN_PATH /usr/local/lib
@@ -30,7 +31,13 @@ RUN yum install -y \
         make \
         gcc-c++ \
         libffi-devel \
-        unixODBC-devel \
+        unixODBC \
+        zlib-devel
+
+RUN ver=`yum list --installed unixODBC | tail -1 | awk -e '{ print $2 }'` \
+    && curl -o /tmp/unixODBC-devel.rpm ${ODBCBASE}unixODBC-devel-$ver.x86_64.rpm \
+    && yum install -y /tmp/unixODBC-devel.rpm \
+    && rm -f /tmp/unixODBC-devel.rpm \
     && yum clean all
 
 RUN mkdir -p /usr/src/python \
