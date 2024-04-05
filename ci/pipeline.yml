@@ -341,7 +341,19 @@ jobs:
       put: slack-alert
       params:
         <<: *slack_alert_message
+    params:
+     image: image/image.tar
+     version: 6.11.5
+  - put: jenkins-node-docker
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
 
+
+
+- name: jenkins-node-6.11.5
+  plan:
   - get: jenkins-git
     passed: [jenkins-base]
     trigger: true
