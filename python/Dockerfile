@@ -48,7 +48,9 @@ RUN mkdir -p /usr/src/python \
     && rm -f ${TMP_BINARY_DESTINATION} \
     && cd /usr/src/python \
     && ./configure --with-ensurepip=install --enable-shared \
-    && make \
+    && make
+
+RUN cd /usr/src/python \
     && make install \
     && printf "\n\n********* Listing python binaries in PATH " \
     && echo $PATH | tr ":" "\n" | xargs -I % sh -c "printf \"\n\n Searchin in %\"; find % -name \"python*\""

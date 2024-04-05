@@ -27,10 +27,6 @@ groups:
   jobs:
   - jenkins-base
 
-- name: cloud-foundry
-  jobs:
-  - jenkins-cloud-foundry-*
-
 - name: cm
   jobs:
   - jenkins-cm-*
@@ -77,7 +73,7 @@ resources:
   icon: github
   source:
     uri: https://github.com/onsdigital/jenkins-build-envs
-    branch: cia-651-cicd
+    branch: cia-rhel-cicd
 
 - name: wednesday-build
   type: time
@@ -113,13 +109,6 @@ resources:
     <<: *docker_auth
     repository: ((docker_organisation))/jenkins-sbt
 
-- name: jenkins-cloud-foundry-cli-docker
-  type: registry-image
-  icon: docker
-  source:
-    <<: *docker_auth
-    repository: ((docker_organisation))/jenkins-cloud-foundry-cli
-
 - name: jenkins-node-docker
   type: registry-image
   icon: docker
@@ -133,13 +122,6 @@ resources:
   source:
     <<: *docker_auth
     repository: ((docker_organisation))/jenkins-cm
-
-- name: jenkins-gmu-docker
-  type: registry-image
-  icon: docker
-  source:
-    <<: *docker_auth
-    repository: ((docker_organisation))/jenkins-gmu
 
 - name: jenkins-gradle-docker
   type: registry-image
@@ -360,34 +342,6 @@ jobs:
       params:
         <<: *slack_alert_message
 
-- name: jenkins-cloud-foundry-cli
-  plan:
-  - get: jenkins-git
-    passed: [jenkins-base]
-    trigger: true
-  - task: build-image
-    privileged: true # oci-build-task must run in a privileged container
-    file: jenkins-git/ci/packer_build.yml
-    input_mapping:
-      repo-name: jenkins-git
-    params:
-      CONTEXT: repo-name/cloud-foundry
-      BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
-    on_failure:
-      put: slack-alert
-      params:
-        <<: *slack_alert_message
-  - put: jenkins-cloud-foundry-cli-docker
-    params:
-      image: image/image.tar
-      version: 1.0.0
-    on_failure:
-      put: slack-alert
-      params:
-        <<: *slack_alert_message
-
-- name: jenkins-node-6.11.5
-  plan:
   - get: jenkins-git
     passed: [jenkins-base]
     trigger: true
@@ -552,42 +506,6 @@ jobs:
       params:
         <<: *slack_alert_message
 
-- name: jenkins-gmu
-  plan:
-  - get: jenkins-git
-    passed: [jenkins-python-3.9.1]
-    trigger: true
-  - task: downloadgmu
-    file: jenkins-git/ci/tasks/gmu/task.yml
-    input_mapping:
-      repo-name: jenkins-git
-    params: 
-      <<: *aws_auth
-      S3_BUCKET: ((S3_BUCKET))
-      CERT_FOLDER: ((CERT_FOLDER))
-      GMU_FOLDER: ((GMU_FOLDER))
-  - task: build-image
-    privileged: true # oci-build-task must run in a privileged container
-    file: jenkins-git/ci/tasks/gmu/packer_build.yml
-    input_mapping:
-      repo-name: jenkins-git
-      folder-name: gmu-output
-    params:
-      CONTEXT: .
-      DOCKERFILE: ./repo-name/gmu/Dockerfile
-      BUILD_ARG_PARENT_VERSION: 3.9.1
-    on_failure:
-      put: slack-alert
-      params:
-        <<: *slack_alert_message
-  - put: jenkins-gmu-docker
-    params:
-      image: image/image.tar
-      version: 1.0.3
-    on_failure:
-      put: slack-alert
-      params:
-        <<: *slack_alert_message
 
 - name: jenkins-gradle-4.9
   plan:
@@ -755,32 +673,32 @@ jobs:
       params:
         <<: *slack_alert_message
 
-- name: jenkins-python-3.6.0
-  plan:
-  - get: jenkins-git
-    passed: [jenkins-base]
-    trigger: true
-  - task: build-image
-    privileged: true # oci-build-task must run in a privileged container
-    file: jenkins-git/ci/packer_build.yml
-    input_mapping:
-      repo-name: jenkins-git
-    params:
-      CONTEXT: repo-name/python
-      BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
-      BUILD_ARG_TOOL_VERSION: 3.6.0
-    on_failure:
-      put: slack-alert
-      params:
-        <<: *slack_alert_message
-  - put: jenkins-python-docker
-    params:
-      image: image/image.tar
-      version: 3.6.0
-    on_failure:
-      put: slack-alert
-      params:
-        <<: *slack_alert_message
+# - name: jenkins-python-3.6.0
+#   plan:
+#   - get: jenkins-git
+#     passed: [jenkins-base]
+#     trigger: true
+#   - task: build-image
+#     privileged: true # oci-build-task must run in a privileged container
+#     file: jenkins-git/ci/packer_build.yml
+#     input_mapping:
+#       repo-name: jenkins-git
+#     params:
+#       CONTEXT: repo-name/python
+#       BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
+#       BUILD_ARG_TOOL_VERSION: 3.6.0
+#     on_failure:
+#       put: slack-alert
+#       params:
+#         <<: *slack_alert_message
+#   - put: jenkins-python-docker
+#     params:
+#       image: image/image.tar
+#       version: 3.6.0
+#     on_failure:
+#       put: slack-alert
+#       params:
+#         <<: *slack_alert_message
 
 - name: jenkins-python-3.6.1
   plan:

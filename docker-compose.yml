@@ -142,16 +142,17 @@ services:
     image: onsdigital/jenkins-python:2.7.15
     depends_on:
       - jenkins-base
-  python_3.6.0:
-    tty: true
-    build:
-      context: ./python
-      args:
-        TOOL_VERSION: 3.6.0
-        PARENT_VERSION: ${jenkins_base_version}
-    image: onsdigital/jenkins-python:3.6.0
-    depends_on:
-      - jenkins-base
+  #python 3.6.0 currently fails to build with a segv on make install - this needs coming back to - possibly.
+    #python_3.6.0:
+    # tty: true
+    # build:
+    #   context: ./python
+    #   args:
+    #     TOOL_VERSION: 3.6.0
+    #     PARENT_VERSION: ${jenkins_base_version}
+    # image: onsdigital/jenkins-python:3.6.0
+    # depends_on:
+    #   - jenkins-base
   python_3.6.1:
     tty: true
     build:
