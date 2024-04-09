@@ -14,10 +14,12 @@ LABEL uk.gov.ons.image.version="${TOOL_VERSION}"
 
 WORKDIR /root
 
+COPY files/centos-stream.repo /etc/yum.repos.d/centos-stream.repo
+
 RUN  yum install -y xorg-x11-server-Xvfb wget \
-    && wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm \
+    && curl -o google-chrome-stable_current_x86_64.rpm https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm \
     && yum install google-chrome-stable_current_x86_64.rpm -y \
     && yum install libXScrnSaver -y \
-    && npm install cypress@${TOOL_VERSION} --save-dev
+    && npm set progress=false && npm install cypress@${TOOL_VERSION} --save-dev
 
 ENV PATH "/node_modules/.bin:${PATH}"
