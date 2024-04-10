@@ -1,0 +1,79 @@
+#make: *** [Makefile:1064: install] Error 139
+TOOL_VERSION=3.6.0
+BASE_URL=https://www.python.org/ftp/python/${TOOL_VERSION}/
+ODBCBASE=https://mirror.stream.centos.org/9-stream/CRB/x86_64/os/Packages/
+TMP_BINARY_DESTINATION="/tmp/python.tar.gz"
+LD_RUN_PATH=/usr/local/lib
+
+yum install -y \
+        zip \
+        gcc \
+        openssl-devel \
+        bzip2-devel \
+        make \
+        gcc-c++ \
+        libffi-devel \
+        unixODBC \
+        zlib-devel
+
+ver=`yum list --installed unixODBC | tail -1 | awk -e '{ print $2 }'` \
+    && curl -o /tmp/unixODBC-devel.rpm ${ODBCBASE}unixODBC-devel-$ver.x86_64.rpm \
+    && yum install -y /tmp/unixODBC-devel.rpm \
+    && rm -f /tmp/unixODBC-devel.rpm \
+    && yum clean all
+
+mkdir -p /usr/src/python \
+    && curl -fsSL -o ${TMP_BINARY_DESTINATION} ${BASE_URL}/Python-${TOOL_VERSION}.tgz \
+    && if [[ -n "${SHA256}" ]] ; then printf "\n\n \x1b[48;5;1m Checking SHA256 sum \e[0m \n"; echo "${SHA256} ${TMP_BINARY_DESTINATION}" | sha256sum -c - ; fi \
+    && if [[ -n "${SHA512}" ]] ; then printf "\n\n \x1b[48;5;1m Checking SHA512 sum \e[0m \n"; echo "${SHA512} ${TMP_BINARY_DESTINATION}" | sha512sum -c - ; fi \
+    && tar -xzf ${TMP_BINARY_DESTINATION} -C /usr/src/python --strip-components=1 \
+    && rm -f ${TMP_BINARY_DESTINATION} \
+    && cd /usr/src/python \
+    && ./configure --with-ensurepip=install --enable-shared \
+    && make
+    
+    make altinstall
+
+
+
+
+
+
+name: jenkins-node-6.11.5
+ plan:
+ - get: jenkins-git
+   passed:
+-   - jenkins-base
+-   trigger: true
+- - file: jenkins-git/ci/packer_build.yml
+-   input_mapping:
+-     repo-name: jenkins-git
+-   on_failure:
+-     params:
+-       text: |
+-         Jenkins Concourse job failed!
+-         Pipeline: $BUILD_PIPELINE_NAME
+-         Job: $BUILD_JOB_NAME
+-         Check it out:
+-         https://concourse.cicd-shared.aws.onsdigital.uk/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME
+-     put: slack-alert
+-   params:
+-     BUILD_ARG_PARENT_VERSION: 1.0.0
+-     BUILD_ARG_SHA256: fffd25c9e9b6d2235e97ba8be1dd6ea5f31e32ea445c5cc704ca84ef44db66c1
+-     BUILD_ARG_TOOL_VERSION: v6.11.5
+-     CONTEXT: repo-name/node
+-   privileged: true
+-   task: build-image
+- - on_failure:
+-     params:
+-       text: |
+-         Jenkins Concourse job failed!
+-         Pipeline: $BUILD_PIPELINE_NAME
+-         Job: $BUILD_JOB_NAME
+-         Check it out:
+-         https://concourse.cicd-shared.aws.onsdigital.uk/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME
+-     put: slack-alert
+-   params:
+-     image: image/image.tar
+-     version: 6.11.5
+-   put: jenkins-node-docker

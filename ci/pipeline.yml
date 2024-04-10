@@ -152,11 +152,22 @@ resources:
     repository: ((docker_organisation))/jenkins-python
 
 jobs:
+- name: set-self
+  plan: 
+  - get: jenkins-git
+    trigger: true
+  - set_pipeline: self
+    file : jenkins-git/ci/pipeline.yml
+    var_files: 
+      - jenkins-git/ci/env/variables.yml
+
+
 - name: jenkins-base
   plan:
   - get: wednesday-build
     trigger: true
   - get: jenkins-git
+    passed: [set-self]
   - task: build-image
     privileged: true # oci-build-task must run in a privileged container
     file: jenkins-git/ci/packer_build.yml
