@@ -73,7 +73,8 @@ resources:
   icon: github
   source:
     uri: https://github.com/onsdigital/jenkins-build-envs
-    branch: cia-rhel-cicd
+    #branch: cia-rhel-cicd
+    branch: main
 
 - name: wednesday-build
   type: time
