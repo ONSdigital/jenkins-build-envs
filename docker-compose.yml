@@ -183,6 +183,40 @@ services:
     image: onsdigital/jenkins-python:3.9.1
     depends_on:
       - jenkins-base
+
+  python_3.10.14:
+    tty: true
+    build:
+      context: ./python
+      args:
+        TOOL_VERSION: 3.10.14
+        PARENT_VERSION: ${jenkins_base_version}
+    image: onsdigital/jenkins-python:3.10.14
+    depends_on:
+      - jenkins-base
+
+  python_3.11.9:
+    tty: true
+    build:
+      context: ./python
+      args:
+        TOOL_VERSION: 3.11.9
+        PARENT_VERSION: ${jenkins_base_version}
+    image: onsdigital/jenkins-python:3.11.9
+    depends_on:
+      - jenkins-base
+
+  python_3.12.4:
+    tty: true
+    build:
+      context: ./python
+      args:
+        TOOL_VERSION: 3.12.4
+        PARENT_VERSION: ${jenkins_base_version}
+    image: onsdigital/jenkins-python:3.12.4
+    depends_on:
+      - jenkins-base
+      
   sbt_0-13-13:
     build:
       context: ./sbt
