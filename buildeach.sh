@@ -15,11 +15,15 @@ docker compose --env-file ./ci/env/variables.yml build maven_3.6.3
 echo Python
 docker compose --env-file ./ci/env/variables.yml build python_2.7.15
 
-#got to get past this point
+
 docker compose --env-file ./ci/env/variables.yml build python_3.6.0
 docker compose --env-file ./ci/env/variables.yml build python_3.6.1
 docker compose --env-file ./ci/env/variables.yml build python_3.8.7
 docker compose --env-file ./ci/env/variables.yml build python_3.9.1
+docker compose --env-file ./ci/env/variables.yml build python_3.10.14
+docker compose --env-file ./ci/env/variables.yml build python_3.11.9
+docker compose --env-file ./ci/env/variables.yml build python_3.12.4
+
 echo SBT
 
 docker compose --env-file ./ci/env/variables.yml build --build-arg PARENT_VERSION=2.12.7 sbt_0-13-13 
