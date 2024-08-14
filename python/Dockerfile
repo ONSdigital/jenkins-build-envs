@@ -7,6 +7,7 @@ ARG PARENT_VERSION
 FROM onsdigital/jenkins-base:${PARENT_VERSION}
 
 ARG TOOL_VERSION
+ARG SQLLITE
 
 LABEL uk.gov.ons.image.name="jenkins-python"
 LABEL uk.gov.ons.image.description="A Jenkins with Python"
@@ -33,6 +34,8 @@ RUN yum install -y \
         libffi-devel \
         unixODBC \
         zlib-devel
+
+RUN if [[ -n "SQLLITE" ]] ; then yum install -y sqlite-devel ;fi
 
 RUN ver=`yum list --installed unixODBC | tail -1 | awk -e '{ print $2 }'` \
     && curl -o /tmp/unixODBC-devel.rpm ${ODBCBASE}unixODBC-devel-$ver.x86_64.rpm \
