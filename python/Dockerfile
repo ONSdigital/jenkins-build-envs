@@ -22,7 +22,7 @@ ARG BASE_URL=https://www.python.org/ftp/python/${TOOL_VERSION}/
 ARG ODBCBASE=https://mirror.stream.centos.org/9-stream/CRB/x86_64/os/Packages/
 ARG TMP_BINARY_DESTINATION="/tmp/python.tar.gz"
 
-ENV LD_RUN_PATH /usr/local/lib
+ENV LD_RUN_PATH=/usr/local/lib
 
 RUN yum install -y \
         zip \
@@ -33,7 +33,10 @@ RUN yum install -y \
         gcc-c++ \
         libffi-devel \
         unixODBC \
-        zlib-devel
+        zlib-devel \
+        krb5-devel
+
+RUN if [[ -n "SQLLITE" ]] ; then yum install -y sqlite-devel ;fi
 
 RUN if [[ -n "SQLLITE" ]] ; then yum install -y sqlite-devel ;fi
 

@@ -1,0 +1,51 @@
+import jenkins.instance.clouds.*
+
+//this jenkinsfile runs all the available docker templates to ensure the template config is correct and that the containers can launch
+
+
+def parallelStages = [:]
+
+def allAgents= []
+
+
+def listTemplates() {
+    def cloud
+    def labels
+    def agents= [] 
+    cloud = Jenkins.instance.clouds.get(0) 
+    labels=cloud.getLabels()
+    labels.each { t ->
+        agents.add(t.toString())
+    }
+    return agents
+}
+
+
+
+allAgents=listTemplates()
+//allAgents=['download'] - useful for testing just one
+pipeline { 
+    agent any 
+    stages { 
+        stage("Fire up container") { 
+            steps {
+                script {
+                    allAgents.each { p ->
+                        parallelStages[p] = {
+                            node(p) {
+                                
+                                    stage(p) {
+                                        sh("echo 'Container template - $p' ; python --version ; java -version ")
+                                    }
+                                
+                            }
+                        } 
+                    }
+                
+                    parallel parallelStages
+                }
+            }
+        }
+    }
+}
+
