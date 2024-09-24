@@ -65,6 +65,17 @@ services:
     image: onsdigital/jenkins-node:v6.11.5
     depends_on:
       - jenkins-base
+    node_16-16-0:
+    tty: true
+    build:
+      context: ./node
+      args:
+        TOOL_VERSION: v16.16.0
+        SHA256: fffd25c9e9b6d2235e97ba8be1dd6ea5f31e32ea445c5cc704ca84ef44db66c1
+        PARENT_VERSION: ${jenkins_base_version}
+    image: onsdigital/jenkins-node:v16.16.0
+    depends_on:
+      - jenkins-base
   node_9.9.0:
     tty: true
     build:
@@ -183,7 +194,16 @@ services:
     image: onsdigital/jenkins-python:3.9.1
     depends_on:
       - jenkins-base
-
+  python_3.9.10:
+    tty: true
+    build:
+      context: ./python
+      args:
+        TOOL_VERSION: 3.9.10
+        PARENT_VERSION: ${jenkins_base_version}
+    image: onsdigital/jenkins-python:3.9.10
+    depends_on:
+      - jenkins-base
   python_3.10.14:
     tty: true
     build:

@@ -35,7 +35,7 @@ pipeline {
                             node(p) {
                                 
                                     stage(p) {
-                                        sh("echo 'Container template - $p' ; python --version ; java -version ")
+                                        sh("echo 'Container template - $p' ; python --version || python3 --version; java -version ")
                                     }
                                 
                             }

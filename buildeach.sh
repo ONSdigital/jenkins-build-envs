@@ -20,6 +20,7 @@ docker compose --env-file ./ci/env/variables.yml build python_3.6.0
 docker compose --env-file ./ci/env/variables.yml build python_3.6.1
 docker compose --env-file ./ci/env/variables.yml build python_3.8.7
 docker compose --env-file ./ci/env/variables.yml build python_3.9.1
+docker compose --env-file ./ci/env/variables.yml build python_3.9.10
 docker compose --env-file ./ci/env/variables.yml build python_3.10.14
 docker compose --env-file ./ci/env/variables.yml build python_3.11.9
 docker compose --env-file ./ci/env/variables.yml build python_3.12.4 --build-arg SQLLITE=yes
