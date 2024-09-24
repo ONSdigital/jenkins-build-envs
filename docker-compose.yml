@@ -183,7 +183,16 @@ services:
     image: onsdigital/jenkins-python:3.9.1
     depends_on:
       - jenkins-base
-
+  python_3.9.10:
+    tty: true
+    build:
+      context: ./python
+      args:
+        TOOL_VERSION: 3.9.10
+        PARENT_VERSION: ${jenkins_base_version}
+    image: onsdigital/jenkins-python:3.9.10
+    depends_on:
+      - jenkins-base
   python_3.10.14:
     tty: true
     build:
