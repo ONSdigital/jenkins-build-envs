@@ -428,7 +428,7 @@ jobs:
       CONTEXT: repo-name/node
       BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
       BUILD_ARG_TOOL_VERSION: v16.16.0
-      BUILD_ARG_SHA256: ffc92b8d9f53a10a2a734c93e78a3be74af7b0034bddd6f034a700c430eb94c1
+      BUILD_ARG_SHA256: fc85b16d1a4c259d01be7111ecb0361260627e4fc245004a920521eacb28e50df
     on_failure:
       put: slack-alert
       params:
