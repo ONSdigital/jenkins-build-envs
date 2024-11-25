@@ -65,7 +65,7 @@ services:
     image: onsdigital/jenkins-node:v6.11.5
     depends_on:
       - jenkins-base
-    node_16-16-0:
+  node_16-16-0:
     tty: true
     build:
       context: ./node
@@ -269,6 +269,19 @@ services:
     image: onsdigital/jenkins-jq:1.6
     depends_on:
       - jenkins-base
+  
+  r-base_4.4.1:
+    tty: true
+    build:
+      context: ./r-base
+      args:
+        TOOL_VERSION: 4.4.1
+        PARENT_VERSION: ${jenkins_base_version}
+    image: onsdigital/jenkins-r-base:4.4.1
+    depends_on:
+      - jenkins-base
+
+
 #  Tier 3 Images
   cm_1.0:
     build:

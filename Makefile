@@ -60,7 +60,12 @@ PYTHON:
 	#$(DOCKER) $(DOCKER_FLAGS) onsdigital/jenkins-slave-python:2.7.15  ${PYTHON_VERIFY_COMMAND_OTHER:_version=2.7}
 	$(call run_docker_meta,$@)
 # -----------------------------------------------------------------------------------------------------
-
+R_VERIFY_COMMAND=R --version
+R_VERSION_LIST=4.4.1
+R_DOCKER_IMAGE=onsdigital/jenkins-slave-r
+R:
+	$(call run_docker_meta,$@)
+# -----------------------------------------------------------------------------------------------------
 # Functions invoked by the individual targets. The following functions do all the work of actually provisioning
 # the docker containers and running the version check commands
 
