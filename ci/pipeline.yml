@@ -152,6 +152,13 @@ resources:
     <<: *docker_auth
     repository: ((docker_organisation))/jenkins-python
 
+- name: jenkins-r-base-docker
+  type: registry-image
+  icon: docker
+  source:
+    <<: *docker_auth
+    repository: ((docker_organisation))/jenkins-rbase
+
 jobs:
 - name: set-self
   plan: 
@@ -937,7 +944,7 @@ jobs:
       params:
         <<: *slack_alert_message
 
-- name: r-base-4.4.1
+- name: jenkins-r-base-4.4.1
   plan:
   - get: jenkins-git
     passed: [jenkins-base]
