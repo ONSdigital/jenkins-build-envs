@@ -270,14 +270,14 @@ services:
     depends_on:
       - jenkins-base
   
-  r-base_4.4.1:
+  r_4.4.1:
     tty: true
     build:
-      context: ./r-base
+      context: ./r
       args:
         TOOL_VERSION: 4.4.1
         PARENT_VERSION: ${jenkins_base_version}
-    image: onsdigital/jenkins-r-base:4.4.1
+    image: onsdigital/jenkins-r:4.4.1
     depends_on:
       - jenkins-base
 

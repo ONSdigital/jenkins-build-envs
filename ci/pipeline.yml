@@ -152,7 +152,7 @@ resources:
     <<: *docker_auth
     repository: ((docker_organisation))/jenkins-python
 
-- name: jenkins-r-base-docker
+- name: jenkins-r-docker
   type: registry-image
   icon: docker
   source:
@@ -944,7 +944,7 @@ jobs:
       params:
         <<: *slack_alert_message
 
-- name: jenkins-r-base-4.4.1
+- name: jenkins-r-4.4.1
   plan:
   - get: jenkins-git
     passed: [jenkins-base]
@@ -955,14 +955,14 @@ jobs:
     input_mapping:
       repo-name: jenkins-git
     params:
-      CONTEXT: repo-name/r-base
+      CONTEXT: repo-name/r
       BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
       BUILD_ARG_TOOL_VERSION: 4.4.1
     on_failure:
       put: slack-alert
       params:
         <<: *slack_alert_message
-  - put: jenkins-r-base-docker
+  - put: jenkins-r-docker
     params:
       image: image/image.tar
       version: 4.4.1

@@ -26,7 +26,7 @@ docker compose --env-file ./ci/env/variables.yml build python_3.11.9
 docker compose --env-file ./ci/env/variables.yml build python_3.12.4 --build-arg SQLLITE=yes
 
 echo R
-docker compose --env-file ./ci/env/variables.yml build r-base_4.4.1
+docker compose --env-file ./ci/env/variables.yml build r_4.4.1
 
 echo SBT
 
