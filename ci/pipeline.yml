@@ -157,7 +157,7 @@ resources:
   icon: docker
   source:
     <<: *docker_auth
-    repository: ((docker_organisation))/jenkins-rbase
+    repository: ((docker_organisation))/jenkins-r
 
 jobs:
 - name: set-self
