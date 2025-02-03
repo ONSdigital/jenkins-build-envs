@@ -18,6 +18,7 @@ LABEL uk.gov.ons.image.version="${TOOL_VERSION}"
 ####################### START r INSTALATION ################################
 FROM quay.io/centos/centos:stream9
 ARG TOOL_VERSION
+RUN yum install -y java-11-openjdk
 RUN curl -O https://cdn.rstudio.com/r/rhel-9/pkgs/R-${TOOL_VERSION}-1-1.x86_64.rpm
 RUN dnf --enablerepo=crb install flexiblas-devel -y 
 RUN dnf -y install R-${TOOL_VERSION}-1-1.x86_64.rpm
