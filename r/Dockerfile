@@ -22,4 +22,5 @@ RUN yum install -y java-11-openjdk
 RUN curl -O https://cdn.rstudio.com/r/rhel-9/pkgs/R-${TOOL_VERSION}-1-1.x86_64.rpm
 RUN dnf --enablerepo=crb install flexiblas-devel -y 
 RUN dnf -y install R-${TOOL_VERSION}-1-1.x86_64.rpm
+RUN alias R=/opt/R/${TOOL_VERSION}/bin/R
 ####################### END r INSTALATION ##################################
