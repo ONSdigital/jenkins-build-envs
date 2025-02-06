@@ -4,6 +4,10 @@ services:
   jenkins-base:
     build: ./jenkins-base
     image: onsdigital/jenkins-base:${jenkins_base_version}
+  jenkins-base-centos:
+    build: ./jenkins-base-centos
+    image: onsdigital/jenkins-base-centos:${jenkins_base_version}
+  
   # TIER 2
   gradle_4-9:
     build:
@@ -279,7 +283,7 @@ services:
         PARENT_VERSION: ${jenkins_base_version}
     image: onsdigital/jenkins-r:4.4.1
     depends_on:
-      - jenkins-base
+      - jenkins-base-centos
 
 
 #  Tier 3 Images

@@ -4,8 +4,10 @@
 #   $ docker run -it onsdigital/jenkins-r:4.4.1 /opt/R/4.4.1/bin/R --version
 #
 ARG PARENT_VERSION=2.0.0
-FROM onsdigital/jenkins-base:${PARENT_VERSION}
 
+FROM onsdigital/jenkins-base-centos:${PARENT_VERSION}
+
+ARG TOOL_VERSION
 
 LABEL uk.gov.ons.image.name="r"
 LABEL uk.gov.ons.image.description="A Jenkins with r"
@@ -16,11 +18,9 @@ LABEL uk.gov.ons.image.version="${TOOL_VERSION}"
 # same dockerfile
 
 ####################### START r INSTALATION ################################
-FROM quay.io/centos/centos:stream9
-ARG TOOL_VERSION
-RUN yum install -y java-11-openjdk
-RUN curl -O https://cdn.rstudio.com/r/rhel-9/pkgs/R-${TOOL_VERSION}-1-1.x86_64.rpm
-RUN dnf --enablerepo=crb install flexiblas-devel -y 
-RUN dnf -y install R-${TOOL_VERSION}-1-1.x86_64.rpm
-RUN alias R=/opt/R/${TOOL_VERSION}/bin/R
+RUN curl -O https://cdn.rstudio.com/r/rhel-9/pkgs/R-${TOOL_VERSION}-1-1.x86_64.rpm \
+ && dnf --enablerepo=crb install flexiblas-devel -y \
+ && dnf -y install R-${TOOL_VERSION}-1-1.x86_64.rpm \
+ && rm R-${TOOL_VERSION}-1-1.x86_64.rpm \
+ && ln /opt/R/${TOOL_VERSION}/bin/R /bin/R 
 ####################### END r INSTALATION ##################################
