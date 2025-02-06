@@ -1,5 +1,8 @@
-#This file exists to allow 
+#This file exists to allow tests of different versions of environments to be built in the dev environment. It's not used in production.
+
 docker compose --env-file ./ci/env/variables.yml build jenkins-base
+docker compose --env-file ./ci/env/variables.yml build jenkins-base-centos
+
 docker compose --env-file ./ci/env/variables.yml build gradle_4-9
 docker compose --env-file ./ci/env/variables.yml build scala_2-11-8
 docker compose --env-file ./ci/env/variables.yml build scala_2-12-7
