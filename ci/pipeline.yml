@@ -60,12 +60,10 @@ groups:
 - name: scala
   jobs:
   - jenkins-scala-*
+  
 - name: r
   jobs:
   - jenkins-r-*
-
-  jobs:
-  - jenkins-scala-*
 
 resource_types:
 - name: slack-notification
