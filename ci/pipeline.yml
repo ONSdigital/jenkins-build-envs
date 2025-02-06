@@ -64,7 +64,6 @@ groups:
   jobs:
   - jenkins-r-*
 
-- name: scala
   jobs:
   - jenkins-scala-*
 
