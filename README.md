@@ -1,6 +1,5 @@
 # ONS Build
 
-[![Build Status](https://travis-ci.org/ONSdigital/jenkins-build-envs.svg?branch=master)](https://travis-ci.org/ONSdigital/jenkins-build-envs)
 
 This repository holds the Dockerfiles for our Jenkins build environments.
 
@@ -10,7 +9,9 @@ This repository holds the Dockerfiles for our Jenkins build environments.
 
 Each jenkins build is added to a repository in onsdigital dockerhub account. 
 
-Errors are reported to jenkins-builds slack channel in ons-operations slack
+Errors are reported to jenkins-builds slack channel in ons-operations slack.
+
+There are two base images RHEL & CENTOS- all the other images are layered on top of either of these.
 
 ### Adding a new repository to the pipeline
 
