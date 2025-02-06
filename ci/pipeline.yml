@@ -26,7 +26,9 @@ groups:
 - name: base_jenkins
   jobs:
   - jenkins-base
-
+- name: base_jenkins_centos
+  jobs:
+  - jenkins-base-centos
 - name: cm
   jobs:
   - jenkins-cm-*
@@ -54,6 +56,13 @@ groups:
 - name: sbt
   jobs:
   - jenkins-sbt-*
+
+- name: scala
+  jobs:
+  - jenkins-scala-*
+- name: r
+  jobs:
+  - jenkins-r-*
 
 - name: scala
   jobs:
@@ -95,6 +104,13 @@ resources:
   source:
     <<: *docker_auth
     repository: ((docker_organisation))/jenkins-base
+
+- name: jenkins-base-centos-docker
+  type: registry-image
+  icon: docker
+  source:
+    <<: *docker_auth
+    repository: ((docker_organisation))/jenkins-base-centos
 
 - name: jenkins-scala-docker
   type: registry-image
@@ -188,6 +204,32 @@ jobs:
       params:
         <<: *slack_alert_message
   - put: jenkins-base-docker
+    params:
+      image: image/image.tar
+      version: ((jenkins_base_version))
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
+
+- name: jenkins-base-centos
+  plan:
+  - get: wednesday-build
+    trigger: true
+  - get: jenkins-git
+    passed: [set-self]
+  - task: build-image
+    privileged: true # oci-build-task must run in a privileged container
+    file: jenkins-git/ci/packer_build.yml
+    input_mapping:
+      repo-name: jenkins-git
+    params:
+      CONTEXT: repo-name/jenkins-base-centos
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
+  - put: jenkins-base-centos-docker
     params:
       image: image/image.tar
       version: ((jenkins_base_version))
@@ -947,7 +989,7 @@ jobs:
 - name: jenkins-r-4.4.1
   plan:
   - get: jenkins-git
-    passed: [jenkins-base]
+    passed: [jenkins-base-centos]
     trigger: true
   - task: build-image
     privileged: true # oci-build-task must run in a privileged container
