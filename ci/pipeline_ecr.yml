@@ -1,0 +1,137 @@
+github_auth: &github_auth
+  username: ((github_pat))
+  password: x-oauth-basic
+
+aws_auth: &aws_auth
+  AWS_ACCESS_KEY_ID: ((ciashared_access_key_id_prod))
+  AWS_SECRET_ACCESS_KEY: ((ciashared_access_key_secret_prod))
+
+groups:
+- name: all
+  jobs:
+  - "*"
+
+- name: base_jenkins_centos
+  jobs:
+  - jenkins-base-centos
+  
+- name: r
+  jobs:
+  - jenkins-r-*
+
+resource_types:
+- name: pull-request
+  type: docker-image
+  source:
+    repository: teliaoss/github-pr-resource
+
+- name: github-release
+  type: registry-image
+  source:
+    repository: concourse/github-release-resource
+    tag: latest
+
+resources:
+# The repo with our Dockerfile
+- name: jenkins-git
+  type: git
+  icon: github
+  source:
+    uri: https://github.com/onsdigital/jenkins-build-envs
+    #branch: cia-rhel-cicd
+    branch: main
+
+- name: jenkins-r-centos-container-version
+  type: semver
+  source:
+    driver: s3
+    initial_version: 2.0.0
+    access_key_id: ((ciashared_access_key_id_prod))
+    secret_access_key: ((ciashared_access_key_secret_prod))
+    bucket: ((aws.s3_bucket))
+    region_name: eu-west-2
+    key:         versions/pycli_container.semver
+
+- name: jenkins-r-container-version
+  type: semver
+  source:
+    driver: s3
+    initial_version: 4.4.1
+    access_key_id: ((ciashared_access_key_id_prod))
+    secret_access_key: ((ciashared_access_key_secret_prod))
+    bucket: ((aws.s3_bucket))
+    region_name: eu-west-2
+    key:         versions/pycli_container.semver
+
+- name: jenkins-base-centos-container
+  type: registry-image
+  icon: docker
+  source:
+    repository: 013353241801.dkr.ecr.eu-west-2.amazonaws.com/jenkins-base-centos
+    aws_access_key_id: ((ciashared_access_key_id_prod))
+    aws_secret_access_key: ((ciashared_access_key_secret_prod))
+
+- name: jenkins-r-container
+  type: docker-image
+  icon: docker
+  source:
+    repository: 013353241801.dkr.ecr.eu-west-2.amazonaws.com/jenkins-r
+    aws_access_key_id: ((ciashared_access_key_id_prod))
+    aws_secret_access_key: ((ciashared_access_key_secret_prod))
+
+jobs:
+#########
+# jenkins-base-centos container
+#########
+- name: jenkins-base-centos
+  plan:
+  - get: jenkins-git
+    passed: [set-self]
+  - put: jenkins-base-centos
+    params: 
+      build: pull-request/containers/jenkins-base-centos
+      tag_file: jenkins-base-centos-container-version/number
+      tag_prefix: v
+    on_error:
+      put: pull-request
+      params:
+        path: pull-request
+        status: FAILURE
+
+    - put: jenkins-base-centos-container-version
+    params:
+      file: jenkins-base-centos-container-version/number
+
+  - put: pull-request
+    params:
+      path: pull-request
+      status: success
+
+
+#########
+# jenkins-r container
+#########
+- name: jenkins-r-4.4.1
+  plan:
+  - get: jenkins-git
+    passed: [jenkins-base-centos]
+    trigger: true
+  - put: jenkins-r-container
+    params: 
+      build: pull-request/containers/jenkins-r
+      tag_file: jenkins-r-container-version/number
+      tag_prefix: v
+    on_error:
+      put: pull-request
+      params:
+        path: pull-request
+        status: FAILURE
+
+  - put: jenkins-r-container-version
+    params:
+      file: jenkins-r-container-version/number
+
+  - put: pull-request
+    params:
+      path: pull-request
+      status: success
