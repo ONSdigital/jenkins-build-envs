@@ -98,7 +98,7 @@ jobs:
         path: pull-request
         status: FAILURE
 
-    - put: jenkins-base-centos-container-version
+  - put: jenkins-base-centos-container-version
     params:
       file: jenkins-base-centos-container-version/number
 
