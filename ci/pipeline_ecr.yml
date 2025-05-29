@@ -79,7 +79,17 @@ resources:
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
 
+
 jobs:
+- name: set-self
+  plan: 
+  - get: jenkins-git
+    trigger: true
+  - set_pipeline: self
+    file : jenkins-git/ci/pipeline.yml
+    var_files: 
+      - jenkins-git/ci/env/variables.yml
+      
 #########
 # jenkins-base-centos container
 #########
