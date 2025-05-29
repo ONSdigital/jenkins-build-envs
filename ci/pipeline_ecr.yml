@@ -41,7 +41,7 @@ resources:
     #branch: cia-rhel-cicd
     branch: changing_image_target_from_docker_hub_to_github
 
-- name: jenkins-r-centos-container-version
+- name: jenkins-base-centos-container-version
   type: semver
   source:
     driver: s3
