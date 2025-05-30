@@ -1,7 +1,3 @@
-docker_auth: &docker_auth
-  username: ((docker-username)) # These come from secrets manager
-  password: ((docker-password))
-
 github_auth: &github_auth
   username: ((github_pat))
   password: x-oauth-basic
@@ -66,15 +62,17 @@ resources:
   type: registry-image
   icon: docker
   source:
-    <<: *github_auth
-    repository: ((docker_organisation))/jenkins-base-centos
+    repository: 013353241801.dkr.ecr.eu-west-2.amazonaws.com/jenkins-base-centos
+    aws_access_key_id: ((ciashared_access_key_id_prod))
+    aws_secret_access_key: ((ciashared_access_key_secret_prod))
 
 - name: jenkins-r-docker
   type: registry-image
   icon: docker
   source:
-    <<: *github_auth
-    repository: ((docker_organisation))/jenkins-r
+    repository: 013353241801.dkr.ecr.eu-west-2.amazonaws.com/jenkins-r
+    aws_access_key_id: ((ciashared_access_key_id_prod))
+    aws_secret_access_key: ((ciashared_access_key_secret_prod))
 
 jobs:
 - name: set-self
