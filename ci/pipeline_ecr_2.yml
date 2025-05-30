@@ -1,0 +1,140 @@
+docker_auth: &docker_auth
+  username: ((docker-username)) # These come from secrets manager
+  password: ((docker-password))
+
+github_auth: &github_auth
+  username: ((github_pat))
+  password: x-oauth-basic
+
+aws_auth: &aws_auth
+  AWS_ACCESS_KEY_ID: ((ciashared_access_key_id_prod))
+  AWS_SECRET_ACCESS_KEY: ((ciashared_access_key_secret_prod))
+
+slack_alert_message: &slack_alert_message
+  text: |
+        Jenkins Concourse job failed!
+        Pipeline: $BUILD_PIPELINE_NAME
+        Job: $BUILD_JOB_NAME
+        Check it out:
+        https://concourse.cicd-shared.aws.onsdigital.uk/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME
+
+groups:
+- name: all
+  jobs:
+  - "*"
+
+
+- name: base_jenkins_centos
+  jobs:
+  - jenkins-base-centos
+  
+- name: r
+  jobs:
+  - jenkins-r-*
+
+resource_types:
+- name: slack-notification
+  type: docker-image
+  source:
+    repository: cfcommunity/slack-notification-resource
+    tag: latest
+
+resources:
+# The repo with our Dockerfiles 
+- name: jenkins-git
+  type: git
+  icon: github
+  source:
+    uri: https://github.com/onsdigital/jenkins-build-envs
+    #branch: cia-rhel-cicd
+    branch: main
+
+- name: wednesday-build
+  type: time
+  icon: clock-outline
+  source:
+    start: 05:00
+    stop: 05:30
+    days: [Wednesday]
+
+- name: slack-alert
+  type: slack-notification
+  source:
+    url: ((slack_webhook)) # Comes from secret manager
+
+- name: jenkins-base-centos
+  type: registry-image
+  icon: docker
+  source:
+    <<: *github_auth
+    repository: ((docker_organisation))/jenkins-base-centos
+
+- name: jenkins-r-docker
+  type: registry-image
+  icon: docker
+  source:
+    <<: *github_auth
+    repository: ((docker_organisation))/jenkins-r
+
+jobs:
+- name: set-self
+  plan: 
+  - get: jenkins-git
+    trigger: true
+  - set_pipeline: self
+    file : jenkins-git/ci/pipeline_ecr_2.yml
+    var_files: 
+      - jenkins-git/ci/env/variables.yml
+
+- name: jenkins-base-centos
+  plan:
+  - get: wednesday-build
+    trigger: true
+  - get: jenkins-git
+    passed: [set-self]
+  - task: build-image
+    privileged: true # oci-build-task must run in a privileged container
+    file: jenkins-git/ci/packer_build.yml
+    input_mapping:
+      repo-name: jenkins-git
+    params:
+      CONTEXT: repo-name/jenkins-base-centos
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
+  - put: jenkins-base-centos
+    params:
+      image: image/image.tar
+      version: ((jenkins_base_version))
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
+
+- name: jenkins-r-4.4.1
+  plan:
+  - get: jenkins-git
+    passed: [jenkins-base-centos]
+    trigger: true
+  - task: build-image
+    privileged: true # oci-build-task must run in a privileged container
+    file: jenkins-git/ci/packer_build.yml
+    input_mapping:
+      repo-name: jenkins-git
+    params:
+      CONTEXT: repo-name/r
+      BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
+      BUILD_ARG_TOOL_VERSION: 4.4.1
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
+  - put: jenkins-r-docker
+    params:
+      image: image/image.tar
+      version: 4.4.1
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
