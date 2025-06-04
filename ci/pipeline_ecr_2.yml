@@ -43,7 +43,7 @@ resources:
   source:
     uri: https://github.com/onsdigital/jenkins-build-envs
     #branch: cia-rhel-cicd
-    branch: main
+    branch: changing_image_target_from_docker_hub_to_github
 
 - name: wednesday-build
   type: time
