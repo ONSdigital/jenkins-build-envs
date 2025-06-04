@@ -49,8 +49,8 @@ resources:
   type: time
   icon: clock-outline
   source:
-    start: 05:00
-    stop: 05:30
+    start: 16:46
+    stop: 17:16
     days: [Wednesday]
 
 - name: slack-alert
