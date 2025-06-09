@@ -37,28 +37,6 @@ resources:
     #branch: cia-rhel-cicd
     branch: changing_image_target_from_docker_hub_to_github
 
-- name: jenkins-base-centos-container-version
-  type: semver
-  source:
-    driver: s3
-    initial_version: 2.0.0
-    access_key_id: ((ciashared_access_key_id_prod))
-    secret_access_key: ((ciashared_access_key_secret_prod))
-    bucket: ((aws.s3_bucket))
-    region_name: eu-west-2
-    key:         versions/pycli_container.semver
-
-- name: jenkins-r-container-version
-  type: semver
-  source:
-    driver: s3
-    initial_version: 4.4.1
-    access_key_id: ((ciashared_access_key_id_prod))
-    secret_access_key: ((ciashared_access_key_secret_prod))
-    bucket: ((aws.s3_bucket))
-    region_name: eu-west-2
-    key:         versions/pycli_container.semver
-
 - name: jenkins-base-centos-container
   type: docker-image
   icon: docker
@@ -96,12 +74,7 @@ jobs:
   - put: jenkins-base-centos-container
     params: 
       build: jenkins-git/jenkins-base-centos
-      tag_file: jenkins-base-centos-container-version/number
-      tag_prefix: v
-
-  - put: jenkins-base-centos-container-version
-    params:
-      file: jenkins-base-centos-container-version/number
+      tag: 2.0.0
 
 
 #########
@@ -115,9 +88,4 @@ jobs:
   - put: jenkins-r-container
     params: 
       build: jenkins-git/jenkins-r
-      tag_file: jenkins-r-container-version/number
-      tag_prefix: v
-
-  - put: jenkins-r-container-version
-    params:
-      file: jenkins-r-container-version/number
+      tag: 4.4.1
