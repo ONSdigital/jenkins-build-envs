@@ -60,7 +60,7 @@ resources:
     key:         versions/pycli_container.semver
 
 - name: jenkins-base-centos-container
-  type: registry-image
+  type: docker-image
   icon: docker
   source:
     repository: 013353241801.dkr.ecr.eu-west-2.amazonaws.com/jenkins-base-centos
