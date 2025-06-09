@@ -112,4 +112,4 @@ jobs:
   - put: jenkins-r-container
     params: 
       build: jenkins-git/jenkins-r
-      tag_file: jenkins-git/jenkins-r/VERSION
+      tag_file: jenkins-git/r/VERSION
