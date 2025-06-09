@@ -111,5 +111,5 @@ jobs:
     trigger: true
   - put: jenkins-r-container
     params: 
-      build: jenkins-git/jenkins-r
+      build: jenkins-git/r
       tag_file: jenkins-git/r/VERSION
