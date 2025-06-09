@@ -103,8 +103,8 @@ jobs:
         <<: *slack_alert_message
   - put: jenkins-base-centos
     params:
-      image: image/image.tar
-      version: ((jenkins_base_version))
+      build: repo-name/jenkins-base-centos
+      tag: ((jenkins_base_version))
     on_failure:
       put: slack-alert
       params:
