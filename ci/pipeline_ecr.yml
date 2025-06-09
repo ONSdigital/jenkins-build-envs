@@ -20,10 +20,6 @@ groups:
   - jenkins-r-*
 
 resource_types:
-- name: pull-request
-  type: docker-image
-  source:
-    repository: teliaoss/github-pr-resource
 
 - name: github-release
   type: registry-image
@@ -97,25 +93,15 @@ jobs:
   plan:
   - get: jenkins-git
     passed: [set-self]
-  - put: jenkins-base-centos
+  - put: jenkins-base-centos-container
     params: 
-      build: pull-request/containers/jenkins-base-centos
+      build: jenkins-git/jenkins-base-centos
       tag_file: jenkins-base-centos-container-version/number
       tag_prefix: v
-    on_error:
-      put: pull-request
-      params:
-        path: pull-request
-        status: FAILURE
 
   - put: jenkins-base-centos-container-version
     params:
       file: jenkins-base-centos-container-version/number
-
-  - put: pull-request
-    params:
-      path: pull-request
-      status: success
 
 
 #########
@@ -128,20 +114,10 @@ jobs:
     trigger: true
   - put: jenkins-r-container
     params: 
-      build: pull-request/containers/jenkins-r
+      build: jenkins-git/jenkins-r
       tag_file: jenkins-r-container-version/number
       tag_prefix: v
-    on_error:
-      put: pull-request
-      params:
-        path: pull-request
-        status: FAILURE
 
   - put: jenkins-r-container-version
     params:
       file: jenkins-r-container-version/number
-
-  - put: pull-request
-    params:
-      path: pull-request
-      status: success
