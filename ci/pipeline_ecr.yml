@@ -18,6 +18,10 @@ groups:
 - name: base_jenkins_centos
   jobs:
   - jenkins-base-centos
+
+- name: gradle
+  jobs:
+  - jenkins-gradle-*
   
 - name: r
   jobs:
@@ -54,6 +58,14 @@ resources:
   icon: docker
   source:
     repository: 013353241801.dkr.ecr.eu-west-2.amazonaws.com/jenkins-base-centos
+    aws_access_key_id: ((ciashared_access_key_id_prod))
+    aws_secret_access_key: ((ciashared_access_key_secret_prod))
+
+- name: jenkins-gradle-container
+  type: docker-image
+  icon: docker
+  source:
+    repository: 013353241801.dkr.ecr.eu-west-2.amazonaws.com/jenkins-gradle
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
 
@@ -100,6 +112,18 @@ jobs:
       build: jenkins-git/jenkins-base-centos
       tag_file: jenkins-git/jenkins-base-centos/VERSION
 
+#########
+# jenkins-gradle container
+#########
+- name: jenkins-gradle-4.9
+  plan:
+  - get: jenkins-git
+    passed: [jenkins-base]
+    trigger: true
+  - put: jenkins-gradle-container
+    params: 
+      build: jenkins-git/jenkins-gradle
+      tag_file: jenkins-git/gradle/VERSION
 
 #########
 # jenkins-r container
@@ -111,5 +135,5 @@ jobs:
     trigger: true
   - put: jenkins-r-container
     params: 
-      build: jenkins-git/r
+      build: jenkins-git/jenkins-r
       tag_file: jenkins-git/r/VERSION
