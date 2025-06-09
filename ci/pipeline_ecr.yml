@@ -11,6 +11,10 @@ groups:
   jobs:
   - "*"
 
+- name: base_jenkins
+  jobs:
+  - jenkins-base
+
 - name: base_jenkins_centos
   jobs:
   - jenkins-base-centos
@@ -36,6 +40,14 @@ resources:
     uri: https://github.com/onsdigital/jenkins-build-envs
     #branch: cia-rhel-cicd
     branch: changing_image_target_from_docker_hub_to_github
+
+- name: jenkins-base-container
+  type: registry-image
+  icon: docker
+  source:
+    repository: 013353241801.dkr.ecr.eu-west-2.amazonaws.com/jenkins-base
+    aws_access_key_id: ((ciashared_access_key_id_prod))
+    aws_secret_access_key: ((ciashared_access_key_secret_prod))
 
 - name: jenkins-base-centos-container
   type: docker-image
@@ -63,7 +75,19 @@ jobs:
     file : jenkins-git/ci/pipeline_ecr.yml
     var_files: 
       - jenkins-git/ci/env/variables.yml
-      
+
+#########
+# jenkins-base container
+#########
+- name: jenkins-base
+  plan:
+  - get: jenkins-git
+    passed: [set-self]
+  - put: jenkins-base-container
+    params: 
+      build: jenkins-git/jenkins-base
+      tag_file: jenkins-git/jenkins-base/VERSION
+
 #########
 # jenkins-base-centos container
 #########
