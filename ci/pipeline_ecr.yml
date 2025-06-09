@@ -42,7 +42,7 @@ resources:
     branch: changing_image_target_from_docker_hub_to_github
 
 - name: jenkins-base-container
-  type: registry-image
+  type: docker-image
   icon: docker
   source:
     repository: 013353241801.dkr.ecr.eu-west-2.amazonaws.com/jenkins-base
@@ -111,5 +111,5 @@ jobs:
     trigger: true
   - put: jenkins-r-container
     params: 
-      build: jenkins-git/jenkins-r
-      tag_file: jenkins-git/jenkins-r/VERSION
+      build: jenkins-git/r
+      tag_file: jenkins-git/r/VERSION
