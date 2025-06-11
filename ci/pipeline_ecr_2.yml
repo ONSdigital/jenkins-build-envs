@@ -53,10 +53,10 @@ resources:
     stop: 17:16
     days: [Wednesday]
 
-- name: slack-alert
-  type: slack-notification
-  source:
-    url: ((slack_webhook)) # Comes from secret manager
+#- name: slack-alert
+#  type: slack-notification
+#  source:
+#    url: ((slack_webhook)) # Comes from secret manager
 
 - name: jenkins-base-centos
   type: docker-image
