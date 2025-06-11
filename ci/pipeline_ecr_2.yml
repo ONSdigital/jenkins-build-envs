@@ -97,18 +97,18 @@ jobs:
       repo-name: jenkins-git
     params:
       CONTEXT: repo-name/jenkins-base-centos
-    on_failure:
-      put: slack-alert
-      params:
-        <<: *slack_alert_message
+ #      on_failure:
+ #       put: slack-alert
+ #      params:
+ #       <<: *slack_alert_message
   - put: jenkins-base-centos
     params:
       build: jenkins-git/jenkins-base-centos
-      tag: ((jenkins_base_version))
-    on_failure:
-      put: slack-alert
-      params:
-        <<: *slack_alert_message
+      tag_file: jenkins-git/jenkins-base-centos/VERSION
+#    on_failure:
+#      put: slack-alert
+#      params:
+#        <<: *slack_alert_message
 
 - name: jenkins-r-4.4.1
   plan:
@@ -121,18 +121,18 @@ jobs:
     input_mapping:
       repo-name: jenkins-git
     params:
-      CONTEXT: jenkins-git/r
+      CONTEXT: repo-name/r
       BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
       BUILD_ARG_TOOL_VERSION: 4.4.1
-    on_failure:
-      put: slack-alert
-      params:
-        <<: *slack_alert_message
+#    on_failure:
+#      put: slack-alert
+#      params:
+#        <<: *slack_alert_message
   - put: jenkins-r-docker
     params:
       image: image/image.tar
       version: 4.4.1
-    on_failure:
-      put: slack-alert
-      params:
-        <<: *slack_alert_message
+#    on_failure:
+#      put: slack-alert
+#      params:
+#        <<: *slack_alert_message
