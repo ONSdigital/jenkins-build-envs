@@ -19,10 +19,17 @@ groups:
   jobs:
   - "*"
 
+- name: base_jenkins
+  jobs:
+  - jenkins-base
 
 - name: base_jenkins_centos
   jobs:
   - jenkins-base-centos
+
+- name: scala
+  jobs:
+  - jenkins-scala-*
   
 - name: r
   jobs:
@@ -64,7 +71,15 @@ resources:
 #  source:
 #    url: ((slack_webhook)) # Comes from secret manager
 
-- name: jenkins-base-centos
+- name: jenkins-base-docker
+  type: docker-image
+  icon: docker
+  source:
+    repository: 013353241801.dkr.ecr.eu-west-2.amazonaws.com/jenkins-base
+    aws_access_key_id: ((ciashared_access_key_id_prod))
+    aws_secret_access_key: ((ciashared_access_key_secret_prod))
+
+- name: jenkins-base-centos-docker
   type: docker-image
   icon: docker
   source:
@@ -90,6 +105,32 @@ jobs:
     var_files: 
       - jenkins-git/ci/env/variables.yml
 
+- name: jenkins-base
+  plan:
+  - get: wednesday-build
+    trigger: true
+  - get: jenkins-git
+    passed: [set-self]
+  - task: build-image
+    privileged: true # oci-build-task must run in a privileged container
+    file: jenkins-git/ci/packer_build.yml
+    input_mapping:
+      repo-name: jenkins-git
+    params:
+      CONTEXT: repo-name/jenkins-base
+#    on_failure:
+#      put: slack-alert
+#      params:
+#        <<: *slack_alert_message
+  - put: jenkins-base-docker
+    params:
+      build: jenkins-git/jenkins-base
+      tag_file: jenkins-git/jenkins-base/VERSION
+#    on_failure:
+#      put: slack-alert
+#      params:
+#        <<: *slack_alert_message
+
 - name: jenkins-base-centos
   plan:
   - get: wednesday-build
@@ -107,7 +148,7 @@ jobs:
  #       put: slack-alert
  #      params:
  #       <<: *slack_alert_message
-  - put: jenkins-base-centos
+  - put: jenkins-base-centos-docker
     params:
       build: jenkins-git/jenkins-base-centos
       tag_file: jenkins-git/jenkins-base-centos/VERSION
@@ -115,6 +156,33 @@ jobs:
 #      put: slack-alert
 #      params:
 #        <<: *slack_alert_message
+
+- name: jenkins-scala-2.11.8
+  plan:
+  - get: jenkins-git
+    passed: [jenkins-base]
+    trigger: true
+  - task: build-image
+    privileged: true # oci-build-task must run in a privileged container
+    file: jenkins-git/ci/packer_build.yml
+    input_mapping:
+      repo-name: jenkins-git
+    params:
+      CONTEXT: repo-name/scala
+      BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
+      BUILD_ARG_TOOL_VERSION: 2.11.8
+#    on_failure:
+#      put: slack-alert
+#      params:
+#        <<: *slack_alert_message
+  - put: jenkins-scala-docker
+    params:
+      build: jenkins-git/scala
+      tag_file: jenkins-git/scala/VERSION_2_11_8
+ #   on_failure:
+ #     put: slack-alert
+ #     params:
+ #       <<: *slack_alert_message
 
 - name: jenkins-r-4.4.1
   plan:
