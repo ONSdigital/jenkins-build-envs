@@ -103,7 +103,7 @@ jobs:
         <<: *slack_alert_message
   - put: jenkins-base-centos
     params:
-      build: repo-name/jenkins-base-centos
+      build: jenkins-git/jenkins-base-centos
       tag: ((jenkins_base_version))
     on_failure:
       put: slack-alert
@@ -121,7 +121,7 @@ jobs:
     input_mapping:
       repo-name: jenkins-git
     params:
-      CONTEXT: repo-name/r
+      CONTEXT: jenkins-git/r
       BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
       BUILD_ARG_TOOL_VERSION: 4.4.1
     on_failure:
