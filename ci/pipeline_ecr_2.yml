@@ -87,6 +87,14 @@ resources:
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
 
+- name: jenkins-scala-docker
+  type: registry-image
+  icon: docker
+  source:
+    repository: 013353241801.dkr.ecr.eu-west-2.amazonaws.com/jenkins-r
+    aws_access_key_id: ((ciashared_access_key_id_prod))
+    aws_secret_access_key: ((ciashared_access_key_secret_prod))
+
 - name: jenkins-r-docker
   type: docker-image
   icon: docker
