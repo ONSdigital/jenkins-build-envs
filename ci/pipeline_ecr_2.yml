@@ -1015,4 +1015,4 @@ jobs:
     on_failure:
       put: slack-alert
       params:
-        <<: *slack_alert
+        <<: *slack_alert_message
