@@ -31,25 +31,25 @@ groups:
   jobs:
   - jenkins-cm-*
 
-# - name: gradle
-#   jobs:
-#   - jenkins-gradle-*
+- name: gradle
+  jobs:
+  - jenkins-gradle-*
 
-# - name: jq
-#   jobs:
-#   - jenkins-jq-*
+- name: jq
+  jobs:
+  - jenkins-jq-*
 
-# - name: maven
-#   jobs:
-#   - jenkins-maven-*
+- name: maven
+  jobs:
+  - jenkins-maven-*
 
 - name: node
   jobs:
   - jenkins-node-*
 
-# - name: python
-#   jobs:
-#   - jenkins-python-*
+- name: python
+  jobs:
+  - jenkins-python-*
 
 - name: sbt
   jobs:
