@@ -3,7 +3,7 @@
 # Example:
 #   $ docker run -it onsdigital/jenkins-scala:2.11.8 scala -version
 #
-ARG PARENT_VERSION=2.0.0
+ARG PARENT_VERSION
 FROM onsdigital/jenkins-base:${PARENT_VERSION}
 ARG TOOL_VERSION
 
