@@ -538,18 +538,18 @@ jobs:
       BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
       BUILD_ARG_TOOL_VERSION: v15.3.0
       BUILD_ARG_SHA256: c3f6c64d98e623c783b7de7580365be74d8a2dba87529447ae66061609b5d0ec
-    on_failure:
-      put: slack-alert
-      params:
-        <<: *slack_alert_message
+#    on_failure:
+#      put: slack-alert
+#      params:
+#        <<: *slack_alert_message
   - put: jenkins-node-docker
     params:
       image: image/image.tar
       version: 15.3.0
-    on_failure:
-      put: slack-alert
-      params:
-        <<: *slack_alert_message
+#    on_failure:
+#     put: slack-alert
+#      params:
+#        <<: *slack_alert_message
 
 - name: jenkins-cm-1.0.0
   plan:
@@ -592,18 +592,18 @@ jobs:
       CONTEXT: repo-name/cm
       BUILD_ARG_TOOL_VERSION: 4.0.1
       BUILD_ARG_PARENT_VERSION: 15.3.0  
-    on_failure:
-      put: slack-alert
-      params:
-        <<: *slack_alert_message
+#    on_failure:
+#      put: slack-alert
+#      params:
+#        <<: *slack_alert_message
   - put: jenkins-cm-docker
     params:
       image: image/image.tar
       version: 2.0.0
-    on_failure:
-      put: slack-alert
-      params:
-        <<: *slack_alert_message
+#    on_failure:
+#      put: slack-alert
+#      params:
+#        <<: *slack_alert_message
 
 
 - name: jenkins-gradle-4.9
