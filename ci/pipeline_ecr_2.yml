@@ -146,37 +146,37 @@ resources:
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
     repository: jenkins-cm
 
-# - name: jenkins-gradle-docker
-#   type: registry-image
-#   icon: docker
-#   source:
-#     aws_access_key_id: ((ciashared_access_key_id_prod))
-#     aws_secret_access_key: ((ciashared_access_key_secret_prod))
-#     repository: jenkins-gradle
+- name: jenkins-gradle-docker
+  type: registry-image
+  icon: docker
+  source:
+    aws_access_key_id: ((ciashared_access_key_id_prod))
+    aws_secret_access_key: ((ciashared_access_key_secret_prod))
+    repository: jenkins-gradle
 
-# - name: jenkins-jq-docker
-#   type: registry-image
-#   icon: docker
-#   source:
-#     aws_access_key_id: ((ciashared_access_key_id_prod))
-#     aws_secret_access_key: ((ciashared_access_key_secret_prod))
-#     repository: jenkins-jq
+- name: jenkins-jq-docker
+  type: registry-image
+  icon: docker
+  source:
+    aws_access_key_id: ((ciashared_access_key_id_prod))
+    aws_secret_access_key: ((ciashared_access_key_secret_prod))
+    repository: jenkins-jq
 
-# - name: jenkins-maven-docker
-#   type: registry-image
-#   icon: docker
-#   source:
-#     aws_access_key_id: ((ciashared_access_key_id_prod))
-#     aws_secret_access_key: ((ciashared_access_key_secret_prod))
-#     repository: jenkins-maven
+- name: jenkins-maven-docker
+  type: registry-image
+  icon: docker
+  source:
+    aws_access_key_id: ((ciashared_access_key_id_prod))
+    aws_secret_access_key: ((ciashared_access_key_secret_prod))
+    repository: jenkins-maven
 
-# - name: jenkins-python-docker
-#   type: registry-image
-#   icon: docker
-#   source:
-#     aws_access_key_id: ((ciashared_access_key_id_prod))
-#     aws_secret_access_key: ((ciashared_access_key_secret_prod))
-#     repository: jenkins-python
+- name: jenkins-python-docker
+  type: registry-image
+  icon: docker
+  source:
+    aws_access_key_id: ((ciashared_access_key_id_prod))
+    aws_secret_access_key: ((ciashared_access_key_secret_prod))
+    repository: jenkins-python
 
 - name: jenkins-r-docker
   type: registry-image
