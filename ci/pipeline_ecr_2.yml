@@ -84,7 +84,8 @@ resources:
   type: registry-image
   icon: docker
   source:
-    repository: 013353241801.dkr.ecr.eu-west-2.amazonaws.com/jenkins-base-centos
+    repository: jenkins-base-centos
+    aws_region: eu-west-2
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
 
@@ -92,7 +93,8 @@ resources:
   type: registry-image
   icon: docker
   source:
-    repository: 013353241801.dkr.ecr.eu-west-2.amazonaws.com/jenkins-scala
+    repository: jenkins-scala
+    aws_region: eu-west-2
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
 
@@ -100,7 +102,8 @@ resources:
   type: registry-image
   icon: docker
   source:
-    repository: 013353241801.dkr.ecr.eu-west-2.amazonaws.com/jenkins-r
+    repository: jenkins-r
+    aws_region: eu-west-2
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
 
