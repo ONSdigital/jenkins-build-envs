@@ -150,6 +150,7 @@ resources:
   type: registry-image
   icon: docker
   source:
+    aws_region: eu-west-2
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
     repository: jenkins-gradle
@@ -158,6 +159,7 @@ resources:
   type: registry-image
   icon: docker
   source:
+    aws_region: eu-west-2
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
     repository: jenkins-jq
@@ -166,6 +168,7 @@ resources:
   type: registry-image
   icon: docker
   source:
+    aws_region: eu-west-2
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
     repository: jenkins-maven
@@ -174,6 +177,7 @@ resources:
   type: registry-image
   icon: docker
   source:
+    aws_region: eu-west-2
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
     repository: jenkins-python
