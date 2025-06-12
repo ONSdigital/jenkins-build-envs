@@ -185,6 +185,7 @@ jobs:
 #        <<: *slack_alert_message
   - put: jenkins-scala-docker
     params:
+      load_repository: onsdigital/jenkins-scala
       load_file: image/image.tar
       tag_file: jenkins-git/scala/VERSION_2_11_8
  #   on_failure:
