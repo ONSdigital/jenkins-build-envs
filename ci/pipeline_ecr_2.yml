@@ -393,18 +393,18 @@ jobs:
       BUILD_ARG_PARENT_VERSION: 2.11.8
       BUILD_ARG_TOOL_VERSION: 0.13.13
       BUILD_ARG_MAJOR_MINOR_VERSION: 0.13
-    on_failure:
-      put: slack-alert
-      params:
-        <<: *slack_alert_message
+#    on_failure:
+#      put: slack-alert
+#      params:
+#        <<: *slack_alert_message
   - put: jenkins-sbt-docker
     params:
       image: image/image.tar
       version: 0.13.13
-    on_failure:
-      put: slack-alert
-      params:
-        <<: *slack_alert_message
+#    on_failure:
+#      params:
+#      put: slack-alert
+#        <<: *slack_alert_message
    
 
 
