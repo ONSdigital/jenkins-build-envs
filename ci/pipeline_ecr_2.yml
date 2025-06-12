@@ -72,7 +72,7 @@ resources:
 #    url: ((slack_webhook)) # Comes from secret manager
 
 - name: jenkins-base-docker
-  type: docker-image
+  type: registry-image
   icon: docker
   source:
     repository: 013353241801.dkr.ecr.eu-west-2.amazonaws.com/jenkins-base
@@ -80,7 +80,7 @@ resources:
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
 
 - name: jenkins-base-centos-docker
-  type: docker-image
+  type: registry-image
   icon: docker
   source:
     repository: 013353241801.dkr.ecr.eu-west-2.amazonaws.com/jenkins-base-centos
@@ -88,7 +88,7 @@ resources:
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
 
 - name: jenkins-scala-docker
-  type: docker-image
+  type: registry-image
   icon: docker
   source:
     repository: 013353241801.dkr.ecr.eu-west-2.amazonaws.com/jenkins-scala
@@ -96,7 +96,7 @@ resources:
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
 
 - name: jenkins-r-docker
-  type: docker-image
+  type: registry-image
   icon: docker
   source:
     repository: 013353241801.dkr.ecr.eu-west-2.amazonaws.com/jenkins-r
@@ -132,8 +132,8 @@ jobs:
 #        <<: *slack_alert_message
   - put: jenkins-base-docker
     params:
-      build: jenkins-git/jenkins-base
-      tag_file: jenkins-git/jenkins-base/VERSION
+      image: image/image.tar
+      version: ((jenkins_base_version))
 #    on_failure:
 #      put: slack-alert
 #      params:
@@ -158,8 +158,8 @@ jobs:
  #       <<: *slack_alert_message
   - put: jenkins-base-centos-docker
     params:
-      build: jenkins-git/jenkins-base-centos
-      tag_file: jenkins-git/jenkins-base-centos/VERSION
+      image: image/image.tar
+      version: ((jenkins_base_version))
 #    on_failure:
 #      put: slack-alert
 #      params:
@@ -185,9 +185,8 @@ jobs:
 #        <<: *slack_alert_message
   - put: jenkins-scala-docker
     params:
-      load_repository: onsdigital/jenkins-scala:2.11.8
-      load_file: image/image.tar
-      tag_file: jenkins-git/scala/VERSION_2_11_8
+      image: image/image.tar
+      version: 2.11.8
  #   on_failure:
  #     put: slack-alert
  #     params:
@@ -213,8 +212,8 @@ jobs:
 #        <<: *slack_alert_message
   - put: jenkins-r-docker
     params:
-      build: jenkins-git/r
-      tag_file: jenkins-git/r/VERSION
+      image: image/image.tar
+      version: 4.4.1
 #    on_failure:
 #      put: slack-alert
 #      params:
