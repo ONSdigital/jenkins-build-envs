@@ -185,7 +185,7 @@ jobs:
 #        <<: *slack_alert_message
   - put: jenkins-scala-docker
     params:
-      build: jenkins-git/scala
+      image: image/image.tar
       tag_file: jenkins-git/scala/VERSION_2_11_8
  #   on_failure:
  #     put: slack-alert
