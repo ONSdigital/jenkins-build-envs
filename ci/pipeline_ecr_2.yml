@@ -202,6 +202,7 @@ jobs:
   - get: jenkins-git
     trigger: true
   - set_pipeline: self
+    #file : jenkins-git/ci/pipeline.yml
     file : jenkins-git/ci/pipeline_ecr_2.yml
     var_files: 
       - jenkins-git/ci/env/variables.yml
