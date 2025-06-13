@@ -1,3 +1,7 @@
+docker_auth: &docker_auth
+  username: ((docker-username)) # These come from secrets manager
+  password: ((docker-password))
+
 github_auth: &github_auth
   username: ((github_pat))
   password: x-oauth-basic
