@@ -79,8 +79,8 @@ resources:
   icon: github
   source:
     uri: https://github.com/onsdigital/jenkins-build-envs
-    branch: changing_image_target_from_docker_hub_to_github
-    # branch: main
+    #branch: cia-rhel-cicd
+    branch: main
 
 - name: wednesday-build
   type: time
@@ -99,100 +99,78 @@ resources:
   type: registry-image
   icon: docker
   source:
-    aws_region: eu-west-2
-    aws_access_key_id: ((ciashared_access_key_id_prod))
-    aws_secret_access_key: ((ciashared_access_key_secret_prod)) 
-    repository: jenkins-base
+    <<: *docker_auth
+    repository: ((docker_organisation))/jenkins-base
 
 - name: jenkins-base-centos-docker
   type: registry-image
   icon: docker
   source:
-    aws_region: eu-west-2
-    aws_access_key_id: ((ciashared_access_key_id_prod))
-    aws_secret_access_key: ((ciashared_access_key_secret_prod))
-    repository: jenkins-base-centos
+    <<: *docker_auth
+    repository: ((docker_organisation))/jenkins-base-centos
 
 - name: jenkins-scala-docker
   type: registry-image
   icon: docker
   source:
-    aws_region: eu-west-2
-    aws_access_key_id: ((ciashared_access_key_id_prod))
-    aws_secret_access_key: ((ciashared_access_key_secret_prod))
-    repository: jenkins-scala
+    <<: *docker_auth
+    repository: ((docker_organisation))/jenkins-scala
 
 - name: jenkins-sbt-docker
   type: registry-image
   icon: docker
   source:
-    aws_region: eu-west-2
-    aws_access_key_id: ((ciashared_access_key_id_prod))
-    aws_secret_access_key: ((ciashared_access_key_secret_prod))
-    repository: jenkins-slave-sbt
+    <<: *docker_auth
+    repository: ((docker_organisation))/jenkins-sbt
 
 - name: jenkins-node-docker
   type: registry-image
   icon: docker
   source:
-    aws_region: eu-west-2
-    aws_access_key_id: ((ciashared_access_key_id_prod))
-    aws_secret_access_key: ((ciashared_access_key_secret_prod))
-    repository: jenkins-node
+    <<: *docker_auth
+    repository: ((docker_organisation))/jenkins-node
 
 - name: jenkins-cm-docker
   type: registry-image
   icon: docker
   source:
-    aws_region: eu-west-2
-    aws_access_key_id: ((ciashared_access_key_id_prod))
-    aws_secret_access_key: ((ciashared_access_key_secret_prod))
-    repository: jenkins-cm
+    <<: *docker_auth
+    repository: ((docker_organisation))/jenkins-cm
 
 - name: jenkins-gradle-docker
   type: registry-image
   icon: docker
   source:
-    aws_region: eu-west-2
-    aws_access_key_id: ((ciashared_access_key_id_prod))
-    aws_secret_access_key: ((ciashared_access_key_secret_prod))
-    repository: jenkins-gradle
+    <<: *docker_auth
+    repository: ((docker_organisation))/jenkins-gradle
 
 - name: jenkins-jq-docker
   type: registry-image
   icon: docker
   source:
-    aws_region: eu-west-2
-    aws_access_key_id: ((ciashared_access_key_id_prod))
-    aws_secret_access_key: ((ciashared_access_key_secret_prod))
-    repository: jenkins-jq
+    <<: *docker_auth
+    repository: ((docker_organisation))/jenkins-jq
 
 - name: jenkins-maven-docker
   type: registry-image
   icon: docker
   source:
-    aws_region: eu-west-2
-    aws_access_key_id: ((ciashared_access_key_id_prod))
-    aws_secret_access_key: ((ciashared_access_key_secret_prod))
-    repository: jenkins-maven
+    <<: *docker_auth
+    repository: ((docker_organisation))/jenkins-maven
 
 - name: jenkins-python-docker
   type: registry-image
   icon: docker
   source:
-    aws_region: eu-west-2
-    aws_access_key_id: ((ciashared_access_key_id_prod))
-    aws_secret_access_key: ((ciashared_access_key_secret_prod))
-    repository: jenkins-python
+    <<: *docker_auth
+    repository: ((docker_organisation))/jenkins-python
 
 - name: jenkins-r-docker
   type: registry-image
   icon: docker
   source:
-    aws_region: eu-west-2
-    aws_access_key_id: ((ciashared_access_key_id_prod))
-    aws_secret_access_key: ((ciashared_access_key_secret_prod))
-    repository: jenkins-r
+    <<: *docker_auth
+    repository: ((docker_organisation))/jenkins-r
 
 jobs:
 - name: set-self
@@ -422,6 +400,9 @@ jobs:
       params:
         <<: *slack_alert_message
    
+
+
+
 - name: jenkins-node-6.11.5
   plan:
   - get: jenkins-git
@@ -477,6 +458,7 @@ jobs:
       put: slack-alert
       params:
         <<: *slack_alert_message
+
 
 - name: jenkins-node-16.16.0
   plan:
@@ -615,6 +597,7 @@ jobs:
       put: slack-alert
       params:
         <<: *slack_alert_message
+
 
 - name: jenkins-gradle-4.9
   plan:
@@ -916,6 +899,8 @@ jobs:
       put: slack-alert
       params:
         <<: *slack_alert_message
+
+
 
 - name: jenkins-python-3.10.14
   plan:
