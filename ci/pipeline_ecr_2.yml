@@ -247,18 +247,18 @@ jobs:
       repo-name: jenkins-git
     params:
       CONTEXT: repo-name/jenkins-base-centos
-    #on_failure:
-      #put: slack-alert
-      #params:
-        #<<: *slack_alert_message
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
   - put: jenkins-base-centos-docker
     params:
       image: image/image.tar
       version: ((jenkins_base_version))
-    #on_failure:
-      #put: slack-alert
-      #params:
-        #<<: *slack_alert_message
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
 
 
 - name: jenkins-scala-2.11.8
