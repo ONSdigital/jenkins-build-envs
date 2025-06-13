@@ -275,18 +275,18 @@ jobs:
       CONTEXT: repo-name/scala
       BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
       BUILD_ARG_TOOL_VERSION: 2.11.8
-    #on_failure:
-      #put: slack-alert
-      #params:
-        #<<: *slack_alert_message
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
   - put: jenkins-scala-docker
     params:
       image: image/image.tar
       version: 2.11.8
-    #on_failure:
-      #put: slack-alert
-      #params:
-        #<<: *slack_alert_message
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
 
 - name: jenkins-scala-2.12.7
   plan:
@@ -302,18 +302,18 @@ jobs:
       CONTEXT: repo-name/scala
       BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
       BUILD_ARG_TOOL_VERSION: 2.12.7
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
   - put: jenkins-scala-docker
     params:
       image: image/image.tar
       version: 2.12.7
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
 
 - name: jenkins-scala-2.12.12
   plan:
@@ -329,18 +329,18 @@ jobs:
       CONTEXT: repo-name/scala
       BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
       BUILD_ARG_TOOL_VERSION: 2.12.12
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
   - put: jenkins-scala-docker
     params:
       image: image/image.tar
       version: 2.12.12
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
 
 - name: jenkins-scala-2.13.4
   plan:
@@ -356,18 +356,18 @@ jobs:
       CONTEXT: repo-name/scala
       BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
       BUILD_ARG_TOOL_VERSION: 2.13.4
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
   - put: jenkins-scala-docker
     params:
       image: image/image.tar
       version: 2.13.4
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
 
 - name: jenkins-sbt-1.2.4
   plan:
@@ -384,18 +384,18 @@ jobs:
       BUILD_ARG_PARENT_VERSION: 2.12.7
       BUILD_ARG_TOOL_VERSION: 1.2.4
       BUILD_ARG_MAJOR_MINOR_VERSION: 1.1
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
   - put: jenkins-sbt-docker
     params:
       image: image/image.tar
       version: 1.2.4
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
 
 - name: jenkins-sbt-0.13.13
   plan:
@@ -412,18 +412,18 @@ jobs:
       BUILD_ARG_PARENT_VERSION: 2.11.8
       BUILD_ARG_TOOL_VERSION: 0.13.13
       BUILD_ARG_MAJOR_MINOR_VERSION: 0.13
-    #on_failure:
-      #put: slack-alert
-      #params:
-        #<<: *slack_alert_message
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
   - put: jenkins-sbt-docker
     params:
       image: image/image.tar
       version: 0.13.13
-    #on_failure:
-      #params:
-      #put: slack-alert
-        #<<: *slack_alert_message
+    on_failure:
+      params:
+      put: slack-alert
+        <<: *slack_alert_message
    
 - name: jenkins-node-6.11.5
   plan:
@@ -440,18 +440,18 @@ jobs:
       BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
       BUILD_ARG_TOOL_VERSION: v6.11.5
       BUILD_ARG_SHA256: fffd25c9e9b6d2235e97ba8be1dd6ea5f31e32ea445c5cc704ca84ef44db66c1
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
   - put: jenkins-node-docker
     params:
       image: image/image.tar
       version: 6.11.5
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
 
 - name: jenkins-node-9.9.0
   plan:
@@ -468,18 +468,18 @@ jobs:
       BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
       BUILD_ARG_TOOL_VERSION: v9.9.0
       BUILD_ARG_SHA256: 887cb4db6207f303b5ba15b6e15298f19d288fce2064e8caa7bb7cae170cbe85
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
   - put: jenkins-node-docker
     params:
       image: image/image.tar
       version: 9.9.0
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
 
 - name: jenkins-node-16.16.0
   plan:
@@ -496,18 +496,18 @@ jobs:
       BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
       BUILD_ARG_TOOL_VERSION: v16.16.0
       BUILD_ARG_SHA256: c85b16d1a4c259d01be7111ecb0361260627e4fc245004a920521eacb28e50df
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
   - put: jenkins-node-docker
     params:
       image: image/image.tar
       version: 16.16.0
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
 
 - name: jenkins-node-12.16.2
   plan:
@@ -524,18 +524,18 @@ jobs:
       BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
       BUILD_ARG_TOOL_VERSION: v12.16.2
       BUILD_ARG_SHA256: ffc92b8d9f53a10a2a734c93e78a3be74af7b0034bddd6f034a700c430eb94c1
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
   - put: jenkins-node-docker
     params:
       image: image/image.tar
       version: 12.16.2
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
 
 - name: jenkins-node-15.3.0
   plan:
@@ -552,18 +552,18 @@ jobs:
       BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
       BUILD_ARG_TOOL_VERSION: v15.3.0
       BUILD_ARG_SHA256: c3f6c64d98e623c783b7de7580365be74d8a2dba87529447ae66061609b5d0ec
-    #on_failure:
-      #put: slack-alert
-      #params:
-        #<<: *slack_alert_message
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
   - put: jenkins-node-docker
     params:
       image: image/image.tar
       version: 15.3.0
-    #on_failure:
-     #put: slack-alert
-      #params:
-        #<<: *slack_alert_message
+    on_failure:
+     put: slack-alert
+      params:
+        <<: *slack_alert_message
 
 - name: jenkins-cm-1.0.0
   plan:
@@ -579,18 +579,18 @@ jobs:
       CONTEXT: repo-name/cm
       BUILD_ARG_TOOL_VERSION: 4.0.1
       BUILD_ARG_PARENT_VERSION: 12.16.2  
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
   - put: jenkins-cm-docker
     params:
       image: image/image.tar
       version: 1.0.0
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
 
 - name: jenkins-cm-2.0.0
   plan:
@@ -606,18 +606,18 @@ jobs:
       CONTEXT: repo-name/cm
       BUILD_ARG_TOOL_VERSION: 4.0.1
       BUILD_ARG_PARENT_VERSION: 15.3.0  
-    #on_failure:
-      #put: slack-alert
-      #params:
-        #<<: *slack_alert_message
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
   - put: jenkins-cm-docker
     params:
       image: image/image.tar
       version: 2.0.0
-    #on_failure:
-      #put: slack-alert
-      #params:
-        #<<: *slack_alert_message
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
 
 
 - name: jenkins-gradle-4.9
@@ -634,18 +634,18 @@ jobs:
       CONTEXT: repo-name/gradle
       BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
       BUILD_ARG_TOOL_VERSION: 4.9
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
   - put: jenkins-gradle-docker
     params:
       image: image/image.tar
       version: 4.9.0
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
 
 - name: jenkins-jq-1.6
   plan:
@@ -661,18 +661,18 @@ jobs:
       CONTEXT: repo-name/jq
       BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
       BUILD_ARG_TOOL_VERSION: 1.6
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
   - put: jenkins-jq-docker
     params:
       image: image/image.tar
       version: 1.6.0
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
 
 - name: jenkins-maven-3.2.5
   plan:
@@ -689,18 +689,18 @@ jobs:
       BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
       BUILD_ARG_TOOL_VERSION: 3.2.5
       BUILD_ARG_SHA256: 8c190264bdf591ff9f1268dc0ad940a2726f9e958e367716a09b8aaa7e74a755
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
   - put: jenkins-maven-docker
     params:
       image: image/image.tar
       version: 3.2.5
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
 
 - name: jenkins-maven-3.5.4
   plan:
@@ -718,18 +718,18 @@ jobs:
       BUILD_ARG_TOOL_VERSION: 3.5.4
       BUILD_ARG_SHA256: ce50b1c91364cb77efe3776f756a6d92b76d9038b0a0782f7d53acf1e997a14d
       BUILD_ARG_SHA512: 2a803f578f341e164f6753e410413d16ab60fabe31dc491d1fe35c984a5cce696bc71f57757d4538fe7738be04065a216f3ebad4ef7e0ce1bb4c51bc36d6be86
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
   - put: jenkins-maven-docker
     params:
       image: image/image.tar
       version: 3.5.4
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
 
 - name: jenkins-maven-3.6.3
   plan:
@@ -746,18 +746,18 @@ jobs:
       BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
       BUILD_ARG_TOOL_VERSION: 3.6.3
       BUILD_ARG_SHA512: c35a1803a6e70a126e80b2b3ae33eed961f83ed74d18fcd16909b2d44d7dada3203f1ffe726c17ef8dcca2dcaa9fca676987befeadc9b9f759967a8cb77181c0
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
   - put: jenkins-maven-docker
     params:
       image: image/image.tar
       version: 3.6.3
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
 
 - name: jenkins-python-2.7.15
   plan:
@@ -773,18 +773,18 @@ jobs:
       CONTEXT: repo-name/python
       BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
       BUILD_ARG_TOOL_VERSION: 2.7.15
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
   - put: jenkins-python-docker
     params:
       image: image/image.tar
       version: 2.7.15
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
 
 #  - name: jenkins-python-3.6.0
 #    plan:
@@ -827,18 +827,18 @@ jobs:
       CONTEXT: repo-name/python
       BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
       BUILD_ARG_TOOL_VERSION: 3.6.1
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
   - put: jenkins-python-docker
     params:
       image: image/image.tar
       version: 3.6.1
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
 
 - name: jenkins-python-3.8.7
   plan:
@@ -854,18 +854,18 @@ jobs:
       CONTEXT: repo-name/python
       BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
       BUILD_ARG_TOOL_VERSION: 3.8.7
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
   - put: jenkins-python-docker
     params:
       image: image/image.tar
       version: 3.8.7
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
 
 - name: jenkins-python-3.9.1
   plan:
@@ -881,18 +881,18 @@ jobs:
       CONTEXT: repo-name/python
       BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
       BUILD_ARG_TOOL_VERSION: 3.9.1
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
   - put: jenkins-python-docker
     params:
       image: image/image.tar
       version: 3.9.1
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
 
 - name: jenkins-python-3.9.10
   plan:
@@ -908,18 +908,18 @@ jobs:
       CONTEXT: repo-name/python
       BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
       BUILD_ARG_TOOL_VERSION: 3.9.10
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
   - put: jenkins-python-docker
     params:
       image: image/image.tar
       version: 3.9.10
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
 
 - name: jenkins-python-3.10.14
   plan:
@@ -935,18 +935,18 @@ jobs:
       CONTEXT: repo-name/python
       BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
       BUILD_ARG_TOOL_VERSION: 3.10.14
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
   - put: jenkins-python-docker
     params:
       image: image/image.tar
       version: 3.10.14
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
 
 - name: jenkins-python-3.11.9
   plan:
@@ -962,18 +962,18 @@ jobs:
       CONTEXT: repo-name/python
       BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
       BUILD_ARG_TOOL_VERSION: 3.11.9
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
   - put: jenkins-python-docker
     params:
       image: image/image.tar
       version: 3.11.9
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
 
 - name: jenkins-python-3.12.4
   plan:
@@ -989,18 +989,18 @@ jobs:
       CONTEXT: repo-name/python
       BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
       BUILD_ARG_TOOL_VERSION: 3.12.4
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
   - put: jenkins-python-docker
     params:
       image: image/image.tar
       version: 3.12.4
-     #on_failure:
-       #put: slack-alert
-       #params:
-         #<<: *slack_alert_message
+     on_failure:
+       put: slack-alert
+       params:
+         <<: *slack_alert_message
 
 - name: jenkins-r-4.4.1
   plan:
@@ -1016,15 +1016,15 @@ jobs:
       CONTEXT: repo-name/r
       BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
       BUILD_ARG_TOOL_VERSION: 4.4.1
-    #on_failure:
-      #put: slack-alert
-      #params:
-        #<<: *slack_alert_message
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
   - put: jenkins-r-docker
     params:
       image: image/image.tar
       version: 4.4.1
-    #on_failure:
-      #put: slack-alert
-      #params:
-        #<<: *slack_alert_message
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
