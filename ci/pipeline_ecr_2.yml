@@ -131,7 +131,7 @@ resources:
     aws_region: eu-west-2
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
-    repository: jenkins-slave-sbt
+    repository: jenkins-sbt
 
 - name: jenkins-node-docker
   type: registry-image
