@@ -101,62 +101,70 @@ resources:
   type: registry-image
   icon: docker
   source:
+    aws_region: eu-west-2
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod)) 
-    repository: public.ecr.aws/b1u6e6n0/jenkins-base
+    repository: jenkins-base
 
 - name: jenkins-base-centos-docker
   type: registry-image
   icon: docker
   source:
+    aws_region: eu-west-2
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
-    repository: public.ecr.aws/b1u6e6n0/jenkins-base-centos
+    repository: jenkins-base-centos
 
 - name: jenkins-scala-docker
   type: registry-image
   icon: docker
   source:
+    aws_region: eu-west-2
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
-    repository: public.ecr.aws/b1u6e6n0/jenkins-scala
+    repository: jenkins-scala
 
 - name: jenkins-sbt-docker
   type: registry-image
   icon: docker
   source:
+    aws_region: eu-west-2
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
-    repository: public.ecr.aws/b1u6e6n0/jenkins-sbt
+    repository: jenkins-sbt
 
 - name: jenkins-node-docker
   type: registry-image
   icon: docker
   source:
+    aws_region: eu-west-2
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
-    repository: public.ecr.aws/b1u6e6n0/jenkins-node
+    repository: jenkins-node
 
 - name: jenkins-cm-docker
   type: registry-image
   icon: docker
   source:
+    aws_region: eu-west-2
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
-    repository: public.ecr.aws/b1u6e6n0/jenkins-cm
+    repository: jenkins-cm
 
 - name: jenkins-gradle-docker
   type: registry-image
   icon: docker
   source:
+    aws_region: eu-west-2
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
-    repository: public.ecr.aws/b1u6e6n0/jenkins-gradle
+    repository: jenkins-gradle
 
 - name: jenkins-jq-docker
   type: registry-image
   icon: docker
   source:
+    aws_region: eu-west-2
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
     repository: jenkins-jq
@@ -165,25 +173,28 @@ resources:
   type: registry-image
   icon: docker
   source:
+    aws_region: eu-west-2
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
-    repository: public.ecr.aws/b1u6e6n0/jenkins-maven
+    repository: jenkins-maven
 
 - name: jenkins-python-docker
   type: registry-image
   icon: docker
   source:
+    aws_region: eu-west-2
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
-    repository: public.ecr.aws/b1u6e6n0/jenkins-python
+    repository: jenkins-python
 
 - name: jenkins-r-docker
   type: registry-image
   icon: docker
   source:
+    aws_region: eu-west-2
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
-    repository: public.ecr.aws/b1u6e6n0/jenkins-r
+    repository: jenkins-r
 
 jobs:
 - name: set-self
