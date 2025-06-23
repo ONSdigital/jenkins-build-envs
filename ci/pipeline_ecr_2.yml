@@ -101,7 +101,8 @@ resources:
   type: registry-image
   icon: docker
   source:
-    aws_region: eu-west-2
+    PUBLIC_REGISTRY_ALIAS: "b1u6e6no"
+    ECR_PUBLIC: "true"
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod)) 
     repository: jenkins-base
@@ -110,7 +111,8 @@ resources:
   type: registry-image
   icon: docker
   source:
-    aws_region: eu-west-2
+    PUBLIC_REGISTRY_ALIAS: "b1u6e6no"
+    ECR_PUBLIC: "true"
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
     repository: jenkins-base-centos
@@ -119,7 +121,8 @@ resources:
   type: registry-image
   icon: docker
   source:
-    aws_region: eu-west-2
+    PUBLIC_REGISTRY_ALIAS: "b1u6e6no"
+    ECR_PUBLIC: "true"
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
     repository: jenkins-scala
@@ -128,7 +131,8 @@ resources:
   type: registry-image
   icon: docker
   source:
-    aws_region: eu-west-2
+    PUBLIC_REGISTRY_ALIAS: "b1u6e6no"
+    ECR_PUBLIC: "true"
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
     repository: jenkins-sbt
@@ -137,7 +141,8 @@ resources:
   type: registry-image
   icon: docker
   source:
-    aws_region: eu-west-2
+    PUBLIC_REGISTRY_ALIAS: "b1u6e6no"
+    ECR_PUBLIC: "true"
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
     repository: jenkins-node
@@ -146,7 +151,8 @@ resources:
   type: registry-image
   icon: docker
   source:
-    aws_region: eu-west-2
+    PUBLIC_REGISTRY_ALIAS: "b1u6e6no"
+    ECR_PUBLIC: "true"
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
     repository: jenkins-cm
@@ -155,7 +161,8 @@ resources:
   type: registry-image
   icon: docker
   source:
-    aws_region: eu-west-2
+    PUBLIC_REGISTRY_ALIAS: "b1u6e6no"
+    ECR_PUBLIC: "true"
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
     repository: jenkins-gradle
@@ -164,7 +171,8 @@ resources:
   type: registry-image
   icon: docker
   source:
-    aws_region: eu-west-2
+    PUBLIC_REGISTRY_ALIAS: "b1u6e6no"
+    ECR_PUBLIC: "true"
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
     repository: jenkins-jq
@@ -173,7 +181,8 @@ resources:
   type: registry-image
   icon: docker
   source:
-    aws_region: eu-west-2
+    PUBLIC_REGISTRY_ALIAS: "b1u6e6no"
+    ECR_PUBLIC: "true"
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
     repository: jenkins-maven
@@ -182,7 +191,8 @@ resources:
   type: registry-image
   icon: docker
   source:
-    aws_region: eu-west-2
+    PUBLIC_REGISTRY_ALIAS: "b1u6e6no"
+    ECR_PUBLIC: "true"
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
     repository: jenkins-python
@@ -191,7 +201,8 @@ resources:
   type: registry-image
   icon: docker
   source:
-    aws_region: eu-west-2
+    PUBLIC_REGISTRY_ALIAS: "b1u6e6no"
+    ECR_PUBLIC: "true"
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
     repository: jenkins-r
