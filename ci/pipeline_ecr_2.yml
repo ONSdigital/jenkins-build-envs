@@ -102,7 +102,6 @@ resources:
   icon: docker
   source:
     PUBLIC_REGISTRY_ALIAS: "b1u6e6no"
-    ECR_PUBLIC: "true"
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod)) 
     repository: jenkins-base
@@ -112,7 +111,6 @@ resources:
   icon: docker
   source:
     PUBLIC_REGISTRY_ALIAS: "b1u6e6no"
-    ECR_PUBLIC: "true"
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
     repository: jenkins-base-centos
@@ -122,7 +120,6 @@ resources:
   icon: docker
   source:
     PUBLIC_REGISTRY_ALIAS: "b1u6e6no"
-    ECR_PUBLIC: "true"
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
     repository: jenkins-scala
@@ -132,7 +129,6 @@ resources:
   icon: docker
   source:
     PUBLIC_REGISTRY_ALIAS: "b1u6e6no"
-    ECR_PUBLIC: "true"
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
     repository: jenkins-sbt
@@ -142,7 +138,6 @@ resources:
   icon: docker
   source:
     PUBLIC_REGISTRY_ALIAS: "b1u6e6no"
-    ECR_PUBLIC: "true"
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
     repository: jenkins-node
@@ -152,7 +147,6 @@ resources:
   icon: docker
   source:
     PUBLIC_REGISTRY_ALIAS: "b1u6e6no"
-    ECR_PUBLIC: "true"
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
     repository: jenkins-cm
@@ -162,7 +156,6 @@ resources:
   icon: docker
   source:
     PUBLIC_REGISTRY_ALIAS: "b1u6e6no"
-    ECR_PUBLIC: "true"
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
     repository: jenkins-gradle
@@ -172,7 +165,6 @@ resources:
   icon: docker
   source:
     PUBLIC_REGISTRY_ALIAS: "b1u6e6no"
-    ECR_PUBLIC: "true"
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
     repository: jenkins-jq
@@ -182,7 +174,6 @@ resources:
   icon: docker
   source:
     PUBLIC_REGISTRY_ALIAS: "b1u6e6no"
-    ECR_PUBLIC: "true"
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
     repository: jenkins-maven
@@ -192,7 +183,6 @@ resources:
   icon: docker
   source:
     PUBLIC_REGISTRY_ALIAS: "b1u6e6no"
-    ECR_PUBLIC: "true"
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
     repository: jenkins-python
@@ -202,7 +192,6 @@ resources:
   icon: docker
   source:
     PUBLIC_REGISTRY_ALIAS: "b1u6e6no"
-    ECR_PUBLIC: "true"
     aws_access_key_id: ((ciashared_access_key_id_prod))
     aws_secret_access_key: ((ciashared_access_key_secret_prod))
     repository: jenkins-r
