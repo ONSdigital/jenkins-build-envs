@@ -97,15 +97,6 @@ resources:
   source:
     url: ((slack_webhook))  # Comes from secret manager
 
-- name: jenkins-base-docker
-  type: registry-image
-  icon: docker
-  source:
-    PUBLIC_REGISTRY_ALIAS: "b1u6e6no"
-    aws_access_key_id: ((ciashared_access_key_id_prod))
-    aws_secret_access_key: ((ciashared_access_key_secret_prod)) 
-    repository: jenkins-base
-
 - name: jenkins-base-centos-docker
   type: registry-image
   icon: docker
@@ -224,10 +215,27 @@ jobs:
       put: slack-alert
       params:
         <<: *slack_alert_message
-  - put: jenkins-base-docker
+  - task: push-to-ecr
+    privileged: true
+    config:
+      platform: linux
+      image_resource:
+        type: registry-image
+        source:
+          repository: docker
+      inputs:
+      - name: image
+      - name: jenkins-git
+      run:
+        path: sh
+        args:
+        - jenkins-git/ci/tasks/push-to-ecr.sh
     params:
-      image: image/image.tar
-      version: ((jenkins_base_version))
+      AWS_ACCESS_KEY_ID: ((ciashared_access_key_id_prod))
+      AWS_SECRET_ACCESS_KEY: ((ciashared_access_key_secret_prod))
+      ECR_REGISTRY_ALIAS: b1u6e6n0
+      ECR_REPOSITORY: jenkins-base
+      IMAGE_VERSION: ((jenkins_base_version))
     on_failure:
       put: slack-alert
       params:
