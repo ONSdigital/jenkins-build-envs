@@ -1,0 +1,41 @@
+resources:
+- name: jenkins-git
+  type: git
+  icon: github
+  source:
+    uri: https://github.com/onsdigital/jenkins-build-envs
+    branch: test-ecr
+
+jobs:
+- name: build-and-push
+  plan:
+  - get: jenkins-git
+    trigger: true
+  - task: build-image
+    privileged: true
+    file: jenkins-git/ci/packer_build.yml
+    input_mapping:
+      repo-name: jenkins-git
+    params:
+      CONTEXT: repo-name/hello-world
+  - task: push-to-ecr
+    privileged: true
+    config:
+      platform: linux
+      image_resource:
+        type: registry-image
+        source:
+          repository: docker
+      inputs:
+      - name: image
+      - name: jenkins-git
+      run:
+        path: sh
+        args:
+        - jenkins-git/ci/push-to-ecr.sh
+    params:
+      AWS_ACCESS_KEY_ID: ((ciashared_access_key_id_prod))
+      AWS_SECRET_ACCESS_KEY: ((ciashared_access_key_secret_prod))
+      ECR_REGISTRY_ALIAS: b1u6e6n0
+      ECR_REPOSITORY: test-ecr
+      IMAGE_VERSION: 0.0.1
