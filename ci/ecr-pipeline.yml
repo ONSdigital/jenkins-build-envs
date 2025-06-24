@@ -32,7 +32,7 @@ jobs:
       run:
         path: sh
         args:
-        - jenkins-git/ci/push-to-ecr.sh
+        - jenkins-git/ci/tasks/push-to-ecr.sh
     params:
       AWS_ACCESS_KEY_ID: ((ciashared_access_key_id_prod))
       AWS_SECRET_ACCESS_KEY: ((ciashared_access_key_secret_prod))
