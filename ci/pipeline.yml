@@ -81,8 +81,8 @@ resources:
   icon: github
   source:
     uri: https://github.com/onsdigital/jenkins-build-envs
-    branch: changing_image_target_from_docker_hub_to_github
-    # branch: main
+    # branch: changing_image_target_from_docker_hub_to_github
+    branch: main
 
 - name: wednesday-build
   type: time
