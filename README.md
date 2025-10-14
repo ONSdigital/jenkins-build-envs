@@ -7,7 +7,9 @@ This repository holds the Dockerfiles for our Jenkins build environments.
 
 [Concourse pipeline](https://concourse.cicd-shared.aws.onsdigital.uk/teams/cia/pipelines/jenkins-docker-build) is setup to run at 05:00 every wednesday. 
 
-Each jenkins build is added to a repository in onsdigital dockerhub account. 
+Documentation : https://officefornationalstatistics.atlassian.net/wiki/spaces/BRRd/pages/57517967/Jenkins+Docker+Images 
+
+Each jenkins build is added to a repository in ECR. 
 
 Errors are reported to jenkins-builds slack channel in ons-operations slack.
 
