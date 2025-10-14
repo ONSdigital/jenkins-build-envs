@@ -242,6 +242,30 @@ services:
     depends_on:
       - jenkins-base
       
+  python_3.12.5:
+    tty: true
+    build:
+      context: ./python
+      args:
+        SQLLITE: yes
+        TOOL_VERSION: 3.12.5
+        PARENT_VERSION: ${jenkins_base_version}
+    image: onsdigital/jenkins-python:3.12.5
+    depends_on:
+      - jenkins-base
+
+  python_3.13.8:
+    tty: true
+    build:
+      context: ./python
+      args:
+        SQLLITE: yes
+        TOOL_VERSION: 3.13.8
+        PARENT_VERSION: ${jenkins_base_version}
+    image: onsdigital/jenkins-python:3.13.8
+    depends_on:
+      - jenkins-base      
+
   sbt_0-13-13:
     build:
       context: ./sbt

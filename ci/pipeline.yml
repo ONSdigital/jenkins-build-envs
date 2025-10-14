@@ -983,6 +983,60 @@ jobs:
       params:
         <<: *slack_alert_message
 
+- name: jenkins-python-3.12.5
+  plan:
+  - get: jenkins-git
+    passed: [jenkins-base]
+    trigger: true
+  - task: build-image
+    privileged: true # oci-build-task must run in a privileged container
+    file: jenkins-git/ci/packer_build.yml
+    input_mapping:
+      repo-name: jenkins-git
+    params:
+      CONTEXT: repo-name/python
+      BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
+      BUILD_ARG_TOOL_VERSION: 3.12.5
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
+  - put: jenkins-python-docker
+    params:
+      image: image/image.tar
+      version: 3.12.5
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
+
+- name: jenkins-python-3.13.8
+  plan:
+  - get: jenkins-git
+    passed: [jenkins-base]
+    trigger: true
+  - task: build-image
+    privileged: true # oci-build-task must run in a privileged container
+    file: jenkins-git/ci/packer_build.yml
+    input_mapping:
+      repo-name: jenkins-git
+    params:
+      CONTEXT: repo-name/python
+      BUILD_ARG_PARENT_VERSION: ((jenkins_base_version))
+      BUILD_ARG_TOOL_VERSION: 3.13.8
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
+  - put: jenkins-python-docker
+    params:
+      image: image/image.tar
+      version: 3.13.8
+    on_failure:
+      put: slack-alert
+      params:
+        <<: *slack_alert_message
+
 - name: jenkins-r-4.4.1
   plan:
   - get: jenkins-git
